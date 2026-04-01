@@ -84,7 +84,7 @@ app.innerHTML += `
     <div class="space-y-20">
       ${works
         .map(
-          (w, idx) => `
+          (w) => `
         <div class="group grid md:grid-cols-2 gap-10 items-center work-item opacity-0 translate-y-10 transition-all duration-700">
           <div class="work-img h-[300px] ${w.reverse ? "order-2 md:order-1" : ""} overflow-hidden rounded-lg border border-gold/20">
             <img src="${w.image}" alt="${w.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
