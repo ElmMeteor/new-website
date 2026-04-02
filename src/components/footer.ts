@@ -1,6 +1,4 @@
 // src/components/Footer.ts
-import { footerNavItems } from "../data";
-
 export function renderFooter(): string {
   return `
 <div class="bg-black/95 border-t border-gold/20 py-12 px-10">
@@ -9,7 +7,7 @@ export function renderFooter(): string {
       <div>
         <h3 class="text-gold font-bold text-lg mb-4 tracking-wide">SERVICE</h3>
         <ul class="space-y-2">
-          <li><a href="#" class="text-gray-400 hover:text-gold transition text-sm">システム開発事業</a></li>
+          <li><a href="/#system-development" class="text-gray-400 hover:text-gold transition text-sm">システム開発事業</a></li>
           <li><a href="#" class="text-gray-400 hover:text-gold transition text-sm">国際貿易</a></li>
           <li><a href="#" class="text-gray-400 hover:text-gold transition text-sm">金融事業</a></li>
           <li><a href="#" class="text-gray-400 hover:text-gold transition text-sm">リサイクル事業</a></li>
