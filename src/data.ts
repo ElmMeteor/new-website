@@ -40,26 +40,26 @@ export const works: Project[] = [
   {
     title: "システム開発事業",
     description:
-      "ソフトウェア開発、システム設計・開発・運用、SESサービス。クライアント様のニーズに見合うシステム設計・開発・運用等業務を行います。",
+      "ソフトウェア開発、システムの設計・開発・運用、SESサービスを行っております。\nお客様のご要望に沿ったシステムをご提供いたします。",
     image: `${BASE}assets/SystemDevelopmentBusiness.jpg`,
   },
   {
     title: "国際貿易",
     description:
-      "日中を中心とした国際貿易業務。国境線のないビジネスの展開で、日中の架橋になれるように力を注ぎます。",
+      "日中を中心とした国際貿易業務を展開しております。\n輸出入業務や国内流通を通じて、国境を越えたビジネスの架橋となります。",
     image: `${BASE}assets/ChinaJapanTrade.jpg`,
     reverse: true,
   },
   {
     title: "金融事業",
     description:
-      "金融サービス、投資関連事業。様々な課題や将来起こる問題に合わせたソリューションをご提案いたします。",
+      "金融サービスおよび投資関連事業を展開しております。\n国内外の投資支援や企業進出に関するコンサルティングを提供いたします。",
     image: `${BASE}assets/FinancialBusiness.jpg`,
   },
   {
     title: "リサイクル事業",
     description:
-      "希少金属資源のリサイクル、環境事業。情報セキュリティを確保された状態を保ち、安心して利用できる環境を提供しています。",
+      "金属スクラップ等のリサイクル事業を展開しております。\n資源の有効活用を通じて、環境に配慮した事業活動を行っております。",
     image: `${BASE}assets/RecyclingBusiness.jpg`,
     reverse: true,
   },

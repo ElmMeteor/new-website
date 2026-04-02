@@ -91,7 +91,7 @@ app.innerHTML += `
           </div>
           <div class="${w.reverse ? "order-1 md:order-2" : ""}">
             <h3 class="text-2xl mb-3 font-semibold text-gold">${w.title}</h3>
-            <p class="text-gray-400 leading-relaxed">${w.description}</p>
+            <p class="text-gray-400 leading-relaxed whitespace-pre-line">${w.description}</p>
           </div>
         </div>
       `,
