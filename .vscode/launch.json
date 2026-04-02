@@ -1,0 +1,63 @@
+{
+  // VSCode 调试配置版本（固定写法）
+  "version": "0.2.0",
+
+  // ==================== 单个启动配置 ====================
+  "configurations": [
+    {
+      // 启动名称（会显示在运行菜单中）
+      "name": "Dev Server",
+
+      // 使用 node 终端（适合运行 npm 命令）
+      "type": "node-terminal",
+
+      // 启动方式（launch = 新开进程）
+      "request": "launch",
+
+      // 实际执行的命令
+      "command": "npm run dev",
+
+      // 工作目录（当前项目根目录）
+      "cwd": "${workspaceFolder}"
+
+      // 👉 作用：
+      // 启动 Vite 开发服务器
+    },
+
+    {
+      // 启动名称
+      "name": "Open Chrome",
+
+      // 使用 Chrome 调试器
+      "type": "chrome",
+
+      // 启动方式
+      "request": "launch",
+
+      // 打开的网址（必须和 vite 端口一致）
+      "url": "http://localhost:8888/",
+
+      // 项目根目录（用于 source map 映射）
+      "webRoot": "${workspaceFolder}"
+
+      // 👉 作用：
+      // 启动 Chrome 并打开本地开发页面
+    }
+  ],
+
+  // ==================== 组合启动（重点） ====================
+  "compounds": [
+    {
+      // 组合名称（你在 VSCode 里点这个）
+      "name": "🚀 Start Project",
+
+      // 要同时执行的配置（顺序执行）
+      "configurations": ["Dev Server", "Open Chrome"]
+
+      // 👉 作用：
+      // 一键启动：
+      // 1. npm run dev
+      // 2. 自动打开浏览器
+    }
+  ]
+}
