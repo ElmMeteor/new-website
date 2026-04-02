@@ -3,6 +3,7 @@ export interface Project {
   description: string;
   image: string;
   reverse?: boolean;
+  link?: string;
 }
 
 // 统一 base
@@ -42,6 +43,7 @@ export const works: Project[] = [
     description:
       "ソフトウェア開発、システムの設計・開発・運用、SESサービスを行っております。\nお客様のご要望に沿ったシステムをご提供いたします。",
     image: `${BASE}assets/SystemDevelopmentBusiness.jpg`,
+    link: "/#system-development",
   },
   {
     title: "国際貿易",
@@ -88,10 +90,10 @@ export const companyInfo = {
   vision: ["世の為", "人の為", "幸せなれるように努めます。"],
 };
 
-// 导航
+// 导航菜单
 export const navItems = [
   { name: "HOME", href: "#hero" },
-  { name: "システム開発事業", href: "#works" },
+  { name: "システム開発事業", href: "#system-development" },
   { name: "国際貿易", href: "#works" },
   { name: "金融事業", href: "#works" },
   { name: "リサイクル事業", href: "#works" },
@@ -99,7 +101,7 @@ export const navItems = [
   { name: "お問い合わせ", href: "#contact" },
 ];
 
-// 底部
+// 底部导航
 export const footerNavItems = [
   "システム開発事業",
   "国際貿易",
@@ -116,4 +118,58 @@ export const contact = {
   phone: "092-686-8911",
   address: "〒812-0012 福岡市博多区博多駅中央街8番1号\nJRJP博多ビル 3F",
   hours: "Mon-Fri 9:00－18:00",
+};
+
+// 在 data.ts 末尾添加
+
+// 系统开发事业页面数据
+export const systemDevelopment = {
+  // 页面标题
+  title: "システム開発事業",
+  subtitle: "SERVICE",
+
+  // 主视觉图片
+  mainImage: `${BASE}assets/tesad.svg`,
+  // mainImage: "http://koki-intl.jp/upload/images/20240702_153118.png",
+
+  // 理念介绍（右对齐区域）
+  vision: [
+    "お客様の課題を解決するソフトウェア開発に注力しています。",
+    "小規模ながらも迅速・柔軟に対応できる体制を整えています。",
+    "日々の業務改善や効率化をサポートするシステムを提供します。",
+    "社員一人ひとりの成長とチーム力を大切にしています。",
+    "地域や社会への貢献も忘れず、利益の一部を社会活動に還元します。",
+  ],
+
+  // 服务项目
+  services: [
+    {
+      title: "システム設計・開発・運用サポート",
+      align: "left",
+      content: [
+        "お客様の要望に合わせて、システムの設計から開発、運用までサポートします。",
+        "中小規模の案件でも迅速に対応できる柔軟な体制です。",
+        "安心して利用できるシステム環境の提供を目指しています。",
+      ],
+      highlightLast: true,
+    },
+    {
+      title: "業務改善コンサルティング",
+      align: "right",
+      content: [
+        "現状の課題や運用上の問題点を整理し、改善提案を行います。",
+        "シンプルで実現可能なソリューションに重点を置いています。",
+      ],
+      highlightLast: false,
+    },
+    {
+      title: "ソフトウェア保守・運用支援",
+      align: "left",
+      content: [
+        "既存システムの運用サポートやトラブル対応を行います。",
+        "小規模チームならではの迅速な対応で、業務に支障を出さない運用を実現します。",
+      ],
+      highlightLast: false,
+    },
+  ],
 };
