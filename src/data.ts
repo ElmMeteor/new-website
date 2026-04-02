@@ -5,14 +5,17 @@ export interface Project {
   reverse?: boolean;
 }
 
+// 统一 base
+const BASE = import.meta.env.BASE_URL;
+
 // Hero 区域
 export const hero = {
   title: "株式会社\n弘毅インターナショナル",
-  image: "/assets/CompanyPhilosophy.svg",
-  logo: "/assets/logo.svg",
+  image: `${BASE}assets/CompanyPhilosophy.svg`,
+  logo: `${BASE}assets/logo.svg`,
 };
 
-// 公司理念（会社理念）
+// 公司理念
 export const about = {
   title: "会社理念",
   paragraphs: [
@@ -29,35 +32,35 @@ export const about = {
     "世の為、人の為",
     "幸せなれるように努めます。",
   ],
-  image: "/assets/CompanyPhilosophy.svg",
+  image: `${BASE}assets/CompanyPhilosophy.svg`,
 };
 
-// 事业内容（事業案内）
+// 事业内容
 export const works: Project[] = [
   {
     title: "システム開発事業",
     description:
       "ソフトウェア開発、システム設計・開発・運用、SESサービス。クライアント様のニーズに見合うシステム設計・開発・運用等業務を行います。",
-    image: "/assets/SystemDevelopmentBusiness.jpg",
+    image: `${BASE}assets/SystemDevelopmentBusiness.jpg`,
   },
   {
     title: "国際貿易",
     description:
       "日中を中心とした国際貿易業務。国境線のないビジネスの展開で、日中の架橋になれるように力を注ぎます。",
-    image: "/assets/ChinaJapanTrade.jpg",
+    image: `${BASE}assets/ChinaJapanTrade.jpg`,
     reverse: true,
   },
   {
     title: "金融事業",
     description:
       "金融サービス、投資関連事業。様々な課題や将来起こる問題に合わせたソリューションをご提案いたします。",
-    image: "/assets/FinancialBusiness.jpg",
+    image: `${BASE}assets/FinancialBusiness.jpg`,
   },
   {
     title: "リサイクル事業",
     description:
       "希少金属資源のリサイクル、環境事業。情報セキュリティを確保された状態を保ち、安心して利用できる環境を提供しています。",
-    image: "/assets/RecyclingBusiness.jpg",
+    image: `${BASE}assets/RecyclingBusiness.jpg`,
     reverse: true,
   },
 ];
