@@ -1,5 +1,5 @@
 import "./style.css";
-import { hero, about, works, navItems } from "./data";
+import { hero, about, works, navItems, contact } from "./data";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
 
@@ -29,7 +29,7 @@ app.innerHTML += `
     </h1>
     <div class="mt-8 fade-up opacity-0 translate-y-10 transition-all duration-700" style="transition-delay: 0.2s">
       <div class="w-16 h-px bg-gold"></div>
-      <p class="text-gray-400 text-sm mt-4 tracking-wider">広い器量と強い意志を持って</p>
+      <p class="text-gray-400 text-sm mt-4 tracking-wider">世の為、人の為、幸せなれるように努めます。</p>
     </div>
   </div>
   <img src="${hero.image}" alt="Hero" class="hero-bg absolute top-0 left-0 w-full h-full object-cover z-0">
@@ -106,24 +106,54 @@ app.innerHTML += `
 app.innerHTML += `
 <section class="py-20 px-10 bg-black">
   <div class="max-w-4xl mx-auto">
+    
+    <!-- 按钮区域 -->
     <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
-      <!-- 求人情報按钮 -->
       <a href="#recruitment" class="btn-gold group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden rounded-lg border border-gold text-gold hover:bg-gold hover:text-white transition-all duration-300 w-64">
         <span class="relative z-10 font-semibold text-lg">求人情報</span>
         <span class="absolute inset-0 bg-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left opacity-20"></span>
         <span class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white">→</span>
       </a>
 
-      <!-- お問い合わせ按钮 -->
       <a href="#contact" class="btn-gold group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden rounded-lg border border-gold text-gold hover:bg-gold hover:text-white transition-all duration-300 w-64">
         <span class="relative z-10 font-semibold text-lg">お問い合わせ</span>
         <span class="absolute inset-0 bg-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left opacity-20"></span>
         <span class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white">→</span>
       </a>
     </div>
+
+    <!-- 引导文字 -->
     <p class="text-center text-gray-500 text-sm mt-8 fade-up opacity-0 translate-y-10 transition-all duration-700">
-      ご質問やご相談がございましたら、お気軽にご連絡ください
+      ${contact.info}
     </p>
+
+    <!-- 联系方式（优化版） -->
+    <div class="mt-12 max-w-md mx-auto fade-up opacity-0 translate-y-10 transition-all duration-700">
+      <div class="border-t border-gold/20 pt-6 space-y-3 text-left">
+        
+        <div class="flex">
+          <span class="w-24 text-gray-500 text-sm">TEL</span>
+          <span class="text-gray-300 text-sm tracking-wide">
+            <a href="tel:${contact.phone}" class="hover:text-gold transition">${contact.phone}
+            </a>
+          </span>
+        </div>
+
+        <div class="flex">
+          <span class="w-24 text-gray-500 text-sm">ADDRESS</span>
+          <span class="text-gray-300 text-sm leading-relaxed whitespace-pre-line">${contact.address}
+          </span>
+        </div>
+
+        <div class="flex">
+          <span class="w-24 text-gray-500 text-sm">HOURS</span>
+          <span class="text-gray-300 text-sm">${contact.hours}
+          </span>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 `;
