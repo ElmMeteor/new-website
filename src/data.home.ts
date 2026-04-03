@@ -11,11 +11,11 @@ const BASE = import.meta.env.BASE_URL;
 export const hero = {
   title: "株式会社\n弘毅インターナショナル",
   image: `${BASE}assets/CompanyPhilosophy.svg`,
-  logo: `${BASE}assets/logo.svg`,
+  logo: `${BASE}assets/logo.jpeg`,
 };
 
 export const about = {
-  title: "会社理念",
+  title: "",
   paragraphs: [
     "広い器量と強い意志を持って、",
     "国際ビジネスの発展に貢献します。",
@@ -86,10 +86,7 @@ export const companyInfo: CompanyInfo = {
 
 export const navItems: NavItem[] = [
   { name: "HOME", href: "#hero" },
-  { name: "システム開発事業", href: "#system-development" },
-  { name: "国際貿易", href: "#works" },
-  { name: "金融事業", href: "#works" },
-  { name: "リサイクル事業", href: "#works" },
+  { name: "事業内容", href: "#works" },
   { name: "求人情報", href: "#recruitment" },
   { name: "お問い合わせ", href: "#contact" },
 ];

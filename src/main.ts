@@ -1,6 +1,7 @@
 import "./style.css";
 import { renderHomePage } from "./pages/home";
 import { renderSystemDevelopmentPage } from "./pages/systemDevelopment";
+import { renderRecruitmentPage } from "./pages/recruitment";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
 let cleanupCurrentPage: (() => void) | null = null;
@@ -14,6 +15,8 @@ function renderPage() {
 
   if (hash === "#system-development") {
     cleanupCurrentPage = renderSystemDevelopmentPage();
+  } else if (hash === "#recruitment") {
+    cleanupCurrentPage = renderRecruitmentPage();
   } else {
     cleanupCurrentPage = renderHomePage(app);
   }

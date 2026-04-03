@@ -1,32 +1,148 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-primary: #b8922a;
+  --color-primary-dark: #9e7a22;
+}
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: #0b0b0b;
+  background-color: #ffffff;
+  color: #333333;
+  font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  line-height: 1.8;
 }
 
-/* 金色主题 */
-.text-gold {
-  color: #bda463;
+/* --- プライマリカラー（ゴールド） --- */
+.text-primary {
+  color: #b8922a;
 }
-.border-gold {
-  border-color: #bda463;
+.bg-primary {
+  background-color: #b8922a;
 }
-.bg-gold {
-  background-color: #bda463;
-}
-.bg-black {
-  background-color: #0b0b0b;
+.border-primary {
+  border-color: #b8922a;
 }
 
-/* 动画过渡 */
+/* --- セクション見出し (LINK モダンクォートスタイル) --- */
+.section-heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  color: #333333;
+  letter-spacing: 0.05em;
+}
+
+.heading-border {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.heading-border-inner {
+  width: 60px;
+  height: 3px;
+  background-color: #b8922a;
+  border-radius: 2px;
+}
+
+/* --- ヘッダー：初期（透明・大）→ スクロール後（白・小）--- */
+#header {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+#header.scrolled {
+  background-color: #ffffff;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  border-bottom-color: #e5e7eb;
+}
+
+/* ヘッダー内コンテナの高さアニメーション */
+.header-inner {
+  height: 100px;
+  transition: height 0.3s ease;
+}
+
+#header.scrolled .header-inner {
+  height: 80px;
+}
+
+/* ロゴテキスト */
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+}
+
+.header-logo-img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  transition: height 0.3s ease;
+}
+
+#header.scrolled .header-logo-img {
+  height: 40px;
+}
+
+.header-logo-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #111827;
+  transition:
+    font-size 0.3s ease,
+    color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+#header.scrolled .header-logo-text {
+  font-size: 0.9rem;
+  letter-spacing: 0.07em;
+  color: #b8922a;
+}
+
+/* ナビリンク */
+.header-nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.header-nav-link:hover {
+  color: #b8922a;
+}
+
+/* コンタクトボタン：スクロール前は半透明 */
+.header-contact-btn {
+  opacity: 0.75;
+  transition: opacity 0.3s ease;
+}
+
+#header.scrolled .header-contact-btn {
+  opacity: 1;
+}
+
+/* --- フェードアップアニメーション --- */
 .hero-bg,
 .hero-text,
 .work-img,
@@ -50,37 +166,75 @@ body {
   transform: translateY(0);
 }
 
-/* Header 过渡 */
-#header {
-  transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-/* 滚动条 */
+/* --- スクロールバー --- */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #f1f1f1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #bda463;
-  border-radius: 4px;
+  background: #b8922a;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4af6a;
+  background: #9e7a22;
 }
 
-/* 卡片悬停效果 */
+/* --- サービスカード --- */
 .work-item {
   transition: transform 0.3s ease;
 }
 .work-item:hover {
   transform: translateY(-4px);
 }
-/* 代码流动背景 - 左右两侧 */
+
+/* --- ボタン --- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 2rem;
+  background-color: #b8922a;
+  color: #ffffff;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background-color: #9e7a22;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 2rem;
+  border: 2px solid #b8922a;
+  color: #b8922a;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  background-color: #b8922a;
+  color: #ffffff;
+}
+
+/* --- セクション区切り線 --- */
+.section-divider {
+  border: none;
+  border-top: 1px solid #e8e8e8;
+  margin: 0;
+}
+
+/* --- コードフロー背景（システム開発ページ用） --- */
 .code-bg {
   position: absolute;
   top: 0;
@@ -91,12 +245,11 @@ body {
   font-family: "Courier New", "SF Mono", "Fira Code", monospace;
   font-size: 13px;
   line-height: 1.8;
-  color: #bda463;
+  color: rgba(184, 146, 42, 0.12);
   pointer-events: none;
   z-index: 0;
 }
 
-/* 左侧代码列 */
 .code-lines-left {
   position: absolute;
   top: 0;
@@ -107,7 +260,6 @@ body {
   padding: 20px 10px;
 }
 
-/* 右侧代码列 */
 .code-lines-right {
   position: absolute;
   top: 0;
@@ -121,7 +273,7 @@ body {
 .code-line {
   display: block;
   opacity: 0;
-  animation: codeFlow 12s infinite linear;
+  animation: codeFlow 14s infinite linear;
   padding: 4px 0;
   white-space: nowrap;
   font-size: 12px;
@@ -133,7 +285,7 @@ body {
     transform: translateY(-100%);
   }
   10% {
-    opacity: 0.5;
+    opacity: 0.6;
   }
   30% {
     opacity: 1;
@@ -147,7 +299,7 @@ body {
   }
 }
 
-/* 响应式：小屏幕隐藏或减小宽度 */
+/* --- レスポンシブ --- */
 @media (max-width: 768px) {
   html {
     scroll-behavior: auto;
@@ -160,22 +312,13 @@ body {
     transition-duration: 0.45s;
   }
 
-  .code-lines-left,
-  .code-lines-right {
-    width: 20%;
-  }
-  .code-line {
-    font-size: 10px;
+  .section-heading {
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 640px) {
   .code-bg {
     display: none;
-  }
-
-  .code-lines-left,
-  .code-lines-right {
-    opacity: 0.3;
   }
 }

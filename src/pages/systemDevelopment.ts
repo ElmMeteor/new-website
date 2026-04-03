@@ -46,45 +46,22 @@ function renderCodeBackgroundLayer(): string {
 
 function renderTitleSection(): string {
   return `
-    <div class="fade-up opacity-0 translate-y-10 transition-all duration-700">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-8 h-px bg-gold"></div>
-        <span class="text-gold text-sm tracking-wider">${systemDevelopment.subtitle}</span>
-      </div>
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4" style="font-family: 'Noto Serif JP', 'Yu Mincho', serif;">${systemDevelopment.title}</h1>
-      <div class="w-20 h-0.5 bg-gold"></div>
-    </div>
-  `;
-}
-
-function renderSummarySection(): string {
-  return `
-    <div class="fade-up opacity-0 translate-y-10 transition-all duration-700 my-16 flex justify-end" style="transition-delay: 0.05s">
-      <div class="relative inline-block">
-        <div class="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-gold/50"></div>
-        <div class="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-gold/50"></div>
-        <div class="text-right pl-6 pr-6 pt-4 pb-4">
-          <div class="flex justify-start items-center gap-3 mb-2">
-            <div class="w-8 h-px bg-gold/50"></div>
-            <span class="text-gold text-xs tracking-wider">—— 信頼と革新 ——</span>
-          </div>
-          <p class="text-gray-300 text-sm tracking-wide leading-relaxed whitespace-nowrap">
-            お客様の課題を迅速・丁寧に解決する、信頼できるシステム開発チーム。
-          </p>
-        </div>
-      </div>
+    <div class="fade-up opacity-0 translate-y-10 text-center mb-4">
+      <p class="text-primary text-sm font-semibold tracking-widest mb-3">${systemDevelopment.subtitle}</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">${systemDevelopment.title}</h1>
+      <div class="heading-border justify-center"><div class="heading-border-inner"></div></div>
     </div>
   `;
 }
 
 function renderVisionSection(): string {
   return `
-    <div class="fade-up opacity-0 translate-y-10 transition-all duration-700" style="transition-delay: 0.1s">
-      <div class="max-w-3xl ml-auto text-right">
+    <div class="fade-up opacity-0 translate-y-10 w-full text-center mb-16" style="transition-delay: 0.05s">
+      <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
         ${systemDevelopment.vision
           .map(
             (text, idx) =>
-              `<p class="text-gray-300 leading-relaxed mb-3 ${idx === systemDevelopment.vision.length - 1 ? "text-gold font-semibold" : ""}">${text}</p>`,
+              `<p class="leading-relaxed mb-3 ${idx === systemDevelopment.vision.length - 1 ? "text-primary font-semibold" : "text-gray-600"}">${text}</p>`,
           )
           .join("")}
       </div>
@@ -96,33 +73,23 @@ function renderServiceItem(
   service: SystemDevelopmentService,
   idx: number,
 ): string {
-  if (service.align === "left") {
-    return `
-      <div class="fade-up opacity-0 translate-y-10 transition-all duration-700 mb-16" style="transition-delay: ${idx * 0.1}s">
-        <div class="border-l-4 border-gold pl-6 mb-6">
-          <h2 class="text-2xl md:text-3xl font-bold text-gold" style="font-family: 'Noto Serif JP', 'Yu Mincho', serif;">${service.title}</h2>
-        </div>
-        <div class="space-y-3 text-gray-300 leading-relaxed">
+  const isLeft = service.align === "left";
+  return `
+    <div class="fade-up opacity-0 translate-y-10 grid md:grid-cols-2 gap-12 items-start mb-16 ${!isLeft ? "md:[&>:first-child]:order-2 md:[&>:last-child]:order-1" : ""}" style="transition-delay: ${idx * 0.1}s">
+      <div class="bg-primary/5 rounded-xl p-8 border border-primary/20">
+        <div class="w-10 h-1 bg-primary rounded mb-4"></div>
+        <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">${service.title}</h2>
+        <div class="space-y-3">
           ${service.content
             .map(
               (text, i) =>
-                `<p class="${service.highlightLast && i === service.content.length - 1 ? "text-gold" : ""}">${text}</p>`,
+                `<p class="${service.highlightLast && i === service.content.length - 1 ? "text-primary font-semibold" : "text-gray-600"} leading-relaxed">${text}</p>`,
             )
             .join("")}
         </div>
       </div>
-    `;
-  }
-
-  return `
-    <div class="fade-up opacity-0 translate-y-10 transition-all duration-700 mb-16" style="transition-delay: ${idx * 0.1}s">
-      <div class="max-w-3xl ml-auto text-right">
-        <div class="border-r-4 border-gold pr-6 mb-6">
-          <h2 class="text-2xl md:text-3xl font-bold text-gold" style="font-family: 'Noto Serif JP', 'Yu Mincho', serif;">${service.title}</h2>
-        </div>
-        ${service.content
-          .map((text) => `<p class="text-gray-300 leading-relaxed">${text}</p>`)
-          .join("")}
+      <div class="flex items-center justify-center">
+        <div class="text-primary/20 text-9xl font-bold select-none" style="font-family: serif;">0${idx + 1}</div>
       </div>
     </div>
   `;
@@ -136,12 +103,11 @@ function renderServicesSection(): string {
 
 function renderMainContent(): string {
   return `
-    <main class="pt-32 pb-20 bg-black min-h-screen relative overflow-hidden">
+    <main class="pt-20 pb-20 bg-gray-50 min-h-screen relative overflow-hidden">
       ${renderCodeBackgroundLayer()}
       <div class="relative z-10">
-        <div class="max-w-6xl mx-auto px-10">
+        <div class="w-full px-6 md:px-10 py-16">
           ${renderTitleSection()}
-          ${renderSummarySection()}
           ${renderVisionSection()}
           ${renderServicesSection()}
         </div>
@@ -179,7 +145,6 @@ export function renderSystemDevelopmentPage(): () => void {
     ${renderFooter()}
   `;
 
-  // 初始化代码背景
   initCodeBackground();
   initScrollEffects();
 
@@ -204,21 +169,20 @@ function initCodeBackground() {
     return;
   }
 
-  const lineCount = 28;
+  const lineCount = 24;
 
-  // 左右两侧分别使用不同速度与延迟，形成错层流动感。
   appendCodeLines(
     leftContainer,
     CODE_SNIPPETS,
     lineCount,
-    (index) => index * 0.2,
+    (index) => index * 0.25,
     "14s",
   );
   appendCodeLines(
     rightContainer,
     CODE_SNIPPETS,
     lineCount,
-    (index) => index * 0.25 + 2,
+    (index) => index * 0.3 + 2,
     "16s",
   );
 }

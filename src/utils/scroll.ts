@@ -52,13 +52,10 @@ export function toggleHeaderScrolledState(
   }
 
   if (scrollY > 50) {
-    header.classList.add("bg-black", "shadow-lg");
-    header.classList.remove("bg-black/80");
-    return;
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
   }
-
-  header.classList.remove("bg-black", "shadow-lg");
-  header.classList.add("bg-black/80");
 }
 
 export function revealFadeUpElements(
