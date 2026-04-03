@@ -153,7 +153,7 @@ function renderContactSection(): string {
         <div class="mt-8 grid items-start gap-6 md:grid-cols-2 md:gap-8 w-full max-w-5xl mx-auto">
           <div class="fade-up opacity-0 translate-y-10 w-full">
             <p class="text-gray-600 leading-relaxed mb-8">${contact.info}</p>
-            <div class="space-y-4 text-left">
+            <div class="space-y-4 text-left mb-8">
               <div class="flex items-start gap-4">
                 <span class="text-primary font-semibold w-20 text-sm flex-shrink-0">TEL</span>
                 <a href="tel:${contact.phone}" class="text-gray-700 hover:text-primary transition-colors">${contact.phone}</a>
@@ -167,32 +167,49 @@ function renderContactSection(): string {
                 <span class="text-gray-700 text-sm">${contact.hours}</span>
               </div>
             </div>
+            <!-- 地図 -->
+            <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-200 w-full h-80">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1976.2613598822777!2d130.41774732607476!3d33.58811926672321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x354191b85b30aa53%3A0x223d7db18c549acb!2s8-1%20Hakataekich%C5%AB%C5%8Dgai%2C%20Hakata%20Ward%2C%20Fukuoka%2C%20812-0012!5e0!3m2!1szh-CN!2sjp!4v1775205669864!5m2!1szh-CN!2sjp" 
+                width="100%" 
+                height="100%" 
+                style="border: 0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
           <div class="fade-up opacity-0 translate-y-10 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-200 w-full" style="transition-delay: 0.1s">
             <h3 class="text-lg font-bold text-gray-800 mb-6">お問い合わせフォーム</h3>
-            <form class="space-y-4" onsubmit="return false;">
+            <!-- 添加 id="contact-form" 用于 AJAX 提交 -->
+            <form id="contact-form" class="space-y-4">
+              <input type="hidden" name="_language" value="ja">
+              <input type="hidden" name="_subject" value="お問い合わせ">
+              
               <div>
                 <label class="block text-sm text-gray-600 mb-1">会社名 <span class="text-red-400">*</span></label>
-                <input type="text" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="例：株式会社○○">
+                <input type="text" name="company" id="company" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="例：株式会社○○" required>
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">お名前 <span class="text-red-400">*</span></label>
-                <input type="text" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="例：山田 太郎">
+                <input type="text" name="name" id="name" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="例：山田 太郎" required>
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">メールアドレス <span class="text-red-400">*</span></label>
-                <input type="email" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="例：example@mail.com">
+                <input type="email" name="email" id="email" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="例：example@mail.com" required>
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">電話番号</label>
-                <input type="tel" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="例：092-000-0000">
+                <input type="tel" name="phone" id="phone" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="例：092-000-0000">
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">お問い合わせ内容</label>
-                <textarea rows="4" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary resize-none" placeholder="ご相談内容をご記入ください"></textarea>
+                <textarea name="message" id="message" rows="4" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary resize-none" placeholder="ご相談内容をご記入ください"></textarea>
               </div>
               <button type="submit" class="btn-primary w-full justify-center">送信する</button>
             </form>
+            <div id="form-status" class="mt-4 text-sm hidden"></div>
           </div>
         </div>
       </div>
@@ -249,6 +266,128 @@ function initHomeScrollEffects(): void {
   );
 }
 
+// AJAX 提交表单（不跳转页面）
+function initContactFormHandler(): void {
+  setTimeout(() => {
+    const form = document.getElementById("contact-form");
+    if (!form) return;
+
+    // 类型断言：告诉 TypeScript 这是一个表单元素
+    const formElement = form as HTMLFormElement;
+
+    formElement.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const statusDiv = document.getElementById("form-status");
+      const submitBtn = formElement.querySelector('button[type="submit"]');
+      const originalText = submitBtn?.textContent || "送信する";
+
+      // ========== 获取字段值 ==========
+      const company =
+        (
+          document.getElementById("company") as HTMLInputElement
+        )?.value.trim() || "";
+      const name =
+        (document.getElementById("name") as HTMLInputElement)?.value.trim() ||
+        "";
+      const email =
+        (document.getElementById("email") as HTMLInputElement)?.value.trim() ||
+        "";
+      const phone =
+        (document.getElementById("phone") as HTMLInputElement)?.value.trim() ||
+        "";
+
+      // ========== 1. 检查必填字段 ==========
+      if (!company || !name || !email) {
+        if (statusDiv) {
+          statusDiv.classList.remove("hidden");
+          statusDiv.textContent =
+            "会社名、お名前、メールアドレスは必須項目です。";
+          statusDiv.className = "mt-4 text-sm text-red-600";
+          setTimeout(() => statusDiv.classList.add("hidden"), 3000);
+        }
+        return;
+      }
+
+      // ========== 2. 邮箱格式验证 ==========
+      const emailRegex = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        if (statusDiv) {
+          statusDiv.classList.remove("hidden");
+          statusDiv.textContent =
+            "有効なメールアドレスを入力してください。（例: example@mail.com）";
+          statusDiv.className = "mt-4 text-sm text-red-600";
+          setTimeout(() => statusDiv.classList.add("hidden"), 3000);
+        }
+        return;
+      }
+
+      // ========== 3. 电话格式验证（日本手机/固定电话） ==========
+      // 日本电话格式：0XX-XXXX-XXXX 或 0XXXXXXXXXX
+      const phoneRegex = /^0\d{1,4}-\d{1,4}-\d{4}$|^0\d{9,10}$/;
+      if (phone && !phoneRegex.test(phone)) {
+        if (statusDiv) {
+          statusDiv.classList.remove("hidden");
+          statusDiv.textContent =
+            "有効な電話番号を入力してください。（例: 092-000-0000 または 09012345678）";
+          statusDiv.className = "mt-4 text-sm text-red-600";
+          setTimeout(() => statusDiv.classList.add("hidden"), 3000);
+        }
+        return;
+      }
+
+      // 显示加载状态
+      if (statusDiv) {
+        statusDiv.classList.remove("hidden");
+        statusDiv.textContent = "送信中...";
+        statusDiv.className = "mt-4 text-sm text-blue-600";
+      }
+      if (submitBtn) submitBtn.textContent = "送信中...";
+
+      // 获取表单数据
+      const formData = new FormData(formElement);
+      formData.append("_next", "");
+
+      try {
+        const response = await fetch("https://formspree.io/f/xqegyzrb", {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
+        if (response.ok) {
+          if (statusDiv) {
+            statusDiv.textContent = "送信完了！ありがとうございます。";
+            statusDiv.className = "mt-4 text-sm text-green-600";
+          }
+          formElement.reset();
+        } else {
+          const errorData = await response.json();
+          if (statusDiv) {
+            statusDiv.textContent =
+              errorData.error || "送信に失敗しました。もう一度お試しください。";
+            statusDiv.className = "mt-4 text-sm text-red-600";
+          }
+        }
+      } catch (error) {
+        if (statusDiv) {
+          statusDiv.textContent =
+            "ネットワークエラー。接続を確認して再試行してください。";
+          statusDiv.className = "mt-4 text-sm text-red-600";
+        }
+      } finally {
+        if (submitBtn) submitBtn.textContent = originalText;
+        setTimeout(() => {
+          if (statusDiv) statusDiv.classList.add("hidden");
+        }, 5000);
+      }
+    });
+  }, 100);
+}
+
+// 在 renderHomePage 中调用
 export function renderHomePage(app: HTMLDivElement): () => void {
   cleanupHomeScrollEffect?.();
   cleanupHomeScrollEffect = null;
@@ -266,6 +405,7 @@ export function renderHomePage(app: HTMLDivElement): () => void {
 
   initHomeScrollEffects();
   cleanupHomeHeaderMenu = initHeaderMobileMenu();
+  initContactFormHandler();
 
   return () => {
     cleanupHomeScrollEffect?.();
