@@ -53,3 +53,64 @@ export interface SystemDevelopmentData {
   vision: string[];
   services: SystemDevelopmentService[];
 }
+
+export interface InternationalTradeData {
+  title: string;
+  leadLines: string[];
+  wholesaleTitle: string;
+  wholesaleParagraphs: string[];
+  oemTitle: string;
+  oemParagraphs: string[];
+  oemSupplyTitle: string;
+  oemSupplyParagraphs: string[];
+  supportMessage: string;
+  closingTitle: string;
+  closingParagraphs: string[];
+}
+
+export type FinancialServiceAlign = "left" | "right";
+
+export interface FinancialServiceBlock {
+  title: string;
+  paragraphs: string[];
+  align: FinancialServiceAlign;
+}
+
+export interface FinancialBusinessData {
+  title: string;
+  leadLines: string[];
+  consultingTitle: string;
+  consultingSubtitle: string;
+  consultingParagraphs: string[];
+  serviceBlocks: FinancialServiceBlock[];
+}
+
+export type RecyclingSectionAlign = "left" | "right";
+
+export interface RecyclingSection {
+  title: string;
+  paragraphs: string[];
+  align: RecyclingSectionAlign;
+}
+
+export interface RecyclingBusinessData {
+  title: string;
+  leadLines: string[];
+  mainTitle: string;
+  sections: RecyclingSection[];
+  closingTitle: string;
+  closingParagraphs: string[];
+}
+
+export interface RecruitmentDetailRow {
+  label: string;
+  values: string[];
+}
+
+export interface RecruitmentPageData {
+  title: string;
+  noticeTitle: string;
+  noticeLines: string[];
+  rows: RecruitmentDetailRow[];
+  inquiryLabel: string;
+}

@@ -9,6 +9,18 @@ export function renderHeader(): string {
       <img src="${hero.logo}" alt="KOKI INTERNATIONAL" class="header-logo-img">
       <span class="header-logo-text">KOKI INTERNATIONAL</span>
     </a>
+    <button
+      id="headerMenuButton"
+      class="header-menu-btn ml-auto md:hidden"
+      type="button"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+      aria-controls="mobileNav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <nav class="hidden md:flex items-center gap-4 ml-auto">
       ${navItems
         .slice(0, -1)
@@ -20,6 +32,16 @@ export function renderHeader(): string {
       <a href="#contact" class="btn-primary header-contact-btn text-xs px-5 py-2">お問い合わせ</a>
     </nav>
   </div>
+  <nav id="mobileNav" class="mobile-nav md:hidden" aria-label="モバイルナビゲーション">
+    <div class="mobile-nav-panel">
+      ${navItems
+        .map(
+          (item) =>
+            `<a href="${item.href}" class="mobile-nav-link">${item.name}</a>`,
+        )
+        .join("")}
+    </div>
+  </nav>
 </header>
   `;
 }

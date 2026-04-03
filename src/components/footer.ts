@@ -14,9 +14,9 @@ const footerColumns: FooterSection[] = [
     title: "SERVICE",
     links: [
       { label: "システム開発事業", href: "/#system-development" },
-      { label: "国際貿易", href: "#works" },
-      { label: "金融事業", href: "#works" },
-      { label: "リサイクル事業", href: "#works" },
+      { label: "国際貿易", href: "/#international-trade" },
+      { label: "金融事業", href: "/#financial-business" },
+      { label: "リサイクル事業", href: "/#recycling-business" },
     ],
   },
   {

@@ -7,8 +7,10 @@ import {
   revealFadeUpElements,
   toggleHeaderScrolledState,
 } from "../utils/scroll";
+import { initHeaderMobileMenu } from "../utils/headerMenu";
 
 let cleanupHomeScrollEffect: (() => void) | null = null;
+let cleanupHomeHeaderMenu: (() => void) | null = null;
 
 /* --- ヘルパー --- */
 function renderSectionHeading(title: string, sub?: string): string {
@@ -26,7 +28,7 @@ function renderHeroSection(): string {
   return `
     <section id="hero" class="flex items-center bg-white relative overflow-hidden" style="min-height: 85vh; padding-top: 90px;">
       <div class="w-full px-6 md:px-10 py-20">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="grid md:grid-cols-[1fr_1.1fr] gap-10 items-center">
           <div class="fade-up opacity-0 translate-y-10">
 
             <p class="text-primary text-sm font-semibold tracking-widest mb-3">KOKI INTERNATIONAL CO., LTD</p>
@@ -41,8 +43,8 @@ function renderHeroSection(): string {
             </p>
           </div>
           <div class="fade-up opacity-0 translate-y-10" style="transition-delay: 0.1s">
-            <div class="overflow-hidden rounded-2xl shadow-lg">
-              <img src="${hero.image}" alt="KOKI INTERNATIONAL" class="hero-bg w-full h-auto object-cover">
+            <div class="overflow-hidden rounded-2xl shadow-lg h-[280px] md:h-[430px]">
+              <img src="${hero.image}" alt="KOKI INTERNATIONAL" class="hero-bg w-full h-full object-cover">
             </div>
           </div>
         </div>
@@ -63,8 +65,8 @@ function renderAboutSection(): string {
           </div>
           <p class="text-gray-500 text-sm">About Us</p>
         </div>
-        <div class="grid md:grid-cols-2 gap-12 items-start mt-8">
-          <div class="flex gap-8 items-start">
+        <div class="grid md:grid-cols-[1.15fr_0.85fr] gap-12 items-start mt-8">
+          <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
             <div class="fade-up opacity-0 translate-y-10">
               <h3 class="text-xl font-bold text-gray-800 mb-4">${about.title}</h3>
               ${about.paragraphs
@@ -87,8 +89,8 @@ function renderAboutSection(): string {
               </div>
             </div>
           </div>
-          <div class="fade-up opacity-0 translate-y-10 overflow-hidden rounded-2xl shadow-md" style="transition-delay: 0.1s">
-            <img src="${about.image}" alt="Company Philosophy" class="w-full h-auto object-cover">
+          <div class="fade-up opacity-0 translate-y-10 overflow-hidden rounded-2xl shadow-md h-[260px] md:h-[360px]" style="transition-delay: 0.1s">
+            <img src="${about.image}" alt="Company Philosophy" class="w-full h-full object-cover">
           </div>
         </div>
       </div>
@@ -240,6 +242,8 @@ function initHomeScrollEffects(): void {
 export function renderHomePage(app: HTMLDivElement): () => void {
   cleanupHomeScrollEffect?.();
   cleanupHomeScrollEffect = null;
+  cleanupHomeHeaderMenu?.();
+  cleanupHomeHeaderMenu = null;
 
   app.innerHTML = `
     ${renderHeader()}
@@ -251,9 +255,12 @@ export function renderHomePage(app: HTMLDivElement): () => void {
   `;
 
   initHomeScrollEffects();
+  cleanupHomeHeaderMenu = initHeaderMobileMenu();
 
   return () => {
     cleanupHomeScrollEffect?.();
     cleanupHomeScrollEffect = null;
+    cleanupHomeHeaderMenu?.();
+    cleanupHomeHeaderMenu = null;
   };
 }

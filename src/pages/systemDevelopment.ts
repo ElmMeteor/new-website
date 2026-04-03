@@ -8,8 +8,10 @@ import {
   revealFadeUpElements,
   toggleHeaderScrolledState,
 } from "../utils/scroll";
+import { initHeaderMobileMenu } from "../utils/headerMenu";
 
 let cleanupSystemDevelopmentScrollEffect: (() => void) | null = null;
+let cleanupSystemDevelopmentHeaderMenu: (() => void) | null = null;
 type SystemDevelopmentService = (typeof systemDevelopment.services)[number];
 
 const CODE_SNIPPETS = [
@@ -136,6 +138,8 @@ function appendCodeLines(
 export function renderSystemDevelopmentPage(): () => void {
   cleanupSystemDevelopmentScrollEffect?.();
   cleanupSystemDevelopmentScrollEffect = null;
+  cleanupSystemDevelopmentHeaderMenu?.();
+  cleanupSystemDevelopmentHeaderMenu = null;
 
   const app = document.querySelector<HTMLDivElement>("#app")!;
 
@@ -147,10 +151,13 @@ export function renderSystemDevelopmentPage(): () => void {
 
   initCodeBackground();
   initScrollEffects();
+  cleanupSystemDevelopmentHeaderMenu = initHeaderMobileMenu();
 
   return () => {
     cleanupSystemDevelopmentScrollEffect?.();
     cleanupSystemDevelopmentScrollEffect = null;
+    cleanupSystemDevelopmentHeaderMenu?.();
+    cleanupSystemDevelopmentHeaderMenu = null;
   };
 }
 

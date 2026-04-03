@@ -1,97 +1,63 @@
 // src/pages/recruitment.ts
 import { renderHeader } from "../components/header";
 import { renderFooter } from "../components/footer";
-import { companyInfo, recruitment } from "../data";
+import { recruitmentPageData } from "../data";
 import {
   createScrollEffect,
   revealFadeUpElements,
   toggleHeaderScrolledState,
 } from "../utils/scroll";
+import { initHeaderMobileMenu } from "../utils/headerMenu";
 
 let cleanupRecruitmentScrollEffect: (() => void) | null = null;
+let cleanupRecruitmentHeaderMenu: (() => void) | null = null;
 
 /* --- バナー --- */
 function renderPageBanner(): string {
   return `
     <section style="padding-top: 90px; background: linear-gradient(150deg, #fdf8f0 0%, #fbf2e3 100%);">
       <div class="w-full px-6 md:px-10 py-20 text-center fade-up opacity-0 translate-y-10">
-        <p class="text-primary text-xs font-semibold tracking-widest mb-3">RECRUIT</p>
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">${recruitment.title}</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">${recruitmentPageData.title}</h1>
         <div class="heading-border justify-center"><div class="heading-border-inner"></div></div>
-        <p class="text-gray-600 w-full leading-relaxed">
-          ${companyInfo.name}では、<br>国際ビジネスを共に担う仲間を募集しています。
-        </p>
+        <p class="text-gray-700 w-full leading-relaxed font-semibold">${recruitmentPageData.noticeTitle}</p>
       </div>
     </section>
   `;
 }
 
-/* --- なぜ弘毅か --- */
-function renderWhyJoinSection(): string {
-  const benefits = [
-    {
-      num: "01",
-      title: "グローバルな舞台",
-      text: "日中を中心とした国際的なビジネス環境で、世界を相手に仕事ができます。",
-    },
-    {
-      num: "02",
-      title: "多彩な事業領域",
-      text: "IT・貿易・金融・リサイクルなど複数の分野で幅広い経験を積めます。",
-    },
-    {
-      num: "03",
-      title: "成長できる環境",
-      text: "広い器量と強い意志を育むため、個人の意欲を最大限サポートします。",
-    },
-  ];
-
+/* --- お知らせ --- */
+function renderNoticeSection(): string {
   return `
     <section class="py-20 bg-white">
       <div class="w-full px-6 md:px-10">
-        <div class="text-center mb-12 fade-up opacity-0 translate-y-10">
-          <p class="text-primary text-xs font-semibold tracking-widest mb-2">WHY JOIN US</p>
-          <h2 class="section-heading">弘毅インターナショナルで働く理由</h2>
-          <div class="heading-border"><div class="heading-border-inner"></div></div>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-          ${benefits
-            .map(
-              (b, i) => `
-            <div class="fade-up opacity-0 translate-y-10 border border-gray-200 rounded-xl p-8 bg-white hover:shadow-md hover:border-primary transition-all" style="transition-delay: ${i * 0.1}s">
-              <div class="text-primary text-3xl font-bold mb-4" style="font-family: serif; opacity: 0.5;">${b.num}</div>
-              <div class="w-8 h-0.5 bg-primary mb-4"></div>
-              <h3 class="font-bold text-gray-800 mb-3">${b.title}</h3>
-              <p class="text-gray-600 text-sm leading-relaxed">${b.text}</p>
-            </div>
-          `,
-            )
-            .join("")}
+        <div class="fade-up opacity-0 translate-y-10 rounded-2xl border border-gray-200 bg-gray-50 p-8 md:p-10 text-center">
+          <div class="space-y-2 text-gray-600 leading-relaxed">
+            ${recruitmentPageData.noticeLines.map((line) => `<p>${line}</p>`).join("")}
+          </div>
         </div>
       </div>
     </section>
   `;
 }
 
-/* --- 募集情報リスト --- */
-function renderJobListings(): string {
+/* --- 募集要項 --- */
+function renderRecruitmentTable(): string {
   return `
     <section class="py-20" style="background: #fdf8f0;">
       <div class="w-full px-6 md:px-10">
         <div class="text-center mb-12 fade-up opacity-0 translate-y-10">
-          <p class="text-primary text-xs font-semibold tracking-widest mb-2">JOB LISTINGS</p>
           <h2 class="section-heading">募集情報</h2>
           <div class="heading-border"><div class="heading-border-inner"></div></div>
         </div>
-        <div class="space-y-4">
-          ${recruitment.items
+        <div class="rounded-2xl border border-gray-300 overflow-hidden bg-white fade-up opacity-0 translate-y-10">
+          ${recruitmentPageData.rows
             .map(
-              (item, i) => `
-            <div class="fade-up opacity-0 translate-y-10 bg-white border border-gray-200 rounded-xl px-6 py-5 flex items-center gap-6 hover:border-primary hover:shadow-sm transition-all" style="transition-delay: ${i * 0.08}s">
-              <span class="text-gray-400 text-sm whitespace-nowrap min-w-[100px]">${item.date}</span>
-              <div class="w-px h-6 bg-gray-200 flex-shrink-0"></div>
-              <a href="${item.link}" class="text-gray-800 hover:text-primary transition-colors font-medium flex-1">${item.title}</a>
-              <span class="text-primary text-xs border border-primary rounded px-3 py-1 whitespace-nowrap flex-shrink-0">詳細を見る</span>
+              (row) => `
+            <div class="grid md:grid-cols-[220px_1fr] border-b border-gray-200 last:border-b-0">
+              <div class="bg-[#f2dcdb] px-5 py-4 text-center font-semibold text-gray-800">${row.label}</div>
+              <div class="px-5 py-4 text-gray-700">
+                ${row.values.map((value) => `<p class="leading-relaxed">${value}</p>`).join("")}
+              </div>
             </div>
           `,
             )
@@ -107,13 +73,7 @@ function renderContactCTA(): string {
   return `
     <section class="py-20 bg-white text-center">
       <div class="fade-up opacity-0 translate-y-10 w-full px-6">
-        <p class="text-primary text-xs font-semibold tracking-widest mb-3">CONTACT</p>
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">ご不明な点はお気軽にご相談ください</h2>
-        <div class="heading-border justify-center"><div class="heading-border-inner"></div></div>
-        <p class="text-gray-600 leading-relaxed mb-8">
-          採用に関するご質問や詳細は、お問い合わせフォームよりご連絡ください。
-        </p>
-        <a href="#contact" class="btn-primary">お問い合わせフォームへ</a>
+        <a href="#contact" class="btn-primary">${recruitmentPageData.inquiryLabel}</a>
       </div>
     </section>
   `;
@@ -135,22 +95,27 @@ function initScrollEffects(): void {
 export function renderRecruitmentPage(): () => void {
   cleanupRecruitmentScrollEffect?.();
   cleanupRecruitmentScrollEffect = null;
+  cleanupRecruitmentHeaderMenu?.();
+  cleanupRecruitmentHeaderMenu = null;
 
   const app = document.querySelector<HTMLDivElement>("#app")!;
 
   app.innerHTML = `
     ${renderHeader()}
     ${renderPageBanner()}
-    ${renderWhyJoinSection()}
-    ${renderJobListings()}
+    ${renderNoticeSection()}
+    ${renderRecruitmentTable()}
     ${renderContactCTA()}
     ${renderFooter()}
   `;
 
   initScrollEffects();
+  cleanupRecruitmentHeaderMenu = initHeaderMobileMenu();
 
   return () => {
     cleanupRecruitmentScrollEffect?.();
     cleanupRecruitmentScrollEffect = null;
+    cleanupRecruitmentHeaderMenu?.();
+    cleanupRecruitmentHeaderMenu = null;
   };
 }

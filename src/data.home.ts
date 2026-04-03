@@ -10,7 +10,7 @@ const BASE = import.meta.env.BASE_URL;
 
 export const hero = {
   title: "株式会社\n弘毅インターナショナル",
-  image: `${BASE}assets/CompanyPhilosophy.svg`,
+  image: `${BASE}assets/CompanyPhilosophy.jpg`,
   logo: `${BASE}assets/logo.jpeg`,
 };
 
@@ -30,7 +30,7 @@ export const about = {
     "世の為、人の為",
     "幸せなれるように努めます。",
   ],
-  image: `${BASE}assets/CompanyPhilosophy.svg`,
+  image: `${BASE}assets/about.jpg`,
 };
 
 export const works: Project[] = [
@@ -46,6 +46,7 @@ export const works: Project[] = [
     description:
       "日中を中心とした国際貿易業務を展開しております。\n輸出入業務や国内流通を通じて、国境を越えたビジネスの架橋となります。",
     image: `${BASE}assets/ChinaJapanTrade.jpg`,
+    link: "/#international-trade",
     reverse: true,
   },
   {
@@ -53,12 +54,14 @@ export const works: Project[] = [
     description:
       "金融サービスおよび投資関連事業を展開しております。\n国内外の投資支援や企業進出に関するコンサルティングを提供いたします。",
     image: `${BASE}assets/FinancialBusiness.jpg`,
+    link: "/#financial-business",
   },
   {
     title: "リサイクル事業",
     description:
       "金属スクラップ等のリサイクル事業を展開しております。\n資源の有効活用を通じて、環境に配慮した事業活動を行っております。",
     image: `${BASE}assets/RecyclingBusiness.jpg`,
+    link: "/#recycling-business",
     reverse: true,
   },
 ];
