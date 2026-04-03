@@ -2,13 +2,12 @@
 import { renderHeader } from "../components/header";
 import { renderFooter } from "../components/footer";
 import { systemDevelopment } from "../data";
-import {
-  createScrollEffect,
-  isMobileViewport,
-  revealFadeUpElements,
-  toggleHeaderScrolledState,
-} from "../utils/scroll";
+import { isMobileViewport } from "../utils/scroll";
 import { initHeaderMobileMenu } from "../utils/headerMenu";
+import {
+  CONTENT_SHELL_CLASS,
+  createStandardPageScrollEffect,
+} from "../utils/page.ts";
 
 let cleanupSystemDevelopmentScrollEffect: (() => void) | null = null;
 let cleanupSystemDevelopmentHeaderMenu: (() => void) | null = null;
@@ -50,7 +49,7 @@ function renderTitleSection(): string {
   return `
     <div class="fade-up opacity-0 translate-y-10 text-center mb-4">
       <p class="text-primary text-sm font-semibold tracking-widest mb-3">${systemDevelopment.subtitle}</p>
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">${systemDevelopment.title}</h1>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">${systemDevelopment.title}</h1>
       <div class="heading-border justify-center"><div class="heading-border-inner"></div></div>
     </div>
   `;
@@ -59,7 +58,7 @@ function renderTitleSection(): string {
 function renderVisionSection(): string {
   return `
     <div class="fade-up opacity-0 translate-y-10 w-full text-center mb-16" style="transition-delay: 0.05s">
-      <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+      <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-200">
         ${systemDevelopment.vision
           .map(
             (text, idx) =>
@@ -77,8 +76,8 @@ function renderServiceItem(
 ): string {
   const isLeft = service.align === "left";
   return `
-    <div class="fade-up opacity-0 translate-y-10 grid md:grid-cols-2 gap-12 items-start mb-16 ${!isLeft ? "md:[&>:first-child]:order-2 md:[&>:last-child]:order-1" : ""}" style="transition-delay: ${idx * 0.1}s">
-      <div class="bg-primary/5 rounded-xl p-8 border border-primary/20">
+    <div class="fade-up opacity-0 translate-y-10 grid md:grid-cols-2 gap-8 md:gap-12 items-start mb-12 md:mb-16 ${!isLeft ? "md:[&>:first-child]:order-2 md:[&>:last-child]:order-1" : ""}" style="transition-delay: ${idx * 0.1}s">
+      <div class="bg-primary/5 rounded-xl p-6 md:p-8 border border-primary/20">
         <div class="w-10 h-1 bg-primary rounded mb-4"></div>
         <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">${service.title}</h2>
         <div class="space-y-3">
@@ -105,10 +104,10 @@ function renderServicesSection(): string {
 
 function renderMainContent(): string {
   return `
-    <main id="system-development" class="pt-20 pb-20 bg-gray-50 min-h-screen relative overflow-hidden">
+    <main id="system-development" class="pt-[88px] md:pt-20 pb-16 md:pb-20 bg-gray-50 min-h-screen relative overflow-hidden">
       ${renderCodeBackgroundLayer()}
       <div class="relative z-10">
-        <div class="w-full px-6 md:px-10 py-16">
+        <div class="${CONTENT_SHELL_CLASS} py-14 md:py-16">
           ${renderTitleSection()}
           ${renderVisionSection()}
           ${renderServicesSection()}
@@ -195,13 +194,5 @@ function initCodeBackground() {
 }
 
 function initScrollEffects() {
-  const header = document.getElementById("header");
-  const fadeItems = document.querySelectorAll<HTMLElement>(".fade-up");
-
-  cleanupSystemDevelopmentScrollEffect = createScrollEffect(
-    ({ scrollY, viewportHeight }) => {
-      toggleHeaderScrolledState(header, scrollY);
-      revealFadeUpElements(fadeItems, viewportHeight);
-    },
-  );
+  cleanupSystemDevelopmentScrollEffect = createStandardPageScrollEffect();
 }

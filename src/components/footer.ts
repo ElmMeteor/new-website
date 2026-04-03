@@ -1,4 +1,6 @@
 // src/components/footer.ts
+import { CONTENT_SHELL_CLASS } from "../utils/page.ts";
+
 type FooterLink = {
   label: string;
   href: string;
@@ -59,9 +61,9 @@ export function renderFooter(): string {
 
   return `
 <footer class="bg-gray-800 text-white pt-16 pb-8">
-  <div class="w-full px-6 md:px-10">
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
-      <div class="col-span-2 md:col-span-1">
+  <div class="${CONTENT_SHELL_CLASS}">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+      <div class="sm:col-span-2 md:col-span-1">
         <p class="text-white font-bold text-sm mb-1">KOKI INTERNATIONAL</p>
         <p class="text-gray-400 text-xs mb-4">株式会社 弘毅インターナショナル</p>
         <p class="text-gray-500 text-xs leading-relaxed">人・物・情報・技術を<br>国際的につなぐ</p>

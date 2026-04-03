@@ -1,12 +1,13 @@
 // src/components/header.ts
 import { navItems, hero } from "../data";
+import { CONTENT_INSET_CLASS } from "../utils/page.ts";
 
 const BASE = import.meta.env.BASE_URL;
 
 export function renderHeader(): string {
   return `
 <header id="header" class="fixed top-0 w-full z-50">
-  <div class="header-inner max-w-7xl mx-auto flex items-center px-6 md:px-10">
+  <div class="header-inner max-w-7xl mx-auto flex items-center ${CONTENT_INSET_CLASS}">
     <a href="${BASE}#hero" class="header-logo flex items-center gap-2">
       <img src="${hero.logo}" alt="KOKI INTERNATIONAL" class="header-logo-img">
       <span class="header-logo-text">KOKI INTERNATIONAL</span>
