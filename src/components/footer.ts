@@ -9,36 +9,38 @@ type FooterSection = {
   links: FooterLink[];
 };
 
+const BASE = import.meta.env.BASE_URL;
+
 const footerColumns: FooterSection[] = [
   {
     title: "SERVICE",
     links: [
-      { label: "システム開発事業", href: "/#system-development" },
-      { label: "国際貿易", href: "/#international-trade" },
-      { label: "金融事業", href: "/#financial-business" },
-      { label: "リサイクル事業", href: "/#recycling-business" },
+      { label: "システム開発事業", href: `${BASE}#system-development` },
+      { label: "国際貿易", href: `${BASE}#international-trade` },
+      { label: "金融事業", href: `${BASE}#financial-business` },
+      { label: "リサイクル事業", href: `${BASE}#recycling-business` },
     ],
   },
   {
     title: "COMPANY",
     links: [
-      { label: "会社概要", href: "#about" },
-      { label: "経営理念", href: "#about" },
+      { label: "会社概要", href: `${BASE}#about` },
+      { label: "経営理念", href: `${BASE}#about` },
     ],
   },
   {
     title: "RECRUIT",
-    links: [{ label: "求人情報", href: "#recruitment" }],
+    links: [{ label: "求人情報", href: `${BASE}#recruitment` }],
   },
   {
     title: "CONTACT",
-    links: [{ label: "お問い合わせ", href: "#contact" }],
+    links: [{ label: "お問い合わせ", href: `${BASE}#contact` }],
   },
   {
     title: "INFORMATION",
     links: [
-      { label: "プライバシーポリシー", href: "#" },
-      { label: "サイトマップ", href: "#" },
+      { label: "プライバシーポリシー", href: `${BASE}#` },
+      { label: "サイトマップ", href: `${BASE}#` },
     ],
   },
 ];

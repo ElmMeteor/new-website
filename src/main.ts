@@ -9,6 +9,27 @@ import { renderRecyclingBusinessPage } from "./pages/recyclingBusiness";
 const app = document.querySelector<HTMLDivElement>("#app")!;
 let cleanupCurrentPage: (() => void) | null = null;
 
+function scrollToHashTarget(hash: string): void {
+  const targetId = hash.replace("#", "").trim();
+
+  // Wait until the new page DOM is mounted, then align to the hash anchor.
+  window.requestAnimationFrame(() => {
+    if (!targetId) {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      return;
+    }
+
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ block: "start", behavior: "auto" });
+      return;
+    }
+
+    // Fallback for unknown hashes: keep users at top instead of jumping to bottom.
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  });
+}
+
 // 路由控制
 function renderPage() {
   cleanupCurrentPage?.();
@@ -29,6 +50,8 @@ function renderPage() {
   } else {
     cleanupCurrentPage = renderHomePage(app);
   }
+
+  scrollToHashTarget(hash);
 }
 
 // 监听 hash 变化

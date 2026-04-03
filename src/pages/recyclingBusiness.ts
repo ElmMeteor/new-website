@@ -15,7 +15,7 @@ let cleanupRecyclingBusinessHeaderMenu: (() => void) | null = null;
 
 function renderIntroSection(): string {
   return `
-    <section class="bg-white" style="padding-top: 80px;">
+    <section id="recycling-business" class="bg-white" style="padding-top: 80px;">
       <div class="w-full px-6 md:px-10 py-16">
         <div class="grid lg:grid-cols-2 gap-10 items-center">
           <div class="fade-up opacity-0 translate-y-10 overflow-hidden rounded-2xl shadow-md order-2 lg:order-1">
@@ -24,7 +24,9 @@ function renderIntroSection(): string {
           <div class="fade-up opacity-0 translate-y-10 order-1 lg:order-2" style="transition-delay: 0.08s">
             <p class="text-primary text-xs font-semibold tracking-widest mb-3">RECYCLING BUSINESS</p>
             <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">${recyclingBusinessData.title}</h1>
-            <div class="heading-border justify-start"><div class="heading-border-inner"></div></div>
+            <div class="flex justify-start mb-4">
+                <div class="w-16 h-[3px] bg-[#b8922a] rounded"></div>
+            </div>
             <div class="space-y-2 text-gray-600 leading-relaxed mb-8">
               ${recyclingBusinessData.leadLines.map((line) => `<p>${line}</p>`).join("")}
             </div>

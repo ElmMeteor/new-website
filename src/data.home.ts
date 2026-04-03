@@ -39,14 +39,14 @@ export const works: Project[] = [
     description:
       "ソフトウェア開発、システムの設計・開発・運用、SESサービスを行っております。\nお客様のご要望に沿ったシステムをご提供いたします。",
     image: `${BASE}assets/SystemDevelopmentBusiness.jpg`,
-    link: "/#system-development",
+    link: `${BASE}#system-development`,
   },
   {
     title: "国際貿易",
     description:
       "日中を中心とした国際貿易業務を展開しております。\n輸出入業務や国内流通を通じて、国境を越えたビジネスの架橋となります。",
     image: `${BASE}assets/ChinaJapanTrade.jpg`,
-    link: "/#international-trade",
+    link: `${BASE}#international-trade`,
     reverse: true,
   },
   {
@@ -54,14 +54,14 @@ export const works: Project[] = [
     description:
       "金融サービスおよび投資関連事業を展開しております。\n国内外の投資支援や企業進出に関するコンサルティングを提供いたします。",
     image: `${BASE}assets/FinancialBusiness.jpg`,
-    link: "/#financial-business",
+    link: `${BASE}#financial-business`,
   },
   {
     title: "リサイクル事業",
     description:
       "金属スクラップ等のリサイクル事業を展開しております。\n資源の有効活用を通じて、環境に配慮した事業活動を行っております。",
     image: `${BASE}assets/RecyclingBusiness.jpg`,
-    link: "/#recycling-business",
+    link: `${BASE}#recycling-business`,
     reverse: true,
   },
 ];
@@ -69,9 +69,21 @@ export const works: Project[] = [
 export const recruitment: Recruitment = {
   title: "求人情報",
   items: [
-    { date: "2022/10/14", title: "スタッフ募集情報", link: "#" },
-    { date: "2022/10/14", title: "外国人留学生募集情報", link: "#" },
-    { date: "2022/10/14", title: "正社員募集情報", link: "#" },
+    {
+      date: "2022/10/14",
+      title: "スタッフ募集情報",
+      link: `${BASE}#recruitment`,
+    },
+    {
+      date: "2022/10/14",
+      title: "外国人留学生募集情報",
+      link: `${BASE}#recruitment`,
+    },
+    {
+      date: "2022/10/14",
+      title: "正社員募集情報",
+      link: `${BASE}#recruitment`,
+    },
   ],
 };
 
@@ -88,10 +100,10 @@ export const companyInfo: CompanyInfo = {
 };
 
 export const navItems: NavItem[] = [
-  { name: "HOME", href: "#hero" },
-  { name: "事業内容", href: "#works" },
-  { name: "求人情報", href: "#recruitment" },
-  { name: "お問い合わせ", href: "#contact" },
+  { name: "HOME", href: `${BASE}#hero` },
+  { name: "事業内容", href: `${BASE}#works` },
+  { name: "求人情報", href: `${BASE}#recruitment` },
+  { name: "お問い合わせ", href: `${BASE}#contact` },
 ];
 
 export const footerNavItems = [

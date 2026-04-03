@@ -11,11 +11,12 @@ import { initHeaderMobileMenu } from "../utils/headerMenu";
 
 let cleanupRecruitmentScrollEffect: (() => void) | null = null;
 let cleanupRecruitmentHeaderMenu: (() => void) | null = null;
+const BASE = import.meta.env.BASE_URL;
 
 /* --- バナー --- */
 function renderPageBanner(): string {
   return `
-    <section style="padding-top: 90px; background: linear-gradient(150deg, #fdf8f0 0%, #fbf2e3 100%);">
+    <section id="recruitment" style="padding-top: 90px; background: linear-gradient(150deg, #fdf8f0 0%, #fbf2e3 100%);">
       <div class="w-full px-6 md:px-10 py-20 text-center fade-up opacity-0 translate-y-10">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">${recruitmentPageData.title}</h1>
         <div class="heading-border justify-center"><div class="heading-border-inner"></div></div>
@@ -73,7 +74,7 @@ function renderContactCTA(): string {
   return `
     <section class="py-20 bg-white text-center">
       <div class="fade-up opacity-0 translate-y-10 w-full px-6">
-        <a href="#contact" class="btn-primary">${recruitmentPageData.inquiryLabel}</a>
+        <a href="${BASE}#contact" class="btn-primary">${recruitmentPageData.inquiryLabel}</a>
       </div>
     </section>
   `;

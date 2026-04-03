@@ -15,7 +15,7 @@ let cleanupFinancialBusinessHeaderMenu: (() => void) | null = null;
 
 function renderBannerSection(): string {
   return `
-    <section style="padding-top: 80px; background: linear-gradient(160deg, #ffffff 0%, #f7f8fa 100%);">
+    <section id="financial-business" style="padding-top: 80px; background: linear-gradient(160deg, #ffffff 0%, #f7f8fa 100%);">
       <div class="w-full px-6 md:px-10 py-16">
         <div class="fade-up opacity-0 translate-y-10 text-center">
           <p class="text-primary text-xs font-semibold tracking-widest mb-3">FINANCIAL BUSINESS</p>

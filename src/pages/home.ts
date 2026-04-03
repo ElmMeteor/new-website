@@ -26,26 +26,31 @@ function renderSectionHeading(title: string, sub?: string): string {
 /* --- ヒーローセクション --- */
 function renderHeroSection(): string {
   return `
-    <section id="hero" class="flex items-center bg-white relative overflow-hidden" style="min-height: 85vh; padding-top: 90px;">
-      <div class="w-full px-6 md:px-10 py-20">
-        <div class="grid md:grid-cols-[1fr_1.1fr] gap-10 items-center">
-          <div class="fade-up opacity-0 translate-y-10">
-
-            <p class="text-primary text-sm font-semibold tracking-widest mb-3">KOKI INTERNATIONAL CO., LTD</p>
-            <h1 class="hero-text text-4xl md:text-5xl font-bold text-gray-800 leading-tight mb-6">
-              ${hero.title.replace("\n", "<br/>")}
-            </h1>
-            <div class="heading-border justify-start mb-4">
-              <div class="heading-border-inner"></div>
+    <section id="hero" class="flex items-center bg-white relative overflow-visible" style="min-height: 85vh; padding-top: 90px;">
+      <div class="relative z-10 w-full px-6 md:px-10 py-20">
+        <div class="relative">
+          <div class="grid md:grid-cols-[1fr_2fr] items-center gap-0">
+            <div class="hidden md:block"></div>
+            <div class="relative fade-up opacity-0 translate-y-10" style="transition-delay: 0.08s">
+              <div class="relative h-[330px] md:h-[460px] lg:h-[500px] w-full md:ml-auto overflow-visible">
+                <img src="${hero.image}" alt="KOKI INTERNATIONAL" class="hero-bg absolute inset-x-0 -top-36 md:-top-48 lg:-top-56 h-[calc(100%+9rem)] md:h-[calc(100%+12rem)] lg:h-[calc(100%+14rem)] w-full object-cover rounded-2xl shadow-lg">
+              </div>
             </div>
-            <p class="text-gray-600 leading-relaxed mb-8">
-              人・物・情報・技術を国際的につなぐ
-            </p>
           </div>
-          <div class="fade-up opacity-0 translate-y-10" style="transition-delay: 0.1s">
-            <div class="overflow-hidden rounded-2xl shadow-lg h-[280px] md:h-[430px]">
-              <img src="${hero.image}" alt="KOKI INTERNATIONAL" class="hero-bg w-full h-full object-cover">
+          <div class="fade-up opacity-0 translate-y-10 relative z-20 mt-6 md:mt-0 md:absolute md:left-0 md:top-1/2 md:-translate-y-1/2 md:w-[58%] lg:w-[52%] text-left" style="transition-delay: 0.14s">
+            <p class="text-primary text-sm md:text-base font-semibold tracking-widest mb-3">KOKI INTERNATIONAL CO., LTD</p>
+            <h1 class="hero-text text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-800 leading-[1.08] whitespace-nowrap drop-shadow-[0_3px_12px_rgba(255,255,255,0.55)]">
+              ${hero.title
+                .replace("\n", "<br/>")
+                .replace(
+                  "ナショナル",
+                  '<span class="text-primary">ナショナル</span>',
+                )}
+            </h1>
+            <div class="flex justify-start mt-4 mb-4">
+              <div class="w-20 h-[3px] bg-[#b8922a] rounded"></div>
             </div>
+            <p class="text-gray-600 leading-relaxed">人・物・情報・技術を国際的につなぐ</p>
           </div>
         </div>
       </div>
@@ -56,7 +61,8 @@ function renderHeroSection(): string {
 /* --- 私たちについて --- */
 function renderAboutSection(): string {
   return `
-    <section id="about" class="py-24 bg-white">
+    <section id="about" class="py-24 bg-white relative overflow-hidden">
+      <div class="about-glow" aria-hidden="true"></div>
       <div class="w-full px-6 md:px-10">
         <div class="text-left mb-2 fade-up opacity-0 translate-y-10">
           <h2 class="text-2xl font-bold text-gray-800" style="text-align: left; font-size: 1.75rem; font-weight: 700; letter-spacing: 0.05em;">私たちについて</h2>
@@ -65,7 +71,8 @@ function renderAboutSection(): string {
           </div>
           <p class="text-gray-500 text-sm">About Us</p>
         </div>
-        <div class="grid md:grid-cols-[1.15fr_0.85fr] gap-12 items-start mt-8">
+        <div class="about-grid relative grid md:grid-cols-[1.15fr_0.85fr] gap-12 items-start mt-8">
+          <div class="about-connector hidden md:block" aria-hidden="true"></div>
           <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
             <div class="fade-up opacity-0 translate-y-10">
               <h3 class="text-xl font-bold text-gray-800 mb-4">${about.title}</h3>
@@ -78,7 +85,7 @@ function renderAboutSection(): string {
                 .join("")}
             </div>
         <div class="fade-up mt-6">
-         <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200 text-center inline-block">
+         <div class="about-quote-card bg-gray-50 rounded-2xl p-8 border border-gray-200 text-center inline-block">
                 <div class="text-primary text-5xl font-bold mb-4" style="font-family: serif;">"</div>
                 <p class="text-gray-700 italic leading-loose mb-4">士不可以不弘毅、任重而道遠</p>
                 <p class="text-primary text-sm">— 論語 —</p>
@@ -89,7 +96,7 @@ function renderAboutSection(): string {
               </div>
             </div>
           </div>
-          <div class="fade-up opacity-0 translate-y-10 overflow-hidden rounded-2xl shadow-md h-[260px] md:h-[360px]" style="transition-delay: 0.1s">
+          <div class="about-visual fade-up opacity-0 translate-y-10 overflow-hidden rounded-2xl shadow-md h-[260px] md:h-[360px]" style="transition-delay: 0.1s">
             <img src="${about.image}" alt="Company Philosophy" class="w-full h-full object-cover">
           </div>
         </div>

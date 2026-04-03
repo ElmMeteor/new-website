@@ -105,7 +105,7 @@ function renderServicesSection(): string {
 
 function renderMainContent(): string {
   return `
-    <main class="pt-20 pb-20 bg-gray-50 min-h-screen relative overflow-hidden">
+    <main id="system-development" class="pt-20 pb-20 bg-gray-50 min-h-screen relative overflow-hidden">
       ${renderCodeBackgroundLayer()}
       <div class="relative z-10">
         <div class="w-full px-6 md:px-10 py-16">

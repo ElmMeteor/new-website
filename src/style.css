@@ -245,6 +245,72 @@ body {
   transform: translateY(0);
 }
 
+/* --- About cohesion effects --- */
+.about-glow {
+  position: absolute;
+  right: -8%;
+  top: 6%;
+  width: 38vw;
+  height: 38vw;
+  min-width: 260px;
+  min-height: 260px;
+  max-width: 520px;
+  max-height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(184, 146, 42, 0.12) 0%,
+    rgba(184, 146, 42, 0) 72%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-grid {
+  z-index: 1;
+}
+
+.about-connector {
+  position: absolute;
+  left: 55%;
+  top: 50%;
+  width: 84px;
+  height: 2px;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(
+    90deg,
+    rgba(184, 146, 42, 0.88) 0%,
+    rgba(184, 146, 42, 0.12) 100%
+  );
+}
+
+.about-quote-card {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.about-quote-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.08);
+}
+
+.about-visual {
+  animation: aboutVisualFloat 8.5s ease-in-out infinite;
+}
+
+@keyframes aboutVisualFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 /* --- スクロールバー --- */
 ::-webkit-scrollbar {
   width: 6px;
@@ -419,6 +485,11 @@ body {
 
 @media (max-width: 640px) {
   .code-bg {
+    display: none;
+  }
+
+  .about-glow,
+  .about-connector {
     display: none;
   }
 
