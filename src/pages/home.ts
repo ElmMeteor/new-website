@@ -20,13 +20,15 @@ const HOME_SECTION_CLASS = "py-16 md:py-24";
 function renderHeroTitle(): string {
   return hero.title
     .split("\n")
-    .map((line) => {
+    .map((line, index) => {
       const highlightedLine = line.replace(
         "インターナショナル",
         '<span class="text-primary">インターナショナル</span>',
       );
 
-      return `<span class="block">${highlightedLine}</span>`;
+      return `<span class="block ${
+        index === 1 ? "whitespace-nowrap" : ""
+      }">${highlightedLine}</span>`;
     })
     .join("");
 }
@@ -48,7 +50,7 @@ function renderHeroSection(): string {
           <div class="hero-copy fade-up opacity-0 translate-y-10 absolute inset-x-0 bottom-0 z-20 text-left md:left-0 md:right-auto md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:w-[58%] lg:w-[52%]" style="transition-delay: 0.14s">
             <div class="hero-copy-panel px-5 pt-12 pb-5 sm:px-6 sm:pt-14 sm:pb-6 md:px-0 md:py-0">
               <p class="text-primary text-sm md:text-base font-semibold tracking-widest mb-3">KOKI INTERNATIONAL CO., LTD</p>
-              <h1 class="hero-text text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-800 leading-[1.08] whitespace-normal md:whitespace-nowrap drop-shadow-[0_3px_12px_rgba(255,255,255,0.55)]">
+              <h1 class="hero-text font-bold text-gray-800 leading-[1.08] whitespace-normal drop-shadow-[0_3px_12px_rgba(255,255,255,0.55)] text-[clamp(2rem,6vw,5rem)]">
                 ${renderHeroTitle()}
               </h1>
               <div class="flex justify-start mt-4 mb-4">
@@ -150,8 +152,8 @@ function renderContactSection(): string {
     <section id="contact" class="${HOME_SECTION_CLASS} bg-gray-50">
       <div class="${CONTENT_SHELL_CLASS}">
         ${renderSectionHeading(contact.title, "Contact")}
-        <div class="mt-8 grid items-start gap-6 md:grid-cols-2 md:gap-8 w-full max-w-5xl mx-auto">
-          <div class="fade-up opacity-0 translate-y-10 w-full">
+        <div class="mt-8 flex flex-col gap-10 md:grid md:grid-cols-2 md:gap-8 w-full max-w-5xl mx-auto">
+          <div class="fade-up opacity-0 translate-y-10 w-full order-1 md:order-none">
             <p class="text-gray-600 leading-relaxed mb-8">${contact.info}</p>
             <div class="space-y-4 text-left mb-8">
               <div class="flex items-start gap-4">
@@ -174,56 +176,79 @@ function renderContactSection(): string {
                 width="100%" 
                 height="100%" 
                 style="border: 0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade"
+                loading="lazy"
               ></iframe>
             </div>
           </div>
-          <div class="fade-up opacity-0 translate-y-10 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-200 w-full" style="transition-delay: 0.1s">
-            <h3 class="text-lg font-bold text-gray-800 mb-6">お問い合わせフォーム</h3>
-            <!-- 添加 id="contact-form" 用于 AJAX 提交 -->
-            <form id="contact-form" class="space-y-4">
+          <div class="fade-up opacity-0 translate-y-10 bg-white rounded-2xl p-8 sm:p-10 md:p-8 shadow-sm border border-gray-200 w-full order-2 md:order-none" style="transition-delay: 0.1s">            <h3 class="text-2xl sm:text-2xl md:text-lg font-bold text-gray-800 mb-6">
+              お問い合わせフォーム
+            </h3>
+            <form id="contact-form" class="space-y-6 md:space-y-4">
               <input type="hidden" name="_language" value="ja">
               <input type="hidden" name="_subject" value="お問い合わせ">
-              
+
               <div>
-                <label class="block text-sm text-gray-600 mb-1">会社名 <span class="text-red-400">*</span></label>
-                <input type="text" name="company" id="company" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="例：株式会社○○" required>
+                <label class="block text-base md:text-sm text-gray-600 mb-2 md:mb-1">
+                  会社名 <span class="text-red-400">*</span>
+                </label>
+                <input type="text" name="company" id="company"
+                  class="w-full border border-gray-300 rounded px-4 py-3.5 md:py-2 text-base md:text-sm focus:outline-none focus:border-primary"
+                  placeholder="例：株式会社○○" required>
               </div>
               <div>
-                <label class="block text-sm text-gray-600 mb-1">お名前 <span class="text-red-400">*</span></label>
-                <input type="text" name="name" id="name" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="例：山田 太郎" required>
+                <label class="block text-base md:text-sm text-gray-600 mb-2 md:mb-1">
+                  お名前 <span class="text-red-400">*</span>
+                </label>
+                <input type="text" name="name" id="name"
+                  class="w-full border border-gray-300 rounded px-4 py-3.5 md:py-2 text-base md:text-sm focus:outline-none focus:border-primary"
+                  placeholder="例：山田 太郎" required>
               </div>
               <div>
-                <label class="block text-sm text-gray-600 mb-1">メールアドレス <span class="text-red-400">*</span></label>
-                <input type="email" name="email" id="email" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="例：example@mail.com" required>
+                <label class="block text-base md:text-sm text-gray-600 mb-2 md:mb-1">
+                  メールアドレス <span class="text-red-400">*</span>
+                </label>
+                <input type="email" name="email" id="email"
+                  class="w-full border border-gray-300 rounded px-4 py-3.5 md:py-2 text-base md:text-sm focus:outline-none focus:border-primary"
+                  placeholder="例：example@mail.com" required>
               </div>
               <div>
-                <label class="block text-sm text-gray-600 mb-1">電話番号</label>
-                <input type="tel" name="phone" id="phone" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="例：092-000-0000">
+                <label class="block text-base md:text-sm text-gray-600 mb-2 md:mb-1">
+                  電話番号
+                </label>
+                <input type="tel" name="phone" id="phone"
+                  class="w-full border border-gray-300 rounded px-4 py-3.5 md:py-2 text-base md:text-sm focus:outline-none focus:border-primary"
+                  placeholder="例：092-000-0000">
               </div>
               <div>
-                <label class="block text-sm text-gray-600 mb-1">お問い合わせ内容</label>
-                <textarea name="message" id="message" rows="4" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary resize-none" placeholder="ご相談内容をご記入ください"></textarea>
+                <label class="block text-base md:text-sm text-gray-600 mb-2 md:mb-1">
+                  お問い合わせ内容
+                </label>
+                <textarea name="message" id="message" rows="5"
+                  class="w-full border border-gray-300 rounded px-4 py-3.5 md:py-2 text-base md:text-sm focus:outline-none focus:border-primary resize-none"
+                  placeholder="ご相談内容をご記入ください"></textarea>
               </div>
-              <div class="pt-1">
-                <label class="inline-flex items-start gap-2 text-sm text-gray-700">
+              <div class="pt-2">
+                <label class="inline-flex items-start gap-2 text-base md:text-sm text-gray-700">
                   <input
                     type="checkbox"
                     id="privacy-consent"
                     name="privacyConsent"
                     value="agreed"
-                    class="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                    class="mt-1 h-5 w-5 md:h-4 md:w-4 rounded border-gray-300 text-primary"
                     required
                   >
                   <span>
-                    <a href="${BASE}#privacy-policy" class="text-primary hover:underline" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>
+                    <a href="${BASE}#privacy-policy" class="text-primary hover:underline" target="_blank">
+                      プライバシーポリシー
+                    </a>
                     に同意します
                   </span>
                 </label>
               </div>
-              <button type="submit" class="btn-primary w-full justify-center">送信する</button>
+              <button type="submit"
+                class="btn-primary w-full justify-center text-base md:text-sm py-3.5 md:py-2">
+                送信する
+              </button>
             </form>
             <div id="form-status" class="mt-4 text-sm hidden"></div>
           </div>
