@@ -10,6 +10,8 @@ import {
 import { initHeaderMobileMenu } from "../utils/headerMenu";
 import { CONTENT_SHELL_CLASS, renderSectionHeading } from "../utils/page.ts";
 
+const BASE = import.meta.env.BASE_URL;
+
 let cleanupHomeScrollEffect: (() => void) | null = null;
 let cleanupHomeHeaderMenu: (() => void) | null = null;
 
@@ -120,9 +122,7 @@ function renderWorksSection(): string {
               (work, i) => `
             <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12 work-item opacity-0 translate-y-10 ${work.reverse ? "md:[&>:first-child]:order-2 md:[&>:last-child]:order-1" : ""}">
               <div class="work-img overflow-hidden rounded-xl shadow-md">
-                ${work.link ? `<a href="${work.link}">` : ""}
                 <img src="${work.image}" alt="${work.title}" class="work-media-image w-full h-[220px] sm:h-64 object-cover transition-transform duration-500">
-                ${work.link ? "</a>" : ""}
               </div>
               <div class="fade-up opacity-0 translate-y-10" style="transition-delay: ${i * 0.05}s">
                 <div class="flex items-center gap-3 mb-3">
@@ -130,7 +130,7 @@ function renderWorksSection(): string {
                   <span class="text-primary text-sm font-semibold tracking-wider">SERVICE 0${i + 1}</span>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">
-                  ${work.link ? `<a href="${work.link}" class="hover:text-primary transition-colors">${work.title}</a>` : work.title}
+                  ${work.title}
                 </h3>
                 <p class="text-gray-600 leading-relaxed whitespace-pre-line">${work.description}</p>
               </div>
@@ -206,6 +206,22 @@ function renderContactSection(): string {
               <div>
                 <label class="block text-sm text-gray-600 mb-1">お問い合わせ内容</label>
                 <textarea name="message" id="message" rows="4" class="w-full border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-primary resize-none" placeholder="ご相談内容をご記入ください"></textarea>
+              </div>
+              <div class="pt-1">
+                <label class="inline-flex items-start gap-2 text-sm text-gray-700">
+                  <input
+                    type="checkbox"
+                    id="privacy-consent"
+                    name="privacyConsent"
+                    value="agreed"
+                    class="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                    required
+                  >
+                  <span>
+                    <a href="${BASE}#privacy-policy" class="text-primary hover:underline" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>
+                    に同意します
+                  </span>
+                </label>
               </div>
               <button type="submit" class="btn-primary w-full justify-center">送信する</button>
             </form>
@@ -296,6 +312,9 @@ function initContactFormHandler(): void {
       const phone =
         (document.getElementById("phone") as HTMLInputElement)?.value.trim() ||
         "";
+      const isPrivacyConsentChecked =
+        (document.getElementById("privacy-consent") as HTMLInputElement)
+          ?.checked || false;
 
       // ========== 1. 检查必填字段 ==========
       if (!company || !name || !email) {
@@ -330,6 +349,18 @@ function initContactFormHandler(): void {
           statusDiv.classList.remove("hidden");
           statusDiv.textContent =
             "有効な電話番号を入力してください。（例: 092-000-0000 または 09012345678）";
+          statusDiv.className = "mt-4 text-sm text-red-600";
+          setTimeout(() => statusDiv.classList.add("hidden"), 3000);
+        }
+        return;
+      }
+
+      // ========== 4. プライバシーポリシー同意確認 ==========
+      if (!isPrivacyConsentChecked) {
+        if (statusDiv) {
+          statusDiv.classList.remove("hidden");
+          statusDiv.textContent =
+            "送信前にプライバシーポリシーへの同意が必要です。";
           statusDiv.className = "mt-4 text-sm text-red-600";
           setTimeout(() => statusDiv.classList.add("hidden"), 3000);
         }

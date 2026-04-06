@@ -40,10 +40,7 @@ const footerColumns: FooterSection[] = [
   },
   {
     title: "INFORMATION",
-    links: [
-      { label: "プライバシーポリシー", href: `${BASE}#` },
-      { label: "サイトマップ", href: `${BASE}#` },
-    ],
+    links: [{ label: "プライバシーポリシー", href: `${BASE}#privacy-policy` }],
   },
 ];
 
@@ -66,7 +63,6 @@ export function renderFooter(): string {
       <div class="sm:col-span-2 md:col-span-1">
         <p class="text-white font-bold text-sm mb-1">KOKI INTERNATIONAL</p>
         <p class="text-gray-400 text-xs mb-4">株式会社 弘毅インターナショナル</p>
-        <p class="text-gray-500 text-xs leading-relaxed">人・物・情報・技術を<br>国際的につなぐ</p>
       </div>
       <div>
         <h3 class="text-white font-semibold text-sm mb-4 tracking-wide">${service.title}</h3>

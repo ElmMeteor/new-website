@@ -5,6 +5,7 @@ import { renderRecruitmentPage } from "./pages/recruitment";
 import { renderInternationalTradePage } from "./pages/internationalTrade";
 import { renderFinancialBusinessPage } from "./pages/financialBusiness";
 import { renderRecyclingBusinessPage } from "./pages/recyclingBusiness";
+import { renderPrivacyPolicyPage } from "./pages/privacyPolicy";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
 let cleanupCurrentPage: (() => void) | null = null;
@@ -47,6 +48,8 @@ function renderPage() {
     cleanupCurrentPage = renderRecyclingBusinessPage();
   } else if (hash === "#recruitment") {
     cleanupCurrentPage = renderRecruitmentPage();
+  } else if (hash === "#privacy-policy") {
+    cleanupCurrentPage = renderPrivacyPolicyPage();
   } else {
     cleanupCurrentPage = renderHomePage(app);
   }
