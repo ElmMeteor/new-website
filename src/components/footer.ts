@@ -26,8 +26,8 @@ const footerColumns: FooterSection[] = [
   {
     title: "COMPANY",
     links: [
-      { label: "会社概要", href: `${BASE}#about` },
-      { label: "経営理念", href: `${BASE}#about` },
+      { label: "社長ご挨拶", href: `${BASE}#about` },
+      { label: "会社概要", href: `${BASE}#company` },
     ],
   },
   {

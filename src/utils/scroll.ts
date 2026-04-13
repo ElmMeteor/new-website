@@ -47,11 +47,15 @@ export function toggleHeaderScrolledState(
   header: HTMLElement | null,
   scrollY: number,
 ): void {
-  if (!header) {
-    return;
-  }
+  if (!header) return;
 
-  if (scrollY > 50) {
+  const logo = document.querySelector(".hero-copy img");
+
+  if (!logo) return;
+
+  const logoBottom = logo.getBoundingClientRect().bottom + window.scrollY;
+
+  if (scrollY > logoBottom) {
     header.classList.add("scrolled");
   } else {
     header.classList.remove("scrolled");

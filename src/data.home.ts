@@ -5,24 +5,22 @@ const BASE = import.meta.env.BASE_URL;
 export const hero = {
   title: "株式会社\n弘毅インターナショナル",
   image: `${BASE}assets/CompanyPhilosophy.jpg`,
-  logo: `${BASE}assets/logo.jpeg`,
+  logo: `${BASE}assets/logo.png`,
+  slogan:
+    "互恵関係を築ける企業\n信頼・信用を基盤に世界と繋がる企業\n笑顔を大切にする企業",
 };
 
 export const about = {
   title: "",
   paragraphs: [
-    "広い器量と強い意志を持って、",
-    "国際ビジネスの発展に貢献します。",
-    "",
-    "私たちは、革新的なソフトウェア開発と",
-    "グローバルな視点での事業展開を通じて",
-    "お客様の成功と社会の発展に寄与します。",
-    "",
-    "「信頼は人から」をモットーに",
-    "お客様満足度No.1企業を目指します。",
-    "",
-    "世の為、人の為",
-    "幸せなれるように努めます。",
+    "弊社のホームページをご覧いただき、誠にありがとうございます。",
+    "弘毅インターナショナルは、「強い意志」と「広い心」をもって世界に挑戦するという想いを社名に込めております。",
+    "私どもは、ITビジネスと国際貿易を軸に事業を展開しております。",
+    "どれほど優れたシステムであっても、それを支えるのは「人」の力であり、企業は人なりと考えております。",
+    "変化の激しい現代においては、ビジネスモデルだけでなく、",
+    "人材の育成と企業文化の醸成こそが企業の価値を左右するものと認識しております。",
+    "今後もお客様と社員を大切にし、信頼される企業であり続けるべく、努力を重ねてまいります。",
+    "引き続き、皆様のご支援とご愛顧を賜りますよう、心よりお願い申し上げます。",
   ],
   image: `${BASE}assets/about.jpg`,
 };
@@ -63,9 +61,29 @@ export const works: Project[] = [
 export const navItems: NavItem[] = [
   { name: "HOME", href: `${BASE}#hero` },
   { name: "事業内容", href: `${BASE}#works` },
+  { name: "会社概要", href: `${BASE}#company` },
   { name: "求人情報", href: `${BASE}#recruitment` },
   { name: "お問い合わせ", href: `${BASE}#contact` },
 ];
+
+export const companyOverview = {
+  companyName: "株式会社弘毅インターナショナル",
+  location: "〒812-0012 福岡市博多区博多駅中央街8番1号 JRJP博多ビル 3F",
+  ceo: "翁　儀林",
+  established: "平成22年5月7日",
+  capital: "500万円",
+  phone: "092-686-8911",
+  email: "info@koki-intl.jp",
+  bankName: "西日本シティ銀行　千早支店",
+  services: [
+    "システム開発事業",
+    "国際貿易事業",
+    "国内・海外投資に関するコンサルティング事業",
+    "リサイクル事業",
+  ],
+  partnerCompany: "株式会社華栄商事",
+  partnerWebsite: "https://kaesyouji.com/",
+};
 
 export const contact: Contact = {
   title: "お問い合わせ",

@@ -1,6 +1,6 @@
 import { renderHeader } from "../components/header";
 import { renderFooter } from "../components/footer";
-import { about, contact, hero, works } from "../data";
+import { about, contact, companyOverview, hero, works } from "../data";
 import {
   createScrollEffect,
   isMobileViewport,
@@ -21,14 +21,9 @@ function renderHeroTitle(): string {
   return hero.title
     .split("\n")
     .map((line, index) => {
-      const highlightedLine = line.replace(
-        "インターナショナル",
-        '<span class="text-primary">インターナショナル</span>',
-      );
-
-      return `<span class="block ${
+      return `<span class="block text-primary text-lg md:text-2xl ${
         index === 1 ? "whitespace-nowrap" : ""
-      }">${highlightedLine}</span>`;
+      }">${line}</span>`;
     })
     .join("");
 }
@@ -47,16 +42,22 @@ function renderHeroSection(): string {
               </div>
             </div>
           </div>
-          <div class="hero-copy fade-up opacity-0 translate-y-10 absolute inset-x-0 bottom-0 z-20 text-left md:left-0 md:right-auto md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:w-[58%] lg:w-[52%]" style="transition-delay: 0.14s">
-            <div class="hero-copy-panel px-5 pt-12 pb-5 sm:px-6 sm:pt-14 sm:pb-6 md:px-0 md:py-0">
-              <p class="text-primary text-sm md:text-base font-semibold tracking-widest mb-3">KOKI INTERNATIONAL CO., LTD</p>
-              <h1 class="hero-text font-bold text-gray-800 leading-[1.08] whitespace-normal drop-shadow-[0_3px_12px_rgba(255,255,255,0.55)] text-[clamp(2rem,6vw,5rem)]">
-                ${renderHeroTitle()}
-              </h1>
+          <div class="hero-copy fade-up opacity-0 translate-y-10 absolute inset-x-0 bottom-0 z-20 text-left md:left-8 lg:left-10 md:right-auto md:bottom-auto md:top-[46%] md:-translate-y-1/2 md:w-[60%] lg:w-[55%]" style="transition-delay: 0.14s">
+              <div class="hero-copy-panel px-5 pt-12 pb-5 sm:px-6 sm:pt-14 sm:pb-6 md:px-0 md:py-0">
+              <div class="flex flex-col items-start mb-3">
+                <img src="${hero.logo}" alt="KOKI LOGO" class="h-32 md:h-44 mb-4 select-none" style="user-drag: none;" draggable="false">
+                <p class="text-primary text-base md:text-lg font-semibold tracking-widest mb-3">KOKI INTERNATIONAL CO., LTD</p>
+                <h1 class="hero-text font-bold text-gray-800 leading-[1.08] whitespace-normal drop-shadow-[0_3px_12px_rgba(255,255,255,0.55)] text-[clamp(2.2rem,6.4vw,5.3rem)]">
+                  ${renderHeroTitle()}
+                </h1>
+              </div>
               <div class="flex justify-start mt-4 mb-4">
                 <div class="w-20 h-[3px] bg-[#b8922a] rounded"></div>
               </div>
-              <p class="text-gray-600 leading-relaxed max-w-xl">人・物・情報・技術を国際的につなぐ</p>
+              <p class="text-gray-600 text-lg md:text-2xl leading-relaxed max-w-xl">${hero.slogan
+                .split("\n")
+                .map((line) => `<span class=\"block\">${line}</span>`)
+                .join("")}</p>
             </div>
           </div>
         </div>
@@ -65,47 +66,56 @@ function renderHeroSection(): string {
   `;
 }
 
-/* --- 私たちについて --- */
+/* --- 社長ご挨拶 --- */
 function renderAboutSection(): string {
   return `
-    <section id="about" class="pt-4 pb-14 sm:pt-6 sm:pb-16 md:py-24 bg-white relative overflow-hidden">
-      <div class="about-glow" aria-hidden="true"></div>
+    <section id="about" class="pt-6 pb-16 md:py-24 bg-white relative overflow-hidden">
       <div class="${CONTENT_SHELL_CLASS}">
-        <div class="text-left mb-2 fade-up opacity-0 translate-y-10">
-          <h2 class="text-2xl font-bold text-gray-800" style="text-align: left; font-size: 1.75rem; font-weight: 700; letter-spacing: 0.05em;">私たちについて</h2>
-          <div class="flex justify-start mt-2 mb-3">
-            <div class="w-16 h-0.5 bg-primary"></div>
-          </div>
-          <p class="text-gray-500 text-sm">About Us</p>
+        
+        <!-- タイトル -->
+        <div class="mb-8 fade-up opacity-0 translate-y-10">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-800 tracking-wide about-title">
+            社長挨拶
+          </h2>
+          <p class="text-gray-400 text-sm mt-3">President's Message</p>
         </div>
-        <div class="about-grid relative grid items-start gap-10 mt-4 sm:mt-6 md:grid-cols-[1.15fr_0.85fr] md:gap-12">
-          <div class="about-connector hidden md:block" aria-hidden="true"></div>
-          <div class="about-copy flex flex-col items-start gap-3 lg:flex-row lg:items-start lg:gap-4 lg:justify-start">
-            <div class="fade-up opacity-0 translate-y-10 w-full lg:w-auto min-w-0">
-              <h3 class="text-xl font-bold text-gray-800 mb-4">${about.title}</h3>
+
+        <div class="grid md:grid-cols-[auto_1fr] gap-10 items-start">
+
+          <!-- 左：文章 -->
+          <div class="fade-up opacity-0 translate-y-10">
+            <div class="about-text space-y-4">
               ${about.paragraphs
                 .map((p) =>
-                  p === ""
-                    ? `<div class="mb-3"></div>`
-                    : `<p class="text-gray-600 leading-relaxed mb-2">${p}</p>`,
+                  p === "" ? `<div class="h-2"></div>` : `<p>${p}</p>`,
                 )
                 .join("")}
             </div>
-            <div class="fade-up opacity-0 translate-y-10 w-full lg:w-[260px] xl:w-[300px] lg:flex-none lg:self-start max-w-sm mx-auto lg:mx-0" style="transition-delay: 0.08s">
-              <div class="about-quote-card bg-gray-50 rounded-2xl p-6 md:p-8 border border-gray-200 text-center w-full">
+          </div>
+
+          <!-- 右：背景＋論語 -->
+          <div class="fade-up opacity-0 translate-y-10 w-full relative" style="transition-delay:0.08s">
+
+            <!-- 背景画像 -->
+            <div class="absolute inset-0 z-0 overflow-hidden rounded-2xl">
+              <img src="${about.image}" class="w-full h-full object-cover" />
+            </div>
+
+            <!-- 論語カード -->
+            <div class="relative z-10 flex items-center justify-center h-full py-10">
+              <div class="about-quote-card-container">
                 <div class="text-primary text-5xl font-bold mb-4" style="font-family: serif;">"</div>
-                <p class="text-gray-700 italic leading-loose mb-4">士不可以不弘毅、任重而道遠</p>
-                <p class="text-primary text-sm">— 論語 —</p>
-                <div class="mt-6 pt-6 border-t border-gray-200">
-                  <div class="text-primary text-2xl font-bold" style="font-family: serif;">弘毅</div>
-                  <p class="text-gray-400 text-xs mt-1">KO · KI</p>
+                <p class="italic leading-loose mb-4 whitespace-nowrap">士不可以不弘毅、任重而道遠</p>
+                <p class="text-primary text-sm mb-6">— 論語 —</p>
+                <div class="border-t border-gray-200 pt-6">
+                  <div class="text-primary text-2xl font-bold mb-2" style="font-family: serif;">弘毅</div>
+                  <p class="text-gray-500 text-xs tracking-widest">KO · KI</p>
                 </div>
               </div>
             </div>
+
           </div>
-          <div class="about-visual fade-up opacity-0 translate-y-10 overflow-hidden rounded-2xl shadow-md h-[240px] sm:h-[280px] md:h-[360px]" style="transition-delay: 0.1s">
-            <img src="${about.image}" alt="Company Philosophy" class="w-full h-full object-cover">
-          </div>
+
         </div>
       </div>
     </section>
@@ -140,6 +150,74 @@ function renderWorksSection(): string {
           `,
             )
             .join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+/* --- 会社概要 --- */
+function renderCompanyOverviewSection(): string {
+  return `
+    <section id="company" class="py-12 md:py-16 bg-white">
+      <div class="${CONTENT_SHELL_CLASS}">
+        ${renderSectionHeading("会社概要", "Company Overview")}
+        <div class="fade-up opacity-0 translate-y-10 mt-8 md:mt-10">
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <tbody>
+                <tr>
+                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800 w-32">会社名</th>
+                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.companyName}</td>
+                </tr>
+                <tr>
+                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">所在地</th>
+                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700 whitespace-pre-line text-sm">${companyOverview.location}</td>
+                </tr>
+                <tr>
+                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">代表取締役</th>
+                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.ceo}</td>
+                </tr>
+                <tr>
+                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">設立日</th>
+                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.established}</td>
+                </tr>
+                <tr>
+                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">資本金</th>
+                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.capital}</td>
+                </tr>
+                <tr>
+                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">連絡先</th>
+                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.phone}</td>
+                </tr>
+                <tr>
+                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">メール</th>
+                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.email}</td>
+                </tr>
+                <tr>
+                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">取引銀行</th>
+                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.bankName}</td>
+                </tr>
+                <tr>
+                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">業務内容</th>
+                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">
+                    <ul class="list-disc list-inside space-y-1">
+                      ${companyOverview.services
+                        .map((service) => `<li class="text-sm">${service}</li>`)
+                        .join("")}
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th class="bg-white px-5 py-4 text-left font-semibold text-gray-800 whitespace-nowrap">パートナー会社</th>
+                  <td class="px-5 py-4 text-gray-700">
+                    <div>${companyOverview.partnerCompany}</div>
+                    <a href=${companyOverview.partnerWebsite} target="_blank" class="text-primary hover:text-gray-700 transition-colors text-sm">${companyOverview.partnerWebsite}</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -455,6 +533,7 @@ export function renderHomePage(app: HTMLDivElement): () => void {
     ${renderHeroSection()}
     ${renderAboutSection()}
     ${renderWorksSection()}
+    ${renderCompanyOverviewSection()}
     ${renderContactSection()}
     ${renderFooter()}
   `;

@@ -85,10 +85,31 @@ body {
 
 /* ロゴテキスト */
 .header-logo {
+  min-width: 120px;
   display: flex;
   align-items: center;
   gap: 0.45rem;
   text-decoration: none;
+}
+
+/* --- 初期状態：logoと社名を非表示 --- */
+.header-logo-img,
+.header-logo-text {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    height 0.3s ease,
+    font-size 0.3s ease,
+    color 0.3s ease;
+}
+
+/* --- スクロール後：表示 --- */
+#header.scrolled .header-logo-img,
+#header.scrolled .header-logo-text {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .header-logo-img {
@@ -639,4 +660,32 @@ body {
     animation: none !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* --- 社長ご挨拶セクション --- */
+.about-title {
+  background-image: linear-gradient(to right, #b8922a, #b8922a);
+  background-position: left bottom;
+  background-size: 4rem 2px;
+  background-repeat: no-repeat;
+  padding-bottom: 0.75rem;
+}
+
+.about-quote-card-container {
+  background-color: rgb(249, 250, 251);
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+  border: 1px solid rgb(229, 231, 235);
+  text-align: center;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  width: 300px;
+}
+
+.about-quote-card-container p {
+  color: rgb(107, 114, 128);
+}
+
+.about-text p {
+  color: rgb(75, 85, 99);
+  line-height: 1.75;
 }
