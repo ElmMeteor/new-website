@@ -1,10 +1,4 @@
-import type {
-  CompanyInfo,
-  Contact,
-  NavItem,
-  Project,
-  Recruitment,
-} from "./types/siteData";
+import type { Contact, NavItem, Project } from "./types/siteData";
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -39,14 +33,14 @@ export const works: Project[] = [
     description:
       "ソフトウェア開発、システムの設計・開発・運用、SESサービスを行っております。\nお客様のご要望に沿ったシステムをご提供いたします。",
     image: `${BASE}assets/SystemDevelopmentBusiness.jpg`,
-    link: `${BASE}#system-development`,
+    link: `${BASE}#works`,
   },
   {
     title: "国際貿易",
     description:
       "日中を中心とした国際貿易業務を展開しております。\n輸出入業務や国内流通を通じて、国境を越えたビジネスの架橋となります。",
     image: `${BASE}assets/ChinaJapanTrade.jpg`,
-    link: `${BASE}#international-trade`,
+    link: `${BASE}#works`,
     reverse: true,
   },
   {
@@ -54,65 +48,23 @@ export const works: Project[] = [
     description:
       "金融サービスおよび投資関連事業を展開しております。\n国内外の投資支援や企業進出に関するコンサルティングを提供いたします。",
     image: `${BASE}assets/FinancialBusiness.jpg`,
-    link: `${BASE}#financial-business`,
+    link: `${BASE}#works`,
   },
   {
     title: "リサイクル事業",
     description:
       "金属スクラップ等のリサイクル事業を展開しております。\n資源の有効活用を通じて、環境に配慮した事業活動を行っております。",
     image: `${BASE}assets/RecyclingBusiness.jpg`,
-    link: `${BASE}#recycling-business`,
+    link: `${BASE}#works`,
     reverse: true,
   },
 ];
-
-export const recruitment: Recruitment = {
-  title: "求人情報",
-  items: [
-    {
-      date: "2022/10/14",
-      title: "スタッフ募集情報",
-      link: `${BASE}#recruitment`,
-    },
-    {
-      date: "2022/10/14",
-      title: "外国人留学生募集情報",
-      link: `${BASE}#recruitment`,
-    },
-    {
-      date: "2022/10/14",
-      title: "正社員募集情報",
-      link: `${BASE}#recruitment`,
-    },
-  ],
-};
-
-export const companyInfo: CompanyInfo = {
-  name: "株式会社 弘毅インターナショナル",
-  nameEn: "KOKI INTERNATIONAL CO.,LTD",
-  mission: [
-    "会社経営していく上で",
-    "広い器量と",
-    "強い意志を持って",
-    "国際ビジネスを取り込んでいきます。",
-  ],
-  vision: ["世の為", "人の為", "幸せなれるように努めます。"],
-};
 
 export const navItems: NavItem[] = [
   { name: "HOME", href: `${BASE}#hero` },
   { name: "事業内容", href: `${BASE}#works` },
   { name: "求人情報", href: `${BASE}#recruitment` },
   { name: "お問い合わせ", href: `${BASE}#contact` },
-];
-
-export const footerNavItems = [
-  "システム開発事業",
-  "国際貿易",
-  "金融事業",
-  "リサイクル事業",
-  "求人情報",
-  "お問い合わせ",
 ];
 
 export const contact: Contact = {

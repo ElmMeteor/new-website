@@ -57,7 +57,7 @@ function renderWholesaleSection(): string {
             </div>
           </div>
           <div class="fade-up opacity-0 translate-y-10 ${MEDIA_FRAME_CLASS} h-[220px] sm:h-[260px] md:h-[320px]" style="transition-delay: 0.08s">
-            <img src="${BASE}assets/hero.jpg" alt="輸出販売・輸入販売" class="w-full h-full object-cover">
+            <img src="${BASE}assets/code.jpg" alt="輸出販売・輸入販売" class="w-full h-full object-cover">
           </div>
         </div>
       </div>
