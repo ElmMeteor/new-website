@@ -92,9 +92,8 @@ body {
   text-decoration: none;
 }
 
-/* --- 初期状態：logoと社名を非表示 --- */
-.header-logo-img,
-.header-logo-text {
+/* --- 初期状態（共通）：logo画像は非表示 --- */
+.header-logo-img {
   opacity: 0;
   transform: translateY(-6px);
   transition:
@@ -103,6 +102,30 @@ body {
     height 0.3s ease,
     font-size 0.3s ease,
     color 0.3s ease;
+}
+
+/* --- 子ページ初期状態：社名は表示 --- */
+.header-logo-text {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    height 0.3s ease,
+    font-size 0.3s ease,
+    color 0.3s ease;
+}
+
+/* --- 子ページ初期状態：logo画像も表示 --- */
+#header.is-subpage .header-logo-img {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- HOME初期状態：社名も非表示 --- */
+#header.is-home .header-logo-text {
+  opacity: 0;
+  transform: translateY(-6px);
 }
 
 /* --- スクロール後：表示 --- */

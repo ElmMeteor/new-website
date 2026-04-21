@@ -51,11 +51,20 @@ export function toggleHeaderScrolledState(
 
   const logo = document.querySelector(".hero-copy img");
 
-  if (!logo) return;
+  // Home page: switch header after hero logo passes viewport top.
+  if (logo) {
+    const logoBottom = logo.getBoundingClientRect().bottom + window.scrollY;
 
-  const logoBottom = logo.getBoundingClientRect().bottom + window.scrollY;
+    if (scrollY > logoBottom) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+    return;
+  }
 
-  if (scrollY > logoBottom) {
+  // Subpages: use a small generic threshold.
+  if (scrollY > 16) {
     header.classList.add("scrolled");
   } else {
     header.classList.remove("scrolled");

@@ -94,7 +94,7 @@ export function renderRecruitmentPage(): () => void {
   const app = document.querySelector<HTMLDivElement>("#app")!;
 
   app.innerHTML = `
-    ${renderHeader()}
+     ${renderHeader(false)}
     ${renderPageBanner()}
     ${renderNoticeSection()}
     ${renderRecruitmentTable()}

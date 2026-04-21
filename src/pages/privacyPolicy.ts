@@ -97,7 +97,7 @@ export function renderPrivacyPolicyPage(): () => void {
   const app = document.querySelector<HTMLDivElement>("#app")!;
 
   app.innerHTML = `
-    ${renderHeader()}
+    ${renderHeader(false)}
     ${renderPrivacyPolicyPageBanner()}
     ${renderPolicySection()}
     ${renderFooter()}

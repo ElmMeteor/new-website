@@ -10,6 +10,7 @@ import {
   PAGE_BANNER_OFFSET_CLASS,
   PAGE_SECTION_CLASS,
   createStandardPageScrollEffect,
+  renderSectionHeading,
 } from "../utils/page.ts";
 
 const BASE = import.meta.env.BASE_URL;
@@ -19,15 +20,13 @@ let cleanupInternationalTradeHeaderMenu: (() => void) | null = null;
 
 function renderHeroSection(): string {
   return `
-    <section id="international-trade" class="bg-white ${PAGE_BANNER_OFFSET_CLASS}">
+    <section id="international-trade" class="${PAGE_BANNER_OFFSET_CLASS} bg-gradient-to-b from-gray-50 to-white">
       <div class="${CONTENT_SHELL_CLASS} py-14 md:py-16">
         <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 items-center">
           <div class="fade-up opacity-0 translate-y-10">
             <p class="text-primary text-xs font-semibold tracking-widest mb-3">INTERNATIONAL TRADE</p>
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 leading-tight mb-4">${internationalTradeData.title}</h1>
-            <div class="flex justify-start mb-4">
-                <div class="w-16 h-[3px] bg-[#b8922a] rounded"></div>
-            </div>
+            <div class="w-16 h-[3px] bg-primary rounded mb-5"></div>
             <div class="space-y-2 text-gray-600 leading-relaxed">
               ${internationalTradeData.leadLines
                 .map((line) => `<p>${line}</p>`)
@@ -45,18 +44,18 @@ function renderHeroSection(): string {
 
 function renderWholesaleSection(): string {
   return `
-    <section class="${PAGE_SECTION_CLASS}" style="background: #fdf8f0;">
+    <section class="${PAGE_SECTION_CLASS} bg-white">
       <div class="${CONTENT_SHELL_CLASS}">
+        ${renderSectionHeading("輸出販売・輸入販売", "Import / Export")}
         <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
-          <div class="fade-up opacity-0 translate-y-10 ${CONTENT_CARD_CLASS}">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-5">${internationalTradeData.wholesaleTitle}</h2>
+          <div class="fade-up opacity-0 translate-y-10 ${CONTENT_CARD_CLASS} mt-8">
             <div class="space-y-3 text-gray-600 leading-relaxed">
               ${internationalTradeData.wholesaleParagraphs
                 .map((text) => `<p>${text}</p>`)
                 .join("")}
             </div>
           </div>
-          <div class="fade-up opacity-0 translate-y-10 ${MEDIA_FRAME_CLASS} h-[220px] sm:h-[260px] md:h-[320px]" style="transition-delay: 0.08s">
+          <div class="fade-up opacity-0 translate-y-10 ${MEDIA_FRAME_CLASS} h-[220px] sm:h-[260px] md:h-[320px] mt-8" style="transition-delay: 0.08s">
             <img src="${BASE}assets/code.jpg" alt="輸出販売・輸入販売" class="w-full h-full object-cover">
           </div>
         </div>
@@ -67,10 +66,11 @@ function renderWholesaleSection(): string {
 
 function renderOemSection(): string {
   return `
-    <section class="${PAGE_SECTION_CLASS} bg-white">
+    <section class="${PAGE_SECTION_CLASS} bg-gray-50">
       <div class="${CONTENT_SHELL_CLASS} space-y-10">
+        ${renderSectionHeading("OEM製品提供", "OEM")}
         <div class="fade-up opacity-0 translate-y-10 ${CONTENT_CARD_SOFT_CLASS}">
-          <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-5">${internationalTradeData.oemTitle}</h2>
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-5 mt-1">${internationalTradeData.oemTitle}</h2>
           <div class="space-y-3 text-gray-600 leading-relaxed">
             ${internationalTradeData.oemParagraphs.map((text) => `<p>${text}</p>`).join("")}
           </div>
@@ -98,10 +98,10 @@ function renderOemSection(): string {
 
 function renderClosingSection(): string {
   return `
-    <section class="${PAGE_SECTION_CLASS}" style="background: #fdf8f0;">
+    <section class="${PAGE_SECTION_CLASS} bg-white">
       <div class="${CONTENT_SHELL_CLASS}">
+        ${renderSectionHeading(internationalTradeData.closingTitle, "Closing")}
         <div class="fade-up opacity-0 translate-y-10 ${CONTENT_CARD_CLASS} md:p-10">
-          <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-5">${internationalTradeData.closingTitle}</h2>
           <div class="space-y-3 text-gray-600 leading-relaxed">
             ${internationalTradeData.closingParagraphs
               .map((text) => `<p>${text}</p>`)
@@ -126,7 +126,7 @@ export function renderInternationalTradePage(): () => void {
   const app = document.querySelector<HTMLDivElement>("#app")!;
 
   app.innerHTML = `
-    ${renderHeader()}
+      ${renderHeader(false)}
     ${renderHeroSection()}
     ${renderWholesaleSection()}
     ${renderOemSection()}

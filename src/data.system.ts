@@ -5,7 +5,7 @@ const BASE = import.meta.env.BASE_URL;
 export const systemDevelopment: SystemDevelopmentData = {
   title: "システム開発事業",
   subtitle: "SERVICE",
-  mainImage: `${BASE}assets/tesad.svg`,
+  mainImage: `${BASE}assets/code.jpg`,
   vision: [
     "お客様の課題を解決するソフトウェア開発に注力しています。",
     "小規模ながらも迅速・柔軟に対応できる体制を整えています。",
@@ -22,7 +22,7 @@ export const systemDevelopment: SystemDevelopmentData = {
         "中小規模の案件でも迅速に対応できる柔軟な体制です。",
         "安心して利用できるシステム環境の提供を目指しています。",
       ],
-      highlightLast: true,
+      highlightLast: false,
     },
     {
       title: "業務改善コンサルティング",

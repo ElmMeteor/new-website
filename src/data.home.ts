@@ -31,14 +31,14 @@ export const works: Project[] = [
     description:
       "ソフトウェア開発、システムの設計・開発・運用、SESサービスを行っております。\nお客様のご要望に沿ったシステムをご提供いたします。",
     image: `${BASE}assets/SystemDevelopmentBusiness.jpg`,
-    link: `${BASE}#works`,
+    link: `${BASE}#system-development`,
   },
   {
     title: "国際貿易",
     description:
       "日中を中心とした国際貿易業務を展開しております。\n輸出入業務や国内流通を通じて、国境を越えたビジネスの架橋となります。",
     image: `${BASE}assets/ChinaJapanTrade.jpg`,
-    link: `${BASE}#works`,
+    link: `${BASE}#international-trade`,
     reverse: true,
   },
   {
@@ -46,14 +46,14 @@ export const works: Project[] = [
     description:
       "金融サービスおよび投資関連事業を展開しております。\n国内外の投資支援や企業進出に関するコンサルティングを提供いたします。",
     image: `${BASE}assets/FinancialBusiness.jpg`,
-    link: `${BASE}#works`,
+    link: `${BASE}#financial-business`,
   },
   {
     title: "リサイクル事業",
     description:
       "金属スクラップ等のリサイクル事業を展開しております。\n資源の有効活用を通じて、環境に配慮した事業活動を行っております。",
     image: `${BASE}assets/RecyclingBusiness.jpg`,
-    link: `${BASE}#works`,
+    link: `${BASE}#recycling-business`,
     reverse: true,
   },
 ];

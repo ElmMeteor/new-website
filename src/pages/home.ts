@@ -132,21 +132,23 @@ function renderWorksSection(): string {
           ${works
             .map(
               (work, i) => `
-            <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12 work-item opacity-0 translate-y-10 ${work.reverse ? "md:[&>:first-child]:order-2 md:[&>:last-child]:order-1" : ""}">
-              <div class="work-img overflow-hidden rounded-xl shadow-md">
-                <img src="${work.image}" alt="${work.title}" class="work-media-image w-full h-[220px] sm:h-64 object-cover transition-transform duration-500">
-              </div>
-              <div class="fade-up opacity-0 translate-y-10" style="transition-delay: ${i * 0.05}s">
-                <div class="flex items-center gap-3 mb-3">
-                  <div class="w-10 h-0.5 bg-primary"></div>
-                  <span class="text-primary text-sm font-semibold tracking-wider">SERVICE 0${i + 1}</span>
+            <a href="${work.link ?? `${BASE}#works`}" class="block group">
+              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12 work-item opacity-0 translate-y-10 ${work.reverse ? "md:[&>:first-child]:order-2 md:[&>:last-child]:order-1" : ""}">
+                <div class="work-img overflow-hidden rounded-xl shadow-md">
+                  <img src="${work.image}" alt="${work.title}" class="work-media-image w-full h-[220px] sm:h-64 object-cover transition-transform duration-500 group-hover:scale-[1.03]">
                 </div>
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">
-                  ${work.title}
-                </h3>
-                <p class="text-gray-600 leading-relaxed whitespace-pre-line">${work.description}</p>
+                <div class="fade-up opacity-0 translate-y-10" style="transition-delay: ${i * 0.05}s">
+                  <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-0.5 bg-primary"></div>
+                    <span class="text-primary text-sm font-semibold tracking-wider">SERVICE 0${i + 1}</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-primary transition-colors">
+                    ${work.title}
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed whitespace-pre-line">${work.description}</p>
+                </div>
               </div>
-            </div>
+            </a>
           `,
             )
             .join("")}
@@ -529,7 +531,7 @@ export function renderHomePage(app: HTMLDivElement): () => void {
   cleanupHomeHeaderMenu = null;
 
   app.innerHTML = `
-    ${renderHeader()}
+    ${renderHeader(true)}
     ${renderHeroSection()}
     ${renderAboutSection()}
     ${renderWorksSection()}

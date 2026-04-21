@@ -4,9 +4,9 @@ import { CONTENT_INSET_CLASS } from "../utils/page.ts";
 
 const BASE = import.meta.env.BASE_URL;
 
-export function renderHeader(): string {
+export function renderHeader(isHomePage = false): string {
   return `
-<header id="header" class="fixed top-0 w-full z-50">
+<header id="header" class="fixed top-0 w-full z-50 ${isHomePage ? "is-home" : "is-subpage"}">
   <div class="header-inner max-w-7xl mx-auto flex items-center ${CONTENT_INSET_CLASS}">
     <a href="${BASE}#hero" class="header-logo flex items-center gap-2">
       <img src="${hero.logo}" alt="KOKI INTERNATIONAL" class="header-logo-img">
