@@ -6,19 +6,14 @@ export const internationalTradeData: InternationalTradeData = {
     "日本製品の国内卸、輸出販売 / 海外商品の輸入販売",
     "在海外小売店で日本製商品や日系企業商品を販売されたいお客様、及び海外商品を日本で販売されたいお客様に代わって、当社が商品の仕入代行業務をいたします。",
   ],
-  wholesaleTitle: "日本製品の国内卸・輸出販売 / 海外商品の輸入販売",
   wholesaleParagraphs: [
     "在海外小売店で日本製商品や日系企業商品を販売されたいお客様、及び海外商品を日本で販売されたいお客様に代わって、当社が商品の仕入代行業務をいたします。",
   ],
-  oemTitle: "一連のビジネス活動をサポートいたします",
   oemParagraphs: [
     "お客様が抱える課題に、寄り添い、解決します",
     "当社はこれまで、様々な分野における「ものづくりの課題」を解決してきました。",
     "課題の本質を見極め、最適な量産体制を構築します。",
   ],
-  oemSupplyTitle: "",
-  oemSupplyParagraphs: [],
-  supportMessage: "",
   closingTitle: "お客様の課題に寄り添い、最適な解決策をご提案します",
   closingParagraphs: [
     "お客様が抱える課題に、寄り添い、解決します",

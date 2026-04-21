@@ -11,24 +11,6 @@ export interface NavItem {
   href: string;
 }
 
-export interface RecruitmentItem {
-  date: string;
-  title: string;
-  link: string;
-}
-
-export interface Recruitment {
-  title: string;
-  items: RecruitmentItem[];
-}
-
-export interface CompanyInfo {
-  name: string;
-  nameEn: string;
-  mission: string[];
-  vision: string[];
-}
-
 export interface Contact {
   title: string;
   info: string;
@@ -37,19 +19,14 @@ export interface Contact {
   hours: string;
 }
 
-export type ServiceAlign = "left" | "right";
-
 export interface SystemDevelopmentService {
   title: string;
-  align: ServiceAlign;
   content: string[];
   highlightLast: boolean;
 }
 
 export interface SystemDevelopmentData {
   title: string;
-  subtitle: string;
-  mainImage: string;
   vision: string[];
   services: SystemDevelopmentService[];
 }
@@ -57,23 +34,15 @@ export interface SystemDevelopmentData {
 export interface InternationalTradeData {
   title: string;
   leadLines: string[];
-  wholesaleTitle: string;
   wholesaleParagraphs: string[];
-  oemTitle: string;
   oemParagraphs: string[];
-  oemSupplyTitle: string;
-  oemSupplyParagraphs: string[];
-  supportMessage: string;
   closingTitle: string;
   closingParagraphs: string[];
 }
 
-export type FinancialServiceAlign = "left" | "right";
-
 export interface FinancialServiceBlock {
   title: string;
   paragraphs: string[];
-  align: FinancialServiceAlign;
 }
 
 export interface FinancialBusinessData {
@@ -85,12 +54,9 @@ export interface FinancialBusinessData {
   serviceBlocks: FinancialServiceBlock[];
 }
 
-export type RecyclingSectionAlign = "left" | "right";
-
 export interface RecyclingSection {
   title: string;
   paragraphs: string[];
-  align: RecyclingSectionAlign;
 }
 
 export interface RecyclingBusinessData {

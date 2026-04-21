@@ -19,7 +19,7 @@ const BASE = import.meta.env.BASE_URL;
 /* --- バナー --- */
 function renderPageBanner(): string {
   return `
-    <section id="recruitment" class="${PAGE_BANNER_OFFSET_CLASS}" style="background: linear-gradient(150deg, #fdf8f0 0%, #fbf2e3 100%);">
+    <section id="recruitment" class="${PAGE_BANNER_OFFSET_CLASS} recruitment-page-banner">
       <div class="${CONTENT_SHELL_CLASS} py-16 md:py-20 text-center fade-up opacity-0 translate-y-10">
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">${recruitmentPageData.title}</h1>
         <div class="heading-border justify-center"><div class="heading-border-inner"></div></div>
@@ -47,7 +47,7 @@ function renderNoticeSection(): string {
 /* --- 募集要項 --- */
 function renderRecruitmentTable(): string {
   return `
-    <section class="${PAGE_SECTION_CLASS}" style="background: #fdf8f0;">
+    <section class="${PAGE_SECTION_CLASS} recruitment-table-section">
       <div class="${CONTENT_SHELL_CLASS}">
         ${renderSectionHeading("募集情報")}
         <div class="rounded-2xl border border-gray-300 overflow-hidden bg-white fade-up opacity-0 translate-y-10">
@@ -55,7 +55,7 @@ function renderRecruitmentTable(): string {
             .map(
               (row) => `
             <div class="grid md:grid-cols-[220px_1fr] border-b border-gray-200 last:border-b-0">
-              <div class="bg-[#f2dcdb] px-5 py-4 text-left md:text-center font-semibold text-gray-800">${row.label}</div>
+              <div class="bg-primary/10 px-5 py-4 text-left md:text-center font-semibold text-gray-800">${row.label}</div>
               <div class="px-5 py-4 text-gray-700">
                 ${row.values.map((value) => `<p class="leading-relaxed">${value}</p>`).join("")}
               </div>

@@ -22,17 +22,17 @@ function renderHeroSection(): string {
     <section id="system-development" class="${PAGE_BANNER_OFFSET_CLASS} relative overflow-hidden bg-gradient-to-br from-amber-50 via-white to-amber-50">
       
       <div class="absolute inset-0 opacity-30">
-        <div class="absolute top-20 left-10 w-72 h-72 bg-amber-200/30 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-20 right-10 w-96 h-96 bg-amber-100/40 rounded-full blur-3xl"></div>
+        <div class="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
       </div>
       
-      <!-- 🔽 收紧这里 -->
+      <!-- 上下余白を抑えたバナー -->
       <div class="relative ${CONTENT_SHELL_CLASS} py-16 md:py-20 lg:py-24">
         <div class="max-w-4xl mx-auto text-center">
           <div class="fade-up opacity-0 translate-y-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/80 backdrop-blur-sm border border-amber-200 mb-6">
-              <span class="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
-              <span class="text-amber-800/80 text-xs font-medium tracking-wider">SYSTEM DEVELOPMENT</span>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-6">
+              <span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+              <span class="text-primary text-xs font-medium tracking-wider">SYSTEM DEVELOPMENT</span>
             </div>
 
             <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 leading-tight mb-6">
@@ -62,7 +62,7 @@ function renderVisionSection(): string {
         
         <div class="max-w-3xl mx-auto">
           <div class="fade-up opacity-0 translate-y-10">
-            <div class="relative bg-gradient-to-r from-amber-50/50 to-white rounded-2xl shadow-md p-8 md:p-10 border border-amber-100">
+            <div class="relative bg-gradient-to-r from-amber-50/50 to-white rounded-2xl shadow-md p-8 md:p-10 border border-primary/20">
               
               <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-amber-300 via-amber-500 to-amber-300 rounded-full"></div>
               
@@ -72,7 +72,7 @@ function renderVisionSection(): string {
                     const isLast = idx === systemDevelopment.vision.length - 1;
                     return `
                       <p class="leading-relaxed text-gray-700 ${
-                        isLast ? "text-amber-700 font-semibold" : ""
+                        isLast ? "text-primary font-semibold" : ""
                       }">
                         ${line}
                       </p>
@@ -101,12 +101,12 @@ function renderServiceItem(
   const gradient = gradients[index % gradients.length];
 
   return `
-    <article class="group ${CONTENT_CARD_CLASS} fade-up opacity-0 translate-y-10 relative bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-amber-100 hover:border-amber-200">
+    <article class="group ${CONTENT_CARD_CLASS} fade-up opacity-0 translate-y-10 relative bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-primary/20 hover:border-primary/40">
       
       <div class="h-1 bg-gradient-to-r ${gradient}"></div>
 
       <div class="p-6 md:p-7">
-        <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-amber-600 transition-colors">
+        <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-primary transition-colors">
           ${service.title}
         </h3>
 
@@ -119,12 +119,10 @@ function renderServiceItem(
               return `
                 <div class="flex gap-2 items-start">
                   <span class="flex-shrink-0 w-1 h-1 rounded-full ${
-                    isHighlighted ? "bg-amber-500" : "bg-amber-300"
+                    isHighlighted ? "bg-primary" : "bg-primary/50"
                   } mt-2"></span>
                   <p class="leading-relaxed text-sm ${
-                    isHighlighted
-                      ? "text-amber-700 font-medium"
-                      : "text-gray-600"
+                    isHighlighted ? "text-primary font-medium" : "text-gray-600"
                   }">
                     ${text}
                   </p>
@@ -142,7 +140,7 @@ function renderServicesSection(): string {
   return `
     <section class="${PAGE_SECTION_CLASS} bg-gradient-to-b from-amber-50/20 to-white relative overflow-hidden">
       
-      <!-- 🔽 收紧这里 -->
+      <!-- 上下余白を抑えたセクション -->
       <div class="${CONTENT_SHELL_CLASS} py-6 md:py-8">
         
         <div class="flex flex-col items-center text-center mb-6">

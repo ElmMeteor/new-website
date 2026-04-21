@@ -19,22 +19,22 @@ let cleanupFinancialBusinessHeaderMenu: (() => void) | null = null;
 function renderBannerSection(): string {
   return `
     <section id="financial-business" class="${PAGE_BANNER_OFFSET_CLASS} relative overflow-hidden bg-gradient-to-br from-amber-50 via-white to-amber-50">
-      <!-- 背景装饰 - 斜线图案 -->
+      <!-- 背景装飾: 斜線パターン -->
       <div class="absolute inset-0 opacity-5">
-        <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, #d97706 0px, #d97706 2px, transparent 2px, transparent 8px);"></div>
+        <div class="absolute inset-0 financial-hero-pattern"></div>
       </div>
       
-      <!-- 装饰圆点 -->
-      <div class="absolute top-32 left-16 w-3 h-3 bg-amber-300/40 rounded-full"></div>
-      <div class="absolute bottom-32 right-16 w-4 h-4 bg-amber-400/30 rounded-full"></div>
-      <div class="absolute top-1/2 right-1/4 w-2 h-2 bg-amber-200/50 rounded-full"></div>
+      <!-- 装飾ドット -->
+      <div class="absolute top-32 left-16 w-3 h-3 bg-primary/40 rounded-full"></div>
+      <div class="absolute bottom-32 right-16 w-4 h-4 bg-primary/30 rounded-full"></div>
+      <div class="absolute top-1/2 right-1/4 w-2 h-2 bg-primary/50 rounded-full"></div>
       
       <div class="relative ${CONTENT_SHELL_CLASS} py-16 md:py-20 lg:py-24">
         <div class="max-w-4xl mx-auto text-center">
           <div class="fade-up opacity-0 translate-y-10">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 border border-amber-200 mb-6 shadow-sm">
-              <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
-              <span class="text-amber-700 text-sm font-medium tracking-wider">FINANCIAL BUSINESS</span>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 shadow-sm">
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+              <span class="text-primary text-sm font-medium tracking-wider">FINANCIAL BUSINESS</span>
             </div>
             <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 leading-tight mb-6">
               ${financialBusinessData.title}
@@ -53,19 +53,19 @@ function renderBannerSection(): string {
 function renderConsultingSection(): string {
   return `
     <section class="${PAGE_SECTION_CLASS} bg-white relative overflow-hidden">
-      <!-- 顶部装饰线 -->
+      <!-- 上部の装飾ライン -->
       <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-amber-300 to-transparent"></div>
       
       <div class="${CONTENT_SHELL_CLASS} py-8 md:py-10">
         <div class="flex flex-col items-center text-center mb-6">
           ${renderSectionHeading(financialBusinessData.consultingTitle, "Consulting")}
-          <p class="text-amber-600 text-sm font-medium mt-2">${financialBusinessData.consultingSubtitle}</p>
+          <p class="text-primary text-sm font-medium mt-2">${financialBusinessData.consultingSubtitle}</p>
         </div>
         
         <div class="max-w-3xl mx-auto">
           <div class="fade-up opacity-0 translate-y-10">
-            <div class="relative ${CONTENT_CARD_SOFT_CLASS} bg-gradient-to-br from-white to-amber-50/20 rounded-2xl shadow-md p-8 md:p-10 border border-amber-100">
-              <!-- 左侧装饰竖条 -->
+            <div class="relative ${CONTENT_CARD_SOFT_CLASS} bg-gradient-to-br from-white to-amber-50/20 rounded-2xl shadow-md p-8 md:p-10 border border-primary/20">
+              <!-- 左側の装飾ライン -->
               <div class="absolute left-0 top-8 bottom-8 w-1 bg-gradient-to-b from-amber-300 via-amber-400 to-amber-300 rounded-full"></div>
               
               <div class="relative pl-6 space-y-3 text-gray-600 leading-relaxed">
@@ -89,13 +89,13 @@ function renderServiceBlocks(): string {
           ${renderSectionHeading("サービス内容", "Services")}
         </div>
         
-        <div class="grid md:grid-cols-2 gap-6">
+        <div class="grid md:grid-cols-2 gap-6 financial-service-grid">
           ${financialBusinessData.serviceBlocks
             .map(
-              (block, idx) => `
-            <div class="fade-up opacity-0 translate-y-10 group" style="transition-delay: ${idx * 0.05}s">
-              <div class="relative ${CONTENT_CARD_CLASS} bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-6 border border-amber-100 hover:border-amber-200">
-                <!-- 顶部彩色条 -->
+              (block) => `
+            <div class="fade-up opacity-0 translate-y-10 group financial-service-item">
+              <div class="relative ${CONTENT_CARD_CLASS} bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-6 border border-primary/20 hover:border-primary/40">
+                <!-- 上部のカラーライン -->
                 <div class="absolute top-0 left-6 right-6 h-0.5 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 rounded-full"></div>
                 
                 <h3 class="text-xl font-bold text-gray-800 mb-3 pt-2">${block.title}</h3>
@@ -103,8 +103,8 @@ function renderServiceBlocks(): string {
                   ${block.paragraphs.map((text) => `<p class="text-gray-600">${text}</p>`).join("")}
                 </div>
                 
-                <!-- 装饰小圆点 -->
-                <div class="absolute bottom-3 right-3 w-2 h-2 rounded-full bg-amber-200 group-hover:bg-amber-400 transition-colors"></div>
+                <!-- 装飾ドット -->
+                <div class="absolute bottom-3 right-3 w-2 h-2 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></div>
               </div>
             </div>
           `,

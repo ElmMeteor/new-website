@@ -12,12 +12,9 @@ export type {
   SystemDevelopmentService,
   FinancialBusinessData,
   FinancialServiceBlock,
-  FinancialServiceAlign,
   InternationalTradeData,
   RecyclingBusinessData,
   RecyclingSection,
-  RecyclingSectionAlign,
   RecruitmentDetailRow,
   RecruitmentPageData,
-  ServiceAlign,
 } from "./types/siteData";

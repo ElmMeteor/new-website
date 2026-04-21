@@ -16,7 +16,6 @@ export const recyclingBusinessData: RecyclingBusinessData = {
         "不要となった陶磁器や工芸品の回収・リサイクルを行っています。",
         "資源の有効活用を通じて、環境保全に貢献します。",
       ],
-      align: "left",
     },
     {
       title: "パソコン・モニター等リサイクル",
@@ -24,7 +23,6 @@ export const recyclingBusinessData: RecyclingBusinessData = {
         "使用済みのパソコンやモニターは、専用施設にてデータ消去・分解処理を行い、",
         "金属や樹脂などの資源として再利用されます。",
       ],
-      align: "left",
     },
     {
       title: "プリンターリサイクル",
@@ -32,7 +30,6 @@ export const recyclingBusinessData: RecyclingBusinessData = {
         "「不用品の処分方法が分からない」「処分に困っている」といったお悩みに対応いたします。",
         "当社では、不用品の回収からリサイクルまで一貫したサービスを提供し、環境保護に取り組んでいます。",
       ],
-      align: "right",
     },
   ],
   closingTitle: "リサイクルのことなら、弘毅グループにお任せください",

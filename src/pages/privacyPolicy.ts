@@ -14,7 +14,7 @@ let cleanupPrivacyPolicyHeaderMenu: (() => void) | null = null;
 
 function renderPrivacyPolicyPageBanner(): string {
   return `
-    <section id="privacy-policy" class="${PAGE_BANNER_OFFSET_CLASS}" style="background: linear-gradient(150deg, #f6f8fb 0%, #eef2f7 100%);">
+    <section id="privacy-policy" class="${PAGE_BANNER_OFFSET_CLASS} privacy-policy-banner">
       <div class="${CONTENT_SHELL_CLASS} py-16 md:py-20 text-center fade-up opacity-0 translate-y-10">
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">プライバシーポリシー</h1>
         <div class="heading-border justify-center"><div class="heading-border-inner"></div></div>

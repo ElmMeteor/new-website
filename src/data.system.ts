@@ -1,11 +1,7 @@
 import type { SystemDevelopmentData } from "./types/siteData";
 
-const BASE = import.meta.env.BASE_URL;
-
 export const systemDevelopment: SystemDevelopmentData = {
   title: "システム開発事業",
-  subtitle: "SERVICE",
-  mainImage: `${BASE}assets/code.jpg`,
   vision: [
     "お客様の課題を解決するソフトウェア開発に注力しています。",
     "小規模ながらも迅速・柔軟に対応できる体制を整えています。",
@@ -16,7 +12,6 @@ export const systemDevelopment: SystemDevelopmentData = {
   services: [
     {
       title: "システム設計・開発・運用サポート",
-      align: "left",
       content: [
         "お客様の要望に合わせて、システムの設計から開発、運用までサポートします。",
         "中小規模の案件でも迅速に対応できる柔軟な体制です。",
@@ -26,7 +21,6 @@ export const systemDevelopment: SystemDevelopmentData = {
     },
     {
       title: "業務改善コンサルティング",
-      align: "right",
       content: [
         "現状の課題や運用上の問題点を整理し、改善提案を行います。",
         "シンプルで実現可能なソリューションに重点を置いています。",
@@ -35,7 +29,6 @@ export const systemDevelopment: SystemDevelopmentData = {
     },
     {
       title: "ソフトウェア保守・運用支援",
-      align: "left",
       content: [
         "既存システムの運用サポートやトラブル対応を行います。",
         "小規模チームならではの迅速な対応で、業務に支障を出さない運用を実現します。",

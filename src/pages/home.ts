@@ -36,16 +36,16 @@ function renderHeroSection(): string {
         <div class="hero-stage relative">
           <div class="grid items-center gap-0 md:grid-cols-[1fr_2fr] md:gap-0">
             <div class="hidden md:block"></div>
-            <div class="relative fade-up opacity-0 translate-y-10" style="transition-delay: 0.08s">
+            <div class="relative fade-up opacity-0 translate-y-10 home-hero-media-reveal">
               <div class="hero-media relative w-full md:ml-auto overflow-visible">
                 <img src="${hero.image}" alt="KOKI INTERNATIONAL" class="hero-bg absolute inset-x-0 w-full object-cover rounded-[1.5rem] shadow-lg">
               </div>
             </div>
           </div>
-          <div class="hero-copy fade-up opacity-0 translate-y-10 absolute inset-x-0 bottom-0 z-20 text-left md:left-8 lg:left-10 md:right-auto md:bottom-auto md:top-[46%] md:-translate-y-1/2 md:w-[60%] lg:w-[55%]" style="transition-delay: 0.14s">
+          <div class="hero-copy fade-up opacity-0 translate-y-10 absolute inset-x-0 bottom-0 z-20 text-left md:left-8 lg:left-10 md:right-auto md:bottom-auto md:top-[46%] md:-translate-y-1/2 md:w-[60%] lg:w-[55%] home-hero-copy-reveal">
               <div class="hero-copy-panel px-5 pt-12 pb-5 sm:px-6 sm:pt-14 sm:pb-6 md:px-0 md:py-0">
               <div class="flex flex-col items-start mb-3">
-                <img src="${hero.logo}" alt="KOKI LOGO" class="h-32 md:h-44 mb-4 select-none" style="user-drag: none;" draggable="false">
+                <img src="${hero.logo}" alt="KOKI LOGO" class="h-32 md:h-44 mb-4 select-none home-hero-logo-img" draggable="false">
                 <p class="text-primary text-base md:text-lg font-semibold tracking-widest mb-3">KOKI INTERNATIONAL CO., LTD</p>
                 <h1 class="hero-text font-bold text-gray-800 leading-[1.08] whitespace-normal drop-shadow-[0_3px_12px_rgba(255,255,255,0.55)] text-[clamp(2.2rem,6.4vw,5.3rem)]">
                   ${renderHeroTitle()}
@@ -94,7 +94,7 @@ function renderAboutSection(): string {
           </div>
 
           <!-- 右：背景＋論語 -->
-          <div class="fade-up opacity-0 translate-y-10 w-full relative" style="transition-delay:0.08s">
+          <div class="fade-up opacity-0 translate-y-10 w-full relative home-about-visual-reveal">
 
             <!-- 背景画像 -->
             <div class="absolute inset-0 z-0 overflow-hidden rounded-2xl">
@@ -104,11 +104,11 @@ function renderAboutSection(): string {
             <!-- 論語カード -->
             <div class="relative z-10 flex items-center justify-center h-full py-10">
               <div class="about-quote-card-container">
-                <div class="text-primary text-5xl font-bold mb-4" style="font-family: serif;">"</div>
+                <div class="text-primary text-5xl font-bold mb-4 home-serif-text">"</div>
                 <p class="italic leading-loose mb-4 whitespace-nowrap">士不可以不弘毅、任重而道遠</p>
                 <p class="text-primary text-sm mb-6">— 論語 —</p>
                 <div class="border-t border-gray-200 pt-6">
-                  <div class="text-primary text-2xl font-bold mb-2" style="font-family: serif;">弘毅</div>
+                  <div class="text-primary text-2xl font-bold mb-2 home-serif-text">弘毅</div>
                   <p class="text-gray-500 text-xs tracking-widest">KO · KI</p>
                 </div>
               </div>
@@ -128,7 +128,7 @@ function renderWorksSection(): string {
     <section id="works" class="${HOME_SECTION_CLASS} bg-gray-50">
       <div class="${CONTENT_SHELL_CLASS}">
         ${renderSectionHeading("事業内容", "Services")}
-        <div class="space-y-14 mt-8 md:space-y-20">
+        <div class="space-y-14 mt-8 md:space-y-20 home-works-list">
           ${works
             .map(
               (work, i) => `
@@ -137,7 +137,7 @@ function renderWorksSection(): string {
                 <div class="work-img overflow-hidden rounded-xl shadow-md">
                   <img src="${work.image}" alt="${work.title}" class="work-media-image w-full h-[220px] sm:h-64 object-cover transition-transform duration-500 group-hover:scale-[1.03]">
                 </div>
-                <div class="fade-up opacity-0 translate-y-10" style="transition-delay: ${i * 0.05}s">
+                <div class="fade-up opacity-0 translate-y-10 home-work-text-reveal">
                   <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-0.5 bg-primary"></div>
                     <span class="text-primary text-sm font-semibold tracking-wider">SERVICE 0${i + 1}</span>
@@ -255,12 +255,12 @@ function renderContactSection(): string {
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1976.2613598822777!2d130.41774732607476!3d33.58811926672321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x354191b85b30aa53%3A0x223d7db18c549acb!2s8-1%20Hakataekich%C5%AB%C5%8Dgai%2C%20Hakata%20Ward%2C%20Fukuoka%2C%20812-0012!5e0!3m2!1szh-CN!2sjp!4v1775205669864!5m2!1szh-CN!2sjp" 
                 width="100%" 
                 height="100%" 
-                style="border: 0;" 
+                class="home-map-iframe" 
                 loading="lazy"
               ></iframe>
             </div>
           </div>
-          <div class="fade-up opacity-0 translate-y-10 bg-white rounded-2xl p-8 sm:p-10 md:p-8 shadow-sm border border-gray-200 w-full order-2 md:order-none" style="transition-delay: 0.1s">            <h3 class="text-2xl sm:text-2xl md:text-lg font-bold text-gray-800 mb-6">
+          <div class="fade-up opacity-0 translate-y-10 bg-white rounded-2xl p-8 sm:p-10 md:p-8 shadow-sm border border-gray-200 w-full order-2 md:order-none home-contact-form-reveal">            <h3 class="text-2xl sm:text-2xl md:text-lg font-bold text-gray-800 mb-6">
               お問い合わせフォーム
             </h3>
             <form id="contact-form" class="space-y-6 md:space-y-4">
@@ -387,13 +387,13 @@ function initHomeScrollEffects(): void {
   );
 }
 
-// AJAX 提交表单（不跳转页面）
+// AJAXでフォームを送信（ページ遷移なし）
 function initContactFormHandler(): void {
   setTimeout(() => {
     const form = document.getElementById("contact-form");
     if (!form) return;
 
-    // 类型断言：告诉 TypeScript 这是一个表单元素
+    // 型アサーション: TypeScriptにフォーム要素であることを伝える
     const formElement = form as HTMLFormElement;
 
     formElement.addEventListener("submit", async function (event) {
@@ -403,7 +403,7 @@ function initContactFormHandler(): void {
       const submitBtn = formElement.querySelector('button[type="submit"]');
       const originalText = submitBtn?.textContent || "送信する";
 
-      // ========== 获取字段值 ==========
+      // ========== 入力値の取得 ==========
       const company =
         (
           document.getElementById("company") as HTMLInputElement
@@ -421,7 +421,7 @@ function initContactFormHandler(): void {
         (document.getElementById("privacy-consent") as HTMLInputElement)
           ?.checked || false;
 
-      // ========== 1. 检查必填字段 ==========
+      // ========== 1. 必須項目チェック ==========
       if (!company || !name || !email) {
         if (statusDiv) {
           statusDiv.classList.remove("hidden");
@@ -433,7 +433,7 @@ function initContactFormHandler(): void {
         return;
       }
 
-      // ========== 2. 邮箱格式验证 ==========
+      // ========== 2. メール形式チェック ==========
       const emailRegex = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
       if (!emailRegex.test(email)) {
         if (statusDiv) {
@@ -446,8 +446,8 @@ function initContactFormHandler(): void {
         return;
       }
 
-      // ========== 3. 电话格式验证（日本手机/固定电话） ==========
-      // 日本电话格式：0XX-XXXX-XXXX 或 0XXXXXXXXXX
+      // ========== 3. 電話番号形式チェック（日本の携帯/固定電話） ==========
+      // 日本の電話形式: 0XX-XXXX-XXXX または 0XXXXXXXXXX
       const phoneRegex = /^0\d{1,4}-\d{1,4}-\d{4}$|^0\d{9,10}$/;
       if (phone && !phoneRegex.test(phone)) {
         if (statusDiv) {
@@ -472,7 +472,7 @@ function initContactFormHandler(): void {
         return;
       }
 
-      // 显示加载状态
+      // 送信中の表示
       if (statusDiv) {
         statusDiv.classList.remove("hidden");
         statusDiv.textContent = "送信中...";
@@ -480,7 +480,7 @@ function initContactFormHandler(): void {
       }
       if (submitBtn) submitBtn.textContent = "送信中...";
 
-      // 获取表单数据
+      // フォームデータの取得
       const formData = new FormData(formElement);
       formData.append("_next", "");
 
@@ -523,7 +523,7 @@ function initContactFormHandler(): void {
   }, 100);
 }
 
-// 在 renderHomePage 中调用
+// renderHomePage 内で初期化
 export function renderHomePage(app: HTMLDivElement): () => void {
   cleanupHomeScrollEffect?.();
   cleanupHomeScrollEffect = null;

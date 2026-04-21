@@ -31,7 +31,7 @@ function scrollToHashTarget(hash: string): void {
   });
 }
 
-// 路由控制
+// ルーティング制御
 function renderPage() {
   cleanupCurrentPage?.();
   cleanupCurrentPage = null;
@@ -57,8 +57,8 @@ function renderPage() {
   scrollToHashTarget(hash);
 }
 
-// 监听 hash 变化
+// ハッシュ変更を監視
 window.addEventListener("hashchange", renderPage);
 
-// 初始渲染
+// 初期描画
 renderPage();

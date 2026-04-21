@@ -21,7 +21,6 @@ export const financialBusinessData: FinancialBusinessData = {
       paragraphs: [
         "発注を具体的に考えている方なので、提案のしがいがあります。",
       ],
-      align: "left",
     },
     {
       title: "商品リサーチ",
@@ -29,7 +28,6 @@ export const financialBusinessData: FinancialBusinessData = {
         "お客様の商品･サービスに合う「ターゲットに刺さる表現」を",
         "専門のリサーチャーが提案します。",
       ],
-      align: "right",
     },
     {
       title: "現地視察アテンドサービス",
@@ -37,7 +35,6 @@ export const financialBusinessData: FinancialBusinessData = {
         "会話をよりスムーズにおこなうためにアテンドとあわせて通訳が必要となる場合には、",
         "弘毅グループでお任せください。",
       ],
-      align: "left",
     },
     {
       title: "進出支援（会社登記、設立、不動産物件）",
@@ -47,7 +44,6 @@ export const financialBusinessData: FinancialBusinessData = {
         "会社登記、設立、不動産物件などのサポートを行い、",
         "輸出入が初めての方でも安心してご依頼頂けます。",
       ],
-      align: "right",
     },
   ],
 };
