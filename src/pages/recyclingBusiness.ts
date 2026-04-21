@@ -1,3 +1,4 @@
+// src/pages/recyclingBusiness.ts
 import { renderHeader } from "../components/header";
 import { renderFooter } from "../components/footer";
 import { recyclingBusinessData } from "../data";
@@ -5,34 +6,44 @@ import { initHeaderMobileMenu } from "../utils/headerMenu";
 import {
   CONTENT_CARD_CLASS,
   CONTENT_SHELL_CLASS,
-  MEDIA_FRAME_CLASS,
   PAGE_BANNER_OFFSET_CLASS,
   PAGE_SECTION_CLASS,
   createStandardPageScrollEffect,
   renderSectionHeading,
 } from "../utils/page.ts";
 
-const BASE = import.meta.env.BASE_URL;
-
 let cleanupRecyclingBusinessScrollEffect: (() => void) | null = null;
 let cleanupRecyclingBusinessHeaderMenu: (() => void) | null = null;
 
 function renderIntroSection(): string {
   return `
-    <section id="recycling-business" class="${PAGE_BANNER_OFFSET_CLASS} bg-gradient-to-b from-gray-50 to-white">
-      <div class="${CONTENT_SHELL_CLASS} py-14 md:py-16">
-        <div class="grid lg:grid-cols-2 gap-10 items-center">
-          <div class="fade-up opacity-0 translate-y-10 ${MEDIA_FRAME_CLASS} order-2 lg:order-1 h-[240px] sm:h-[300px] md:h-[420px]">
-            <img src="${BASE}assets/RecyclingBusiness.jpg" alt="リサイクル事業" class="w-full h-full object-cover">
-          </div>
-          <div class="fade-up opacity-0 translate-y-10 order-1 lg:order-2" style="transition-delay: 0.08s">
-            <p class="text-primary text-xs font-semibold tracking-widest mb-3">RECYCLING BUSINESS</p>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">${recyclingBusinessData.title}</h1>
-            <div class="w-16 h-[3px] bg-primary rounded mb-5"></div>
-            <div class="space-y-2 text-gray-600 leading-relaxed mb-8">
+    <section id="recycling-business" class="${PAGE_BANNER_OFFSET_CLASS} relative overflow-hidden bg-gradient-to-br from-amber-50 via-white to-amber-50">
+      <!-- 背景装饰 - 波浪点阵 -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 50% 50%, #d97706 2px, transparent 2px); background-size: 30px 30px;"></div>
+      </div>
+      
+      <!-- 装饰圆环 -->
+      <div class="absolute top-1/4 left-10 w-32 h-32 rounded-full border border-amber-200/30"></div>
+      <div class="absolute bottom-1/4 right-10 w-48 h-48 rounded-full border border-amber-200/20"></div>
+      
+      <div class="relative ${CONTENT_SHELL_CLASS} py-16 md:py-20 lg:py-24">
+        <div class="max-w-3xl mx-auto text-center">
+          <div class="fade-up opacity-0 translate-y-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 border border-amber-200 mb-6 shadow-sm">
+              <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+              <span class="text-amber-700 text-sm font-medium tracking-wider">RECYCLING BUSINESS</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 leading-tight mb-6">
+              ${recyclingBusinessData.title}
+            </h1>
+            <div class="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-200 rounded-full mx-auto mb-6"></div>
+            <div class="space-y-3 text-gray-600 text-base leading-relaxed">
               ${recyclingBusinessData.leadLines.map((line) => `<p>${line}</p>`).join("")}
             </div>
-            <p class="text-gray-800 font-semibold">${recyclingBusinessData.mainTitle}</p>
+            <div class="mt-6 inline-block px-4 py-2 bg-amber-100/50 rounded-full">
+              <p class="text-amber-700 font-semibold text-sm">${recyclingBusinessData.mainTitle}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -42,20 +53,35 @@ function renderIntroSection(): string {
 
 function renderBusinessSections(): string {
   return `
-    <section class="${PAGE_SECTION_CLASS} bg-gray-50">
-      <div class="${CONTENT_SHELL_CLASS}">
-        ${renderSectionHeading("事業内容", "Services")}
-        <div class="space-y-6">
+    <section class="${PAGE_SECTION_CLASS} bg-white relative overflow-hidden">
+      <!-- 背景装饰 -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-amber-50/50 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div class="relative ${CONTENT_SHELL_CLASS} py-8 md:py-10">
+        <div class="flex flex-col items-center text-center mb-8">
+          ${renderSectionHeading("事業内容", "Services")}
+        </div>
+        
+        <div class="space-y-4">
           ${recyclingBusinessData.sections
             .map(
               (section, idx) => `
-            <article class="fade-up opacity-0 translate-y-10 ${CONTENT_CARD_CLASS} ${section.align === "right" ? "md:text-right" : ""}" style="transition-delay: ${idx * 0.08}s">
-              <h3 class="text-2xl font-bold text-gray-800 mb-3">${section.title}</h3>
-              <div class="w-8 h-0.5 bg-primary mb-4 ${section.align === "right" ? "md:ml-auto" : ""}"></div>
-              <div class="space-y-2 text-gray-600 leading-relaxed">
-                ${section.paragraphs.map((text) => `<p>${text}</p>`).join("")}
+            <div class="fade-up opacity-0 translate-y-10 group" style="transition-delay: ${idx * 0.06}s">
+              <div class="relative ${CONTENT_CARD_CLASS} bg-gradient-to-r from-white to-amber-50/20 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 p-6 border border-amber-100 hover:border-amber-200 overflow-hidden">
+                <!-- 左侧彩色条 -->
+                <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-amber-300 via-amber-500 to-amber-300"></div>
+                
+                <div class="pl-5">
+                  <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3">${section.title}</h3>
+                  <div class="w-10 h-0.5 bg-amber-400 rounded mb-4"></div>
+                  <div class="space-y-2 text-gray-600 text-sm leading-relaxed">
+                    ${section.paragraphs.map((text) => `<p class="text-gray-600">${text}</p>`).join("")}
+                  </div>
+                </div>
               </div>
-            </article>
+            </div>
           `,
             )
             .join("")}
@@ -67,14 +93,32 @@ function renderBusinessSections(): string {
 
 function renderClosingSection(): string {
   return `
-    <section class="${PAGE_SECTION_CLASS} bg-white">
-      <div class="${CONTENT_SHELL_CLASS}">
-        ${renderSectionHeading(recyclingBusinessData.closingTitle, "Closing")}
-        <div class="fade-up opacity-0 translate-y-10 rounded-2xl border border-primary/25 bg-white p-6 md:p-10">
-          <div class="space-y-2 text-gray-600 leading-relaxed">
-            ${recyclingBusinessData.closingParagraphs
-              .map((text) => `<p>${text}</p>`)
-              .join("")}
+    <section class="${PAGE_SECTION_CLASS} bg-gradient-to-b from-amber-50/30 to-white relative overflow-hidden">
+      <div class="${CONTENT_SHELL_CLASS} py-8 md:py-10">
+        <div class="flex flex-col items-center text-center mb-6">
+          ${renderSectionHeading(recyclingBusinessData.closingTitle, "Closing")}
+        </div>
+        
+        <div class="max-w-3xl mx-auto">
+          <div class="fade-up opacity-0 translate-y-10">
+            <div class="relative ${CONTENT_CARD_CLASS} bg-white rounded-2xl shadow-md p-8 md:p-10 border border-amber-100">
+              <!-- 四角装饰 -->
+              <div class="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-amber-200 rounded-tl-lg"></div>
+              <div class="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-amber-200 rounded-tr-lg"></div>
+              <div class="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-amber-200 rounded-bl-lg"></div>
+              <div class="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-amber-200 rounded-br-lg"></div>
+              
+              <div class="relative space-y-3 text-gray-600 leading-relaxed text-center">
+                ${recyclingBusinessData.closingParagraphs
+                  .map((text, idx) => {
+                    const isLast =
+                      idx ===
+                      recyclingBusinessData.closingParagraphs.length - 1;
+                    return `<p class="${isLast ? "text-amber-700 font-semibold mt-3 pt-2" : "text-gray-600"}">${text}</p>`;
+                  })
+                  .join("")}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -95,7 +139,7 @@ export function renderRecyclingBusinessPage(): () => void {
   const app = document.querySelector<HTMLDivElement>("#app")!;
 
   app.innerHTML = `
-     ${renderHeader(false)}
+    ${renderHeader(false)}
     ${renderIntroSection()}
     ${renderBusinessSections()}
     ${renderClosingSection()}
