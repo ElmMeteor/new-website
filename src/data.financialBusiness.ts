@@ -3,11 +3,8 @@ import type { FinancialBusinessData } from "./types/siteData";
 export const financialBusinessData: FinancialBusinessData = {
   title: "金融事業",
   leadLines: [
-    "日本から世界へ",
-    "国境線のないソフトウェア開発などのビジネスの展開、もっと身近い、もっと便利に",
-    "発展する国際の市場に合わせ、日中の架橋になれるように力を展開",
-    "日中の各面の精華部分をお互いに紹介する",
-    "利益を各国の貧困地区に寄付",
+    "国内外投資に関するコンサルティング業務",
+    "中国・日本市場への投資および進出支援（情報提供・会社設立支援など）",
   ],
   consultingTitle: "国内・海外投資に関するコンサルティング事業",
   consultingSubtitle:
