@@ -1,3 +1,4 @@
+// src/pages/internationalTrade.ts
 import { renderHeader } from "../components/header";
 import { renderFooter } from "../components/footer";
 import { internationalTradeData } from "../data";
@@ -6,35 +7,40 @@ import {
   CONTENT_CARD_CLASS,
   CONTENT_CARD_SOFT_CLASS,
   CONTENT_SHELL_CLASS,
-  MEDIA_FRAME_CLASS,
   PAGE_BANNER_OFFSET_CLASS,
   PAGE_SECTION_CLASS,
   createStandardPageScrollEffect,
   renderSectionHeading,
 } from "../utils/page.ts";
 
-const BASE = import.meta.env.BASE_URL;
-
 let cleanupInternationalTradeScrollEffect: (() => void) | null = null;
 let cleanupInternationalTradeHeaderMenu: (() => void) | null = null;
 
 function renderHeroSection(): string {
   return `
-    <section id="international-trade" class="${PAGE_BANNER_OFFSET_CLASS} bg-gradient-to-b from-gray-50 to-white">
-      <div class="${CONTENT_SHELL_CLASS} py-14 md:py-16">
-        <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 items-center">
+    <section id="international-trade" class="${PAGE_BANNER_OFFSET_CLASS} relative overflow-hidden bg-gradient-to-br from-amber-50 via-white to-amber-50">
+      <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, #d97706 1px, transparent 1px); background-size: 40px 40px;"></div>
+      </div>
+      
+      <div class="absolute top-20 right-20 w-64 h-64 border-2 border-amber-200/20 rounded-full"></div>
+      <div class="absolute bottom-20 left-20 w-96 h-96 border-2 border-amber-200/10 rounded-full"></div>
+      
+      <div class="relative ${CONTENT_SHELL_CLASS} py-16 md:py-20 lg:py-24">
+        <div class="max-w-4xl mx-auto text-center">
           <div class="fade-up opacity-0 translate-y-10">
-            <p class="text-primary text-xs font-semibold tracking-widest mb-3">INTERNATIONAL TRADE</p>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 leading-tight mb-4">${internationalTradeData.title}</h1>
-            <div class="w-16 h-[3px] bg-primary rounded mb-5"></div>
-            <div class="space-y-2 text-gray-600 leading-relaxed">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 border border-amber-200 mb-6 shadow-sm">
+              <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+              <span class="text-amber-700 text-sm font-medium tracking-wider">INTERNATIONAL TRADE</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 leading-tight mb-6">
+              ${internationalTradeData.title}
+            </h1>
+            <div class="space-y-3 text-gray-600 text-base leading-relaxed max-w-2xl mx-auto">
               ${internationalTradeData.leadLines
                 .map((line) => `<p>${line}</p>`)
                 .join("")}
             </div>
-          </div>
-          <div class="fade-up opacity-0 translate-y-10 ${MEDIA_FRAME_CLASS} h-[220px] sm:h-[280px] md:h-[420px]" style="transition-delay: 0.08s">
-            <img src="${BASE}assets/ChinaJapanTrade.jpg" alt="国際貿易" class="w-full h-full object-cover">
           </div>
         </div>
       </div>
@@ -44,19 +50,33 @@ function renderHeroSection(): string {
 
 function renderWholesaleSection(): string {
   return `
-    <section class="${PAGE_SECTION_CLASS} bg-white">
-      <div class="${CONTENT_SHELL_CLASS}">
-        ${renderSectionHeading("輸出販売・輸入販売", "Import / Export")}
-        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
-          <div class="fade-up opacity-0 translate-y-10 ${CONTENT_CARD_CLASS} mt-8">
-            <div class="space-y-3 text-gray-600 leading-relaxed">
-              ${internationalTradeData.wholesaleParagraphs
-                .map((text) => `<p>${text}</p>`)
-                .join("")}
+    <section class="${PAGE_SECTION_CLASS} bg-white relative overflow-hidden">
+      <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-amber-200 via-amber-400 to-amber-200"></div>
+      
+      <div class="${CONTENT_SHELL_CLASS} py-8 md:py-10">
+        <div class="flex flex-col items-center text-center mb-6">
+          ${renderSectionHeading("輸出販売・輸入販売", "Import / Export")}
+        </div>
+        
+        <div class="max-w-4xl mx-auto">
+          <div class="fade-up opacity-0 translate-y-10">
+            <div class="relative ${CONTENT_CARD_CLASS} bg-gradient-to-br from-white to-amber-50/30 rounded-3xl shadow-xl p-8 md:p-10 border border-amber-100">
+              <div class="absolute top-6 right-6 text-6xl text-amber-100/50 font-serif">"</div>
+              
+              <div class="relative space-y-4 text-gray-600 leading-relaxed">
+                ${internationalTradeData.wholesaleParagraphs
+                  .map((text) => `<p class="text-gray-700">${text}</p>`)
+                  .join("")}
+              </div>
+              
+              <div class="mt-6 pt-5 border-t border-amber-100">
+                <div class="flex justify-center gap-2">
+                  <div class="w-2 h-2 rounded-full bg-amber-300"></div>
+                  <div class="w-2 h-2 rounded-full bg-amber-400"></div>
+                  <div class="w-2 h-2 rounded-full bg-amber-500"></div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="fade-up opacity-0 translate-y-10 ${MEDIA_FRAME_CLASS} h-[220px] sm:h-[260px] md:h-[320px] mt-8" style="transition-delay: 0.08s">
-            <img src="${BASE}assets/code.jpg" alt="輸出販売・輸入販売" class="w-full h-full object-cover">
           </div>
         </div>
       </div>
@@ -66,28 +86,23 @@ function renderWholesaleSection(): string {
 
 function renderOemSection(): string {
   return `
-    <section class="${PAGE_SECTION_CLASS} bg-gray-50">
-      <div class="${CONTENT_SHELL_CLASS} space-y-10">
-        ${renderSectionHeading("OEM製品提供", "OEM")}
-        <div class="fade-up opacity-0 translate-y-10 ${CONTENT_CARD_SOFT_CLASS}">
-          <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-5 mt-1">${internationalTradeData.oemTitle}</h2>
-          <div class="space-y-3 text-gray-600 leading-relaxed">
-            ${internationalTradeData.oemParagraphs.map((text) => `<p>${text}</p>`).join("")}
-          </div>
+    <section class="${PAGE_SECTION_CLASS} bg-gradient-to-b from-amber-50/30 to-white relative overflow-hidden">
+      <div class="absolute inset-0">
+        <div class="absolute top-20 right-20 w-3 h-3 bg-amber-300/50 rounded-full"></div>
+        <div class="absolute top-40 left-40 w-2 h-2 bg-amber-400/50 rounded-full"></div>
+        <div class="absolute bottom-32 right-32 w-4 h-4 bg-amber-200/50 rounded-full"></div>
+        <div class="absolute bottom-60 left-60 w-2 h-2 bg-amber-300/50 rounded-full"></div>
+      </div>
+      
+      <div class="relative ${CONTENT_SHELL_CLASS} py-8 md:py-10">
+        <div class="flex flex-col items-center text-center mb-6">
+          ${renderSectionHeading("貿易コンサルティング", "Consulting")}
         </div>
-        <div class="fade-up opacity-0 translate-y-10" style="transition-delay: 0.08s">
-          <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 items-center">
-            <div class="${MEDIA_FRAME_CLASS} h-[220px] sm:h-[260px] md:h-[320px]">
-              <img src="${BASE}assets/ChinaJapanTrade.jpg" alt="OEM製品提供" class="w-full h-full object-cover">
-            </div>
-            <div class="rounded-2xl border border-primary/25 bg-white p-6 md:p-8">
-              <h3 class="text-2xl font-bold text-gray-800 mb-5">${internationalTradeData.oemSupplyTitle}</h3>
-              <div class="space-y-3 text-gray-600 leading-relaxed mb-6">
-                ${internationalTradeData.oemSupplyParagraphs
-                  .map((text) => `<p>${text}</p>`)
-                  .join("")}
-              </div>
-              <p class="text-primary font-semibold">${internationalTradeData.supportMessage}</p>
+        
+        <div class="fade-up opacity-0 translate-y-10">
+          <div class="relative ${CONTENT_CARD_SOFT_CLASS} bg-white rounded-3xl shadow-lg p-8 md:p-10 border-l-8 border-l-amber-400">
+            <div class="space-y-4 text-gray-600 leading-relaxed">
+              ${internationalTradeData.oemParagraphs.map((text) => `<p class="text-gray-700">${text}</p>`).join("")}
             </div>
           </div>
         </div>
@@ -98,14 +113,33 @@ function renderOemSection(): string {
 
 function renderClosingSection(): string {
   return `
-    <section class="${PAGE_SECTION_CLASS} bg-white">
-      <div class="${CONTENT_SHELL_CLASS}">
-        ${renderSectionHeading(internationalTradeData.closingTitle, "Closing")}
-        <div class="fade-up opacity-0 translate-y-10 ${CONTENT_CARD_CLASS} md:p-10">
-          <div class="space-y-3 text-gray-600 leading-relaxed">
-            ${internationalTradeData.closingParagraphs
-              .map((text) => `<p>${text}</p>`)
-              .join("")}
+    <section class="${PAGE_SECTION_CLASS} bg-white relative overflow-hidden">
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-300 to-transparent"></div>
+      
+      <div class="${CONTENT_SHELL_CLASS} py-8 md:py-10">
+        <div class="flex flex-col items-center text-center mb-6">
+          ${renderSectionHeading(internationalTradeData.closingTitle, "Closing")}
+        </div>
+        
+        <div class="max-w-3xl mx-auto">
+          <div class="fade-up opacity-0 translate-y-10">
+            <div class="relative ${CONTENT_CARD_CLASS} bg-amber-50/30 rounded-3xl p-8 md:p-10 text-center border border-amber-200 shadow-sm">
+              <div class="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-amber-300 rounded-tl-xl"></div>
+              <div class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-amber-300 rounded-tr-xl"></div>
+              <div class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-amber-300 rounded-bl-xl"></div>
+              <div class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-amber-300 rounded-br-xl"></div>
+              
+              <div class="relative space-y-3 text-gray-600 leading-relaxed">
+                ${internationalTradeData.closingParagraphs
+                  .map((text, idx) => {
+                    const isLast =
+                      idx ===
+                      internationalTradeData.closingParagraphs.length - 1;
+                    return `<p class="${isLast ? "text-amber-700 font-semibold mt-4 pt-3 border-t border-amber-200" : "text-gray-700"}">${text}</p>`;
+                  })
+                  .join("")}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -126,7 +160,7 @@ export function renderInternationalTradePage(): () => void {
   const app = document.querySelector<HTMLDivElement>("#app")!;
 
   app.innerHTML = `
-      ${renderHeader(false)}
+    ${renderHeader(false)}
     ${renderHeroSection()}
     ${renderWholesaleSection()}
     ${renderOemSection()}

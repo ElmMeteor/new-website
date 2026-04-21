@@ -6,7 +6,6 @@ import { initHeaderMobileMenu } from "../utils/headerMenu";
 import {
   CONTENT_CARD_CLASS,
   CONTENT_SHELL_CLASS,
-  MEDIA_FRAME_CLASS,
   PAGE_BANNER_OFFSET_CLASS,
   PAGE_SECTION_CLASS,
   createStandardPageScrollEffect,
