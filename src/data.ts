@@ -1,7 +1,7 @@
 export * from "./data.home";
 export * from "./data.system";
+export * from "./data.itDxSupport";
 export * from "./data.internationalTrade";
-export * from "./data.financialBusiness";
 export * from "./data.recyclingBusiness";
 export * from "./data.recruitmentPage";
 export type {
@@ -10,9 +10,9 @@ export type {
   Project,
   SystemDevelopmentData,
   SystemDevelopmentService,
-  FinancialBusinessData,
-  FinancialServiceBlock,
   InternationalTradeData,
+  ItDxSupportData,
+  ItDxSupportService,
   RecyclingBusinessData,
   RecyclingSection,
   RecruitmentDetailRow,

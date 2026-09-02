@@ -1,6 +1,9 @@
 export interface Project {
   title: string;
+  englishTitle?: string;
   description: string;
+  lead?: string;
+  items?: string[];
   image: string;
   reverse?: boolean;
   link?: string;
@@ -31,6 +34,20 @@ export interface SystemDevelopmentData {
   services: SystemDevelopmentService[];
 }
 
+export interface ItDxSupportService {
+  title: string;
+  description: string;
+}
+
+export interface ItDxSupportData {
+  title: string;
+  englishTitle: string;
+  lead: string;
+  introduction: string;
+  services: ItDxSupportService[];
+  closing: string;
+}
+
 export interface InternationalTradeData {
   title: string;
   leadLines: string[];
@@ -38,20 +55,6 @@ export interface InternationalTradeData {
   oemParagraphs: string[];
   closingTitle: string;
   closingParagraphs: string[];
-}
-
-export interface FinancialServiceBlock {
-  title: string;
-  paragraphs: string[];
-}
-
-export interface FinancialBusinessData {
-  title: string;
-  leadLines: string[];
-  consultingTitle: string;
-  consultingSubtitle: string;
-  consultingParagraphs: string[];
-  serviceBlocks: FinancialServiceBlock[];
 }
 
 export interface RecyclingSection {
@@ -77,6 +80,7 @@ export interface RecruitmentPageData {
   title: string;
   noticeTitle: string;
   noticeLines: string[];
+  categories?: string[];
   rows: RecruitmentDetailRow[];
   inquiryLabel: string;
 }

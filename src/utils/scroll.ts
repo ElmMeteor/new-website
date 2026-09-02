@@ -49,13 +49,17 @@ export function toggleHeaderScrolledState(
 ): void {
   if (!header) return;
 
-  const logo = document.querySelector(".hero-copy img");
+  const logo = document.querySelector<HTMLElement>(
+    ".koki-hero-logo, .koki-mobile-wordmark",
+  );
 
-  // Home page: switch header after hero logo passes viewport top.
+  // Home page: show the compact brand only after the large hero logo
+  // has completely passed behind the fixed header.
   if (logo) {
-    const logoBottom = logo.getBoundingClientRect().bottom + window.scrollY;
+    const logoBottom = logo.getBoundingClientRect().bottom;
+    const headerBottom = header.getBoundingClientRect().bottom;
 
-    if (scrollY > logoBottom) {
+    if (logoBottom <= headerBottom) {
       header.classList.add("scrolled");
     } else {
       header.classList.remove("scrolled");

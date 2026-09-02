@@ -2,8 +2,8 @@ import "./style.css";
 import { renderHomePage } from "./pages/home";
 import { renderSystemDevelopmentPage } from "./pages/systemDevelopment";
 import { renderRecruitmentPage } from "./pages/recruitment";
+import { renderItDxSupportPage } from "./pages/itDxSupport";
 import { renderInternationalTradePage } from "./pages/internationalTrade";
-import { renderFinancialBusinessPage } from "./pages/financialBusiness";
 import { renderRecyclingBusinessPage } from "./pages/recyclingBusiness";
 import { renderPrivacyPolicyPage } from "./pages/privacyPolicy";
 
@@ -40,10 +40,10 @@ function renderPage() {
 
   if (hash === "#system-development") {
     cleanupCurrentPage = renderSystemDevelopmentPage();
+  } else if (hash === "#it-dx-support") {
+    cleanupCurrentPage = renderItDxSupportPage();
   } else if (hash === "#international-trade") {
     cleanupCurrentPage = renderInternationalTradePage();
-  } else if (hash === "#financial-business") {
-    cleanupCurrentPage = renderFinancialBusinessPage();
   } else if (hash === "#recycling-business") {
     cleanupCurrentPage = renderRecyclingBusinessPage();
   } else if (hash === "#recruitment") {

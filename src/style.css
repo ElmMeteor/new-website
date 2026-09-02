@@ -7,6 +7,9 @@
 :root {
   --color-primary: #b8922a;
   --color-primary-dark: #9e7a22;
+  --color-ink: #202020;
+  --color-paper: #ffffff;
+  --color-soft: #f5f4f0;
 }
 
 html {
@@ -19,6 +22,16 @@ body {
   font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
   line-height: 1.8;
   overflow-x: hidden;
+}
+
+#hero,
+#works,
+#about,
+#message,
+#company,
+#recruit,
+#contact {
+  scroll-margin-top: 92px;
 }
 
 /* --- プライマリカラー（ゴールド） --- */
@@ -128,6 +141,23 @@ body {
   transform: translateY(-6px);
 }
 
+/* HOMEでは大きなヒーローロゴが見えている間、ヘッダーブランドを隠す */
+#header.is-home .header-logo {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    visibility 0s linear 0.3s;
+}
+
+#header.is-home.scrolled .header-logo {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
 /* --- スクロール後：表示 --- */
 #header.scrolled .header-logo-img,
 #header.scrolled .header-logo-text {
@@ -165,6 +195,9 @@ body {
 
 /* ナビリンク */
 .header-nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: 0.875rem;
   font-weight: 500;
   color: #374151;
@@ -256,6 +289,7 @@ body {
   font-weight: 600;
   border-bottom: 1px solid #f3f4f6;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .mobile-nav-link:last-child {
@@ -522,6 +556,1278 @@ body {
     animation: none !important;
     transition-duration: 0.01ms !important;
   }
+
+  .koki-mobile-gold-curve {
+    animation: none !important;
+  }
+}
+
+/* --- 2026 corporate redesign: LINK-inspired composition using KOKI assets --- */
+#header.is-home {
+  background-color: rgba(255, 255, 255, 0.94);
+}
+
+#header.is-home .header-inner {
+  height: 92px;
+}
+
+#header.is-home.scrolled .header-inner {
+  height: 72px;
+}
+
+#header.is-home .header-logo-img,
+#header.is-home .header-logo-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#header.is-home .header-logo-img {
+  height: 48px;
+}
+
+#header.is-home .header-logo-text {
+  color: var(--color-ink);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+}
+
+.koki-hero {
+  padding-top: 92px;
+}
+
+.koki-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(340px, 38%) minmax(0, 62%);
+  min-height: min(760px, calc(100vh - 48px));
+}
+
+.koki-hero-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: clamp(3rem, 6vw, 7rem) clamp(2rem, 5vw, 5.5rem);
+  background: #fff;
+}
+
+.koki-hero-copy::after {
+  content: "";
+  position: absolute;
+  right: -52px;
+  top: 0;
+  bottom: 0;
+  width: 104px;
+  background: #fff;
+  transform: skewX(-5deg);
+  transform-origin: bottom;
+}
+
+.koki-hero-copy .hero-copy-panel {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+}
+
+.koki-hero-logo {
+  width: clamp(112px, 12vw, 172px);
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.koki-mobile-wordmark,
+.koki-mobile-gold-flow {
+  display: none;
+}
+
+@keyframes koki-mobile-gold-drift-a {
+  from {
+    transform: translate3d(0, 0, 0) rotate(-16deg);
+  }
+  to {
+    transform: translate3d(-2rem, 1rem, 0) rotate(-12deg);
+  }
+}
+
+@keyframes koki-mobile-gold-drift-b {
+  from {
+    transform: translate3d(0, 0, 0) rotate(-10deg);
+  }
+  to {
+    transform: translate3d(-1.25rem, -0.75rem, 0) rotate(-14deg);
+  }
+}
+
+@keyframes koki-mobile-gold-drift-c {
+  from {
+    transform: translate3d(0, 0, 0) rotate(14deg);
+  }
+  to {
+    transform: translate3d(1.5rem, -0.9rem, 0) rotate(10deg);
+  }
+}
+
+.koki-eyebrow {
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+
+.koki-hero-title {
+  margin-top: 0.9rem;
+  color: var(--color-ink);
+  font-size: clamp(1.75rem, 3vw, 3.8rem);
+  font-weight: 600;
+  line-height: 1.42;
+  letter-spacing: 0.05em;
+  filter: none;
+}
+
+.koki-hero-title > span {
+  display: block;
+  color: var(--color-ink);
+  font-size: inherit;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+.koki-hero-title .koki-keyword,
+.koki-message .koki-keyword,
+.koki-recruit .koki-keyword {
+  color: var(--color-primary);
+}
+
+.koki-accent-line {
+  width: 72px;
+  height: 3px;
+  margin: 1.8rem 0;
+  background: var(--color-primary);
+}
+
+.koki-hero-slogan {
+  color: #5f5f5f;
+  font-size: clamp(0.9rem, 1.2vw, 1.08rem);
+  line-height: 2;
+  letter-spacing: 0.04em;
+}
+
+.koki-hero-media {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: #ece9e1;
+}
+
+.koki-hero-media .hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.02);
+}
+
+.koki-services {
+  position: relative;
+  background: var(--color-soft);
+}
+
+.koki-section-intro {
+  max-width: 720px;
+  margin: 0 auto 3.5rem;
+  text-align: center;
+}
+
+.koki-section-intro h2 {
+  margin: 0.8rem 0 1rem;
+  color: var(--color-ink);
+  font-size: clamp(1.65rem, 3vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.koki-section-intro > p:last-child {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.koki-service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px;
+  background: #dedcd6;
+  box-shadow: 0 18px 48px rgba(32, 32, 32, 0.08);
+}
+
+.koki-service-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.koki-service-card {
+  display: grid;
+  grid-template-columns: 44% 56%;
+  min-height: 430px;
+  overflow: hidden;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+}
+
+.koki-service-card:nth-child(2),
+.koki-service-card:nth-child(3) {
+  background: #282828;
+  color: #fff;
+}
+
+.koki-service-card:nth-child(2) .koki-service-copy p,
+.koki-service-card:nth-child(3) .koki-service-copy p {
+  color: #d2d2d2;
+}
+
+.koki-service-image {
+  height: 100%;
+  overflow: hidden;
+}
+
+.koki-service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.55s ease;
+}
+
+.koki-service-card:hover .koki-service-image img {
+  transform: scale(1.045);
+}
+
+.koki-service-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.6rem, 3vw, 3rem);
+}
+
+.koki-service-copy > span {
+  color: var(--color-primary);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.koki-service-copy h3 {
+  margin: 0.7rem 0 1rem;
+  font-size: clamp(1.2rem, 2vw, 1.65rem);
+  font-weight: 600;
+}
+
+.koki-service-copy h4 {
+  margin-bottom: 0.75rem;
+  color: var(--color-primary);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.koki-service-copy p {
+  color: #666;
+  font-size: 0.82rem;
+  line-height: 1.9;
+  white-space: pre-line;
+}
+
+.koki-service-copy ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem 0.75rem;
+  margin-top: 1rem;
+  color: #555;
+  font-size: 0.76rem;
+}
+
+.koki-service-copy li::before {
+  content: "—";
+  margin-right: 0.4rem;
+  color: var(--color-primary);
+}
+
+.koki-service-card:nth-child(2) .koki-service-copy ul,
+.koki-service-card:nth-child(3) .koki-service-copy ul {
+  color: #d2d2d2;
+}
+
+.koki-service-copy strong {
+  margin-top: 1.35rem;
+  color: var(--color-primary);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+}
+
+.koki-vision {
+  background: #fff;
+}
+
+.koki-vision-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+}
+
+.koki-vision-image {
+  min-height: 620px;
+  overflow: hidden;
+}
+
+.koki-vision-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 620px;
+  object-fit: cover;
+}
+
+.koki-vision-copy h2,
+.koki-company h2,
+.koki-message h2,
+.koki-recruit h2 {
+  margin: 0.8rem 0 1.5rem;
+  color: var(--color-ink);
+  font-size: clamp(1.7rem, 3vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.05em;
+}
+
+.koki-vision-keywords {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+  color: #222;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 600;
+}
+
+.koki-vision-keywords i {
+  color: var(--color-primary);
+  font-style: normal;
+}
+
+.koki-vision-copy blockquote {
+  margin: 0 0 1.8rem;
+  padding: 1.3rem 1.5rem;
+  border-left: 3px solid var(--color-primary);
+  background: #f7f6f2;
+  color: #222;
+  font-family: serif;
+  font-size: clamp(1rem, 1.7vw, 1.3rem);
+  letter-spacing: 0.08em;
+}
+
+.koki-body-copy,
+.koki-message-copy {
+  color: #575757;
+  font-size: 0.92rem;
+  line-height: 2.05;
+}
+
+.koki-body-copy p + p,
+.koki-message-copy p + p {
+  margin-top: 1rem;
+}
+
+.koki-company {
+  background: #f5f4f0;
+}
+
+.koki-company-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  align-items: start;
+}
+
+.koki-company-en {
+  color: #777;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+}
+
+.koki-company-name span {
+  display: block;
+}
+
+.koki-company-name span:last-child {
+  font-size: 0.9em;
+  overflow-wrap: anywhere;
+}
+
+.koki-company-list > div {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 1.5rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid #d7d4cc;
+  font-size: 0.88rem;
+}
+
+.koki-company-list dt {
+  color: #222;
+  font-weight: 600;
+}
+
+.koki-company-list dd {
+  color: #555;
+  white-space: pre-line;
+}
+
+.koki-message {
+  position: relative;
+  overflow: hidden;
+  background: #202020;
+  color: #fff;
+}
+
+.koki-message::before {
+  content: "MESSAGE";
+  position: absolute;
+  right: -0.04em;
+  top: -0.28em;
+  color: rgba(255, 255, 255, 0.025);
+  font-size: clamp(6rem, 18vw, 18rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+}
+
+.koki-message-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(3rem, 8vw, 8rem);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.koki-section-jp {
+  margin-top: 0.35rem;
+  color: #aaa;
+  font-size: 0.78rem;
+}
+
+.koki-message h2 {
+  margin-top: clamp(2rem, 5vw, 4.5rem);
+  color: #fff;
+  font-size: clamp(1.9rem, 3vw, 3.5rem);
+  line-height: 1.42;
+  letter-spacing: 0.06em;
+}
+
+.koki-message h2 > span,
+.koki-recruit h2 > span {
+  display: block;
+  white-space: nowrap;
+}
+
+.koki-message-line {
+  width: 72px;
+  height: 3px;
+  margin-top: 2.2rem;
+  background: var(--color-primary);
+}
+
+.koki-message-copy {
+  position: relative;
+  max-width: 720px;
+  margin: 0 0 0 auto;
+  padding: clamp(3.5rem, 6vw, 5rem) clamp(1.8rem, 4vw, 4rem) clamp(2.8rem, 5vw, 4rem);
+  border: 1px solid rgba(184, 146, 42, 0.48);
+  border-top: 4px solid var(--color-primary);
+  background:
+    linear-gradient(90deg, transparent 0 1.25rem, rgba(184, 146, 42, 0.12) 1.25rem 1.3rem, transparent 1.3rem),
+    radial-gradient(circle at 15% 10%, rgba(184, 146, 42, 0.07), transparent 34%),
+    #f5f0e4;
+  box-shadow:
+    0 28px 65px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.16);
+  color: #4d4942;
+  font-size: clamp(0.86rem, 1.05vw, 0.96rem);
+  line-height: 2.15;
+}
+
+.koki-message-copy::before {
+  content: "KOKI INTERNATIONAL CO., LTD.";
+  position: absolute;
+  top: 1.25rem;
+  left: clamp(1.8rem, 4vw, 4rem);
+  color: var(--color-primary);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.koki-message-copy::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(225deg, #202020 0 49%, #ded5c1 50% 100%);
+  box-shadow: -3px 3px 7px rgba(0, 0, 0, 0.12);
+  pointer-events: none;
+}
+
+.koki-message-heading,
+.koki-message-letter {
+  transition-duration: 0.85s;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.koki-message-heading.opacity-0 {
+  transform: translateX(-48px);
+}
+
+.koki-message-heading.opacity-100 {
+  transform: translateX(0);
+}
+
+.koki-message-letter.opacity-0 {
+  transform: translateX(56px) rotate(0.35deg);
+}
+
+.koki-message-letter.opacity-100 {
+  transform: translateX(0) rotate(0);
+}
+
+.koki-message-copy p:first-child::first-letter {
+  color: var(--color-primary);
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+.koki-message-signature {
+  margin-top: 2.5rem !important;
+  color: #28251f;
+  text-align: right;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.koki-recruit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 560px;
+  background: #222;
+}
+
+.koki-recruit-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(3rem, 7vw, 7rem);
+}
+
+.koki-recruit h2 {
+  color: #fff;
+  font-size: clamp(1.65rem, 2.2vw, 2.35rem);
+  line-height: 1.5;
+  letter-spacing: 0.035em;
+}
+
+.koki-recruit-copy > p:not(.koki-eyebrow) {
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.9;
+}
+
+.koki-recruit-tags,
+.koki-recruitment-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1.75rem 0 2rem;
+}
+
+.koki-recruit-tags span {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #666;
+  color: #ddd;
+  font-size: 0.72rem;
+}
+
+.koki-recruit-image {
+  min-height: 560px;
+  overflow: hidden;
+}
+
+.koki-recruit-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.koki-recruitment-intro,
+.koki-entry-panel {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem);
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+.koki-recruitment-categories {
+  justify-content: center;
+}
+
+.koki-recruitment-categories span {
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--color-primary);
+  color: #333;
+  font-size: 0.8rem;
+}
+
+.koki-entry-panel {
+  text-align: center;
+}
+
+.koki-entry-panel h3 {
+  margin-bottom: 1rem;
+  color: #222;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.koki-entry-panel p {
+  color: #666;
+  font-size: 0.88rem;
+  line-height: 1.9;
+}
+
+@media (max-width: 1050px) {
+  .koki-service-card {
+    grid-template-columns: 1fr;
+  }
+
+  .koki-service-image {
+    height: 220px;
+  }
+
+  .koki-message-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .koki-message-copy {
+    max-width: none;
+    margin: 0;
+  }
+
+  .koki-message-letter.opacity-0 {
+    transform: translateY(44px) rotate(0.25deg);
+  }
+
+  .koki-message-letter.opacity-100 {
+    transform: translateY(0) rotate(0);
+  }
+
+  .koki-recruit {
+    grid-template-columns: 1fr;
+  }
+
+  .koki-recruit-image {
+    min-height: 360px;
+    height: 52vw;
+    max-height: 560px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  #header.is-home .header-inner {
+    height: 78px;
+  }
+
+  #header.is-home.scrolled .header-inner {
+    height: 64px;
+  }
+
+  #header.is-home .header-logo-img {
+    height: 38px;
+  }
+
+  #header.is-home .header-logo-text {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+  }
+
+  .koki-hero {
+    padding-top: 78px;
+    isolation: isolate;
+    background: #fff;
+  }
+
+  .koki-hero-grid {
+    position: relative;
+    z-index: 1;
+    display: block;
+    min-height: 0;
+  }
+
+  .koki-hero-media {
+    display: none;
+  }
+
+  .koki-hero-copy {
+    min-height: max(650px, calc(100svh - 78px));
+    padding: 5.25rem 1.5rem 3.75rem;
+    background: transparent;
+  }
+
+  .koki-hero-copy .hero-copy-panel {
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .koki-hero-copy::after {
+    display: none;
+  }
+
+  .koki-hero-logo {
+    display: none;
+  }
+
+  .koki-mobile-wordmark {
+    display: inline-grid;
+    gap: 0.15rem;
+    margin-bottom: clamp(4.5rem, 20vw, 6.25rem);
+    color: var(--color-primary);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.22em;
+  }
+
+  .koki-mobile-wordmark > span {
+    font-size: 1.05rem;
+  }
+
+  .koki-mobile-wordmark > small {
+    font-size: 0.52rem;
+    letter-spacing: 0.28em;
+  }
+
+  .koki-mobile-gold-flow {
+    position: absolute;
+    z-index: 0;
+    inset: 78px 0 0;
+    display: block;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .koki-mobile-gold-curve {
+    position: absolute;
+    display: block;
+    border-style: solid;
+    border-color: rgba(184, 146, 42, 0.26);
+    border-radius: 50%;
+    will-change: transform;
+  }
+
+  .koki-mobile-gold-curve-a {
+    top: -8rem;
+    right: -15rem;
+    width: 35rem;
+    height: 20.5rem;
+    border-width: 7px;
+    animation: koki-mobile-gold-drift-a 16s ease-in-out infinite alternate;
+  }
+
+  .koki-mobile-gold-curve-b {
+    top: 4rem;
+    right: -17.5rem;
+    width: 37.5rem;
+    height: 22rem;
+    border-width: 2px;
+    border-color: rgba(184, 146, 42, 0.16);
+    animation: koki-mobile-gold-drift-b 20s ease-in-out infinite alternate;
+  }
+
+  .koki-mobile-gold-curve-c {
+    bottom: -7.5rem;
+    left: -22.5rem;
+    width: 38rem;
+    height: 22.5rem;
+    border-width: 5px;
+    border-color: rgba(184, 146, 42, 0.21);
+    animation: koki-mobile-gold-drift-c 18s ease-in-out infinite alternate;
+  }
+
+  .koki-hero-title {
+    font-size: clamp(1.85rem, 8.5vw, 3rem);
+    line-height: 1.48;
+    letter-spacing: 0.035em;
+  }
+
+  .koki-service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .koki-service-card {
+    min-height: 0;
+  }
+
+  .koki-service-image,
+  .koki-vision-image,
+  .koki-recruit-image,
+  .dx-hero-image {
+    display: none !important;
+  }
+
+  .koki-service-card:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  .koki-service-card:nth-child(3) {
+    background: #fff;
+    color: inherit;
+  }
+
+  .koki-service-card:nth-child(3) .koki-service-copy p {
+    color: #666;
+  }
+
+  .koki-service-card:nth-child(even) {
+    background: #282828;
+    color: #fff;
+  }
+
+  .koki-service-card:nth-child(even) .koki-service-copy p {
+    color: #d2d2d2;
+  }
+
+  .koki-service-card:nth-child(even) .koki-service-copy ul {
+    color: #d2d2d2;
+  }
+
+  .koki-service-card:nth-child(odd) .koki-service-copy ul {
+    color: #555;
+  }
+
+  .koki-service-copy ul {
+    grid-template-columns: 1fr;
+  }
+
+  .koki-vision-grid,
+  .koki-company-grid,
+  .koki-message-inner,
+  .koki-recruit {
+    grid-template-columns: 1fr;
+  }
+
+  .koki-company-list > div {
+    grid-template-columns: 100px 1fr;
+    gap: 1rem;
+  }
+
+  .koki-message-copy {
+    max-width: none;
+    margin: 0;
+    padding: 3.5rem 1.4rem 2.4rem 2.25rem;
+  }
+
+  .koki-message-copy::before {
+    left: 2.25rem;
+  }
+
+  .koki-message h2 {
+    max-width: 16em;
+    margin-top: 1.5rem;
+    font-size: clamp(1.8rem, 7.8vw, 2.7rem);
+    line-height: 1.5;
+  }
+
+  .koki-message-line {
+    margin: 1.5rem 0 0;
+  }
+
+  .koki-recruit-copy {
+    padding: 3.5rem 1.5rem;
+  }
+
+  .koki-recruit {
+    min-height: 0;
+  }
+
+  .koki-recruit h2 {
+    font-size: clamp(1.35rem, 6vw, 2rem);
+  }
+
+  .dx-hero-grid {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .koki-company-list > div {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .koki-company-name {
+    font-size: clamp(1.45rem, 7vw, 2rem) !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.025em !important;
+  }
+
+  .koki-vision-keywords {
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .koki-recruit-copy {
+    padding-inline: 1.25rem;
+  }
+}
+
+/* --- IT / DX SUPPORT page --- */
+.dx-hero {
+  overflow: hidden;
+  background: #202020;
+  color: #fff;
+}
+
+.dx-hero-grid,
+.dx-content-shell {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.dx-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  align-items: stretch;
+  min-height: 640px;
+}
+
+.dx-hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(4rem, 8vw, 8rem) 0;
+}
+
+.dx-eyebrow,
+.dx-section-heading > p {
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.dx-hero h1 {
+  margin: 1rem 0 1.5rem;
+  font-size: clamp(2.6rem, 6vw, 5.6rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+}
+
+.dx-hero .subpage-title {
+  max-width: 100%;
+  margin: 1rem 0 1.5rem;
+  font-size: clamp(2.1rem, 4vw, 4.1rem);
+  line-height: 1.2;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+.dx-hero .subpage-title-long {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  letter-spacing: 0;
+}
+
+.dx-hero-lead {
+  max-width: 32em;
+  color: #fff;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+.dx-gold-line {
+  width: 72px;
+  height: 3px;
+  margin: 2rem 0;
+  background: var(--color-primary);
+}
+
+.dx-hero-introduction {
+  max-width: 38em;
+  color: #c9c9c9;
+  font-size: 0.9rem;
+  line-height: 2;
+}
+
+.dx-hero-image {
+  min-height: 640px;
+  overflow: hidden;
+}
+
+.dx-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.dx-services {
+  background: var(--color-soft);
+}
+
+.dx-section-heading {
+  max-width: 760px;
+  margin-bottom: 3rem;
+}
+
+.dx-section-heading h2,
+.dx-closing-panel h2 {
+  margin-top: 0.8rem;
+  color: var(--color-ink);
+  font-size: clamp(1.7rem, 3.2vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.05em;
+}
+
+.dx-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid #d9d6ce;
+  background: #d9d6ce;
+}
+
+.dx-service-card {
+  min-height: 260px;
+  padding: clamp(1.6rem, 3vw, 2.6rem);
+  background: #fff;
+}
+
+.dx-service-card h3 {
+  margin: 0 0 1rem;
+  color: #242424;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.dx-service-card p {
+  color: #646464;
+  font-size: 0.86rem;
+  line-height: 1.95;
+}
+
+.unified-card-copy {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.unified-two-column-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.dx-closing {
+  background: #fff;
+}
+
+.dx-closing-panel {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 5rem);
+  border-top: 3px solid var(--color-primary);
+  background: #202020;
+  color: #d0d0d0;
+  text-align: center;
+}
+
+.dx-closing-panel h2 {
+  color: #fff;
+}
+
+.dx-closing-panel > p:not(.dx-eyebrow) {
+  max-width: 650px;
+  margin: 1.5rem auto 2rem;
+  font-size: 0.9rem;
+  line-height: 2;
+}
+
+.unified-closing-copy {
+  display: grid;
+  gap: 0.7rem;
+  max-width: 680px;
+  margin: 1.5rem auto 0;
+  color: #d0d0d0;
+  font-size: 0.9rem;
+  line-height: 1.95;
+}
+
+.unified-recruitment-table {
+  overflow: hidden;
+  border: 1px solid #d9d6ce;
+  background: #fff;
+}
+
+.unified-recruitment-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) minmax(0, 1fr);
+  border-bottom: 1px solid #dedbd3;
+}
+
+.unified-recruitment-row:last-child {
+  border-bottom: 0;
+}
+
+.unified-recruitment-label {
+  padding: 1.1rem 1.3rem;
+  background: #202020;
+  color: var(--color-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.unified-recruitment-value {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1.1rem 1.3rem;
+  color: #555;
+  font-size: 0.86rem;
+  line-height: 1.8;
+}
+
+.unified-page-cta {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.unified-policy-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid #d9d6ce;
+  background: #d9d6ce;
+}
+
+.unified-policy-card {
+  min-height: 250px;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background: #fff;
+}
+
+.unified-policy-card h2 {
+  margin: 0 0 0.9rem;
+  color: #252525;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.unified-policy-copy {
+  display: grid;
+  gap: 0.45rem;
+  color: #626262;
+  font-size: 0.82rem;
+  line-height: 1.9;
+}
+
+.unified-policy-copy ul {
+  margin: 0.5rem 0 0 1.2rem;
+  list-style: disc;
+}
+
+@media (max-width: 900px) {
+  .dx-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .dx-hero-copy {
+    padding: 4rem 0;
+  }
+
+  .dx-hero-image {
+    min-height: 380px;
+    height: 55vw;
+    max-height: 560px;
+  }
+
+  .dx-service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .unified-policy-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  #hero,
+  #works,
+  #about,
+  #message,
+  #company,
+  #recruit,
+  #contact {
+    scroll-margin-top: 78px;
+  }
+
+  .dx-hero-copy {
+    padding: 3rem 0;
+  }
+
+  .dx-hero h1,
+  .dx-hero .subpage-title,
+  .dx-hero .subpage-title-long {
+    font-size: clamp(1.5rem, 7.4vw, 2.25rem);
+    letter-spacing: 0;
+  }
+
+  .dx-hero-image {
+    min-height: 300px;
+    height: 72vw;
+  }
+
+  .dx-service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .unified-two-column-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dx-service-card {
+    min-height: 0;
+  }
+
+  .unified-recruitment-row {
+    grid-template-columns: 1fr;
+  }
+
+  .unified-recruitment-label,
+  .unified-recruitment-value {
+    padding: 0.9rem 1rem;
+  }
+
+  .unified-policy-card {
+    min-height: 0;
+  }
 }
 
 /* --- 社長ご挨拶セクション --- */
@@ -605,26 +1911,7 @@ body {
   transition-delay: 0.25s;
 }
 
-/* --- Pages: Business (System/Trade/Financial/Recycling) --- */
-.international-hero-pattern {
-  background-image: radial-gradient(
-    circle at 2px 2px,
-    #d97706 1px,
-    transparent 1px
-  );
-  background-size: 40px 40px;
-}
-
-.financial-hero-pattern {
-  background-image: repeating-linear-gradient(
-    45deg,
-    #d97706 0px,
-    #d97706 2px,
-    transparent 2px,
-    transparent 8px
-  );
-}
-
+/* --- Pages: Business (System/Trade/IT-DX/Recycling) --- */
 .recycling-hero-pattern {
   background-image: radial-gradient(
     circle at 50% 50%,
@@ -632,22 +1919,6 @@ body {
     transparent 2px
   );
   background-size: 30px 30px;
-}
-
-.financial-service-grid > .financial-service-item:nth-child(1) {
-  transition-delay: 0s;
-}
-
-.financial-service-grid > .financial-service-item:nth-child(2) {
-  transition-delay: 0.05s;
-}
-
-.financial-service-grid > .financial-service-item:nth-child(3) {
-  transition-delay: 0.1s;
-}
-
-.financial-service-grid > .financial-service-item:nth-child(4) {
-  transition-delay: 0.15s;
 }
 
 .recycling-sections-list > .recycling-section-item:nth-child(1) {

@@ -2,11 +2,11 @@ import type { RecruitmentPageData } from "./types/siteData";
 
 export const recruitmentPageData: RecruitmentPageData = {
   title: "求人情報",
-  noticeTitle: "令和８年度は、新卒採用の募集は行っておりません。",
+  noticeTitle: "令和８年度 システムエンジニア・プログラマー募集中",
   noticeLines: [
     "弊社にご関心をお寄せいただき、まことにありがとうございます。",
-    "大変申し訳ありませんが、全ての職種について現在、求人募集は行っておりません。",
-    "募集の際は当ページにてご案内いたします。",
+    "現在、システムエンジニア・プログラマーを募集しています。",
+    "募集要項をご確認のうえ、応募書類をご送付ください。採用者が決まり次第、募集を終了します。",
   ],
   rows: [
     {

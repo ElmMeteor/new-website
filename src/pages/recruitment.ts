@@ -1,42 +1,42 @@
-// src/pages/recruitment.ts
 import { renderHeader } from "../components/header";
 import { renderFooter } from "../components/footer";
 import { recruitmentPageData } from "../data";
 import { initHeaderMobileMenu } from "../utils/headerMenu";
 import {
-  CONTENT_CARD_SOFT_CLASS,
   CONTENT_SHELL_CLASS,
-  PAGE_BANNER_OFFSET_CLASS,
   PAGE_SECTION_CLASS,
   createStandardPageScrollEffect,
-  renderSectionHeading,
 } from "../utils/page.ts";
+import {
+  renderUnifiedHero,
+  renderUnifiedSectionHeading,
+} from "../utils/unifiedPage.ts";
 
+const BASE = import.meta.env.BASE_URL;
 let cleanupRecruitmentScrollEffect: (() => void) | null = null;
 let cleanupRecruitmentHeaderMenu: (() => void) | null = null;
-const BASE = import.meta.env.BASE_URL;
 
-/* --- バナー --- */
-function renderPageBanner(): string {
-  return `
-    <section id="recruitment" class="${PAGE_BANNER_OFFSET_CLASS} recruitment-page-banner">
-      <div class="${CONTENT_SHELL_CLASS} py-16 md:py-20 text-center fade-up opacity-0 translate-y-10">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">${recruitmentPageData.title}</h1>
-        <div class="heading-border justify-center"><div class="heading-border-inner"></div></div>
-        <p class="text-gray-700 w-full leading-relaxed font-semibold">${recruitmentPageData.noticeTitle}</p>
-      </div>
-    </section>
-  `;
+function renderHeroSection(): string {
+  return renderUnifiedHero({
+    id: "recruitment",
+    eyebrow: "RECRUIT",
+    title: recruitmentPageData.title,
+    lead: recruitmentPageData.noticeTitle,
+    description: recruitmentPageData.noticeLines[0],
+    image: `${BASE}assets/recruit-team.jpg`,
+    imageAlt: "求人情報のイメージ",
+  });
 }
 
-/* --- お知らせ --- */
 function renderNoticeSection(): string {
   return `
-    <section class="${PAGE_SECTION_CLASS} bg-white">
-      <div class="${CONTENT_SHELL_CLASS}">
-        <div class="fade-up opacity-0 translate-y-10 ${CONTENT_CARD_SOFT_CLASS} md:p-10 text-center">
-          <div class="space-y-2 text-gray-600 leading-relaxed">
-            ${recruitmentPageData.noticeLines.map((line) => `<p>${line}</p>`).join("")}
+    <section class="${PAGE_SECTION_CLASS} dx-closing recruitment-status-section">
+      <div class="${CONTENT_SHELL_CLASS} dx-content-shell">
+        <div class="dx-closing-panel fade-up opacity-0 translate-y-10">
+          <p class="dx-eyebrow">NOW HIRING</p>
+          <h2>現在募集中</h2>
+          <div class="unified-closing-copy">
+            ${recruitmentPageData.noticeLines.slice(1).map((line) => `<p>${line}</p>`).join("")}
           </div>
         </div>
       </div>
@@ -44,65 +44,47 @@ function renderNoticeSection(): string {
   `;
 }
 
-/* --- 募集要項 --- */
 function renderRecruitmentTable(): string {
   return `
-    <section class="${PAGE_SECTION_CLASS} recruitment-table-section">
-      <div class="${CONTENT_SHELL_CLASS}">
-        ${renderSectionHeading("募集情報")}
-        <div class="rounded-2xl border border-gray-300 overflow-hidden bg-white fade-up opacity-0 translate-y-10">
+    <section class="${PAGE_SECTION_CLASS} dx-services unified-recruitment-section">
+      <div class="${CONTENT_SHELL_CLASS} dx-content-shell">
+        ${renderUnifiedSectionHeading("REQUIREMENTS", "募集情報")}
+        <div class="unified-recruitment-table fade-up opacity-0 translate-y-10">
           ${recruitmentPageData.rows
             .map(
               (row) => `
-            <div class="grid md:grid-cols-[220px_1fr] border-b border-gray-200 last:border-b-0">
-              <div class="bg-primary/10 px-5 py-4 text-left md:text-center font-semibold text-gray-800">${row.label}</div>
-              <div class="px-5 py-4 text-gray-700">
-                ${row.values.map((value) => `<p class="leading-relaxed">${value}</p>`).join("")}
-              </div>
-            </div>
-          `,
+                <div class="unified-recruitment-row">
+                  <div class="unified-recruitment-label">${row.label}</div>
+                  <div class="unified-recruitment-value">
+                    ${row.values.map((value) => `<p>${value}</p>`).join("")}
+                  </div>
+                </div>
+              `,
             )
             .join("")}
+        </div>
+        <div class="unified-page-cta fade-up opacity-0 translate-y-10">
+          <a href="${BASE}#contact" class="btn-primary">${recruitmentPageData.inquiryLabel}</a>
         </div>
       </div>
     </section>
   `;
 }
 
-/* --- お問い合わせ CTA --- */
-function renderContactCTA(): string {
-  return `
-    <section class="${PAGE_SECTION_CLASS} bg-white text-center">
-      <div class="fade-up opacity-0 translate-y-10 ${CONTENT_SHELL_CLASS}">
-        <a href="${BASE}#contact" class="btn-primary">${recruitmentPageData.inquiryLabel}</a>
-      </div>
-    </section>
-  `;
-}
-
-/* --- スクロールエフェクト --- */
-function initScrollEffects(): void {
-  cleanupRecruitmentScrollEffect = createStandardPageScrollEffect();
-}
-
 export function renderRecruitmentPage(): () => void {
   cleanupRecruitmentScrollEffect?.();
-  cleanupRecruitmentScrollEffect = null;
   cleanupRecruitmentHeaderMenu?.();
-  cleanupRecruitmentHeaderMenu = null;
 
   const app = document.querySelector<HTMLDivElement>("#app")!;
-
   app.innerHTML = `
-     ${renderHeader(false)}
-    ${renderPageBanner()}
+    ${renderHeader(false)}
+    ${renderHeroSection()}
     ${renderNoticeSection()}
     ${renderRecruitmentTable()}
-    ${renderContactCTA()}
     ${renderFooter()}
   `;
 
-  initScrollEffects();
+  cleanupRecruitmentScrollEffect = createStandardPageScrollEffect();
   cleanupRecruitmentHeaderMenu = initHeaderMobileMenu();
 
   return () => {

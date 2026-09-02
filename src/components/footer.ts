@@ -19,14 +19,14 @@ const footerColumns: FooterSection[] = [
     links: [
       { label: "システム開発事業", href: `${BASE}#system-development` },
       { label: "国際貿易", href: `${BASE}#international-trade` },
-      { label: "金融事業", href: `${BASE}#financial-business` },
+      { label: "IT・DX支援", href: `${BASE}#it-dx-support` },
       { label: "リサイクル事業", href: `${BASE}#recycling-business` },
     ],
   },
   {
     title: "COMPANY",
     links: [
-      { label: "社長ご挨拶", href: `${BASE}#about` },
+      { label: "社長ご挨拶", href: `${BASE}#message` },
       { label: "会社概要", href: `${BASE}#company` },
     ],
   },

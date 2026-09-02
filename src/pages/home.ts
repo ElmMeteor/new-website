@@ -1,6 +1,13 @@
 import { renderHeader } from "../components/header";
 import { renderFooter } from "../components/footer";
-import { about, contact, companyOverview, hero, works } from "../data";
+import {
+  contact,
+  companyOverview,
+  hero,
+  presidentMessage,
+  vision,
+  works,
+} from "../data";
 import {
   createScrollEffect,
   isMobileViewport,
@@ -14,108 +21,74 @@ const BASE = import.meta.env.BASE_URL;
 
 let cleanupHomeScrollEffect: (() => void) | null = null;
 let cleanupHomeHeaderMenu: (() => void) | null = null;
+let cleanupHomeAnchorNavigation: (() => void) | null = null;
 
 const HOME_SECTION_CLASS = "py-16 md:py-24";
 
 function renderHeroTitle(): string {
-  return hero.title
-    .split("\n")
-    .map((line, index) => {
-      return `<span class="block text-primary text-lg md:text-2xl ${
-        index === 1 ? "whitespace-nowrap" : ""
-      }">${line}</span>`;
-    })
-    .join("");
+  return `<span>ITで、企業の</span><span><span class="koki-keyword">未来</span>をつくる。</span>`;
 }
 
 /* --- ヒーローセクション --- */
 function renderHeroSection(): string {
+  const renderImages = !isMobileViewport();
+
   return `
-    <section id="hero" class="hero-section flex items-center bg-white relative overflow-visible md:pt-[90px]">
-      <div class="relative z-10 ${CONTENT_SHELL_CLASS} pb-0 md:py-20">
-        <div class="hero-stage relative">
-          <div class="grid items-center gap-0 md:grid-cols-[1fr_2fr] md:gap-0">
-            <div class="hidden md:block"></div>
-            <div class="relative fade-up opacity-0 translate-y-10 home-hero-media-reveal">
-              <div class="hero-media relative w-full md:ml-auto overflow-visible">
-                <img src="${hero.image}" alt="KOKI INTERNATIONAL" class="hero-bg absolute inset-x-0 w-full object-cover rounded-[1.5rem] shadow-lg">
-              </div>
+    <section id="hero" class="hero-section koki-hero bg-white relative overflow-hidden">
+      <div class="koki-mobile-gold-flow" aria-hidden="true">
+        <span class="koki-mobile-gold-curve koki-mobile-gold-curve-a"></span>
+        <span class="koki-mobile-gold-curve koki-mobile-gold-curve-b"></span>
+        <span class="koki-mobile-gold-curve koki-mobile-gold-curve-c"></span>
+      </div>
+      <div class="koki-hero-grid">
+        <div class="hero-copy koki-hero-copy fade-up opacity-0 translate-y-10 home-hero-copy-reveal">
+          <div class="hero-copy-panel">
+            ${renderImages ? `<img src="${hero.logo}" alt="株式会社弘毅インターナショナル" class="koki-hero-logo select-none home-hero-logo-img" draggable="false">` : ""}
+            <div class="koki-mobile-wordmark" aria-label="KOKI INTERNATIONAL">
+              <span>KOKI</span>
+              <small>INTERNATIONAL</small>
             </div>
-          </div>
-          <div class="hero-copy fade-up opacity-0 translate-y-10 absolute inset-x-0 bottom-0 z-20 text-left md:left-8 lg:left-10 md:right-auto md:bottom-auto md:top-[46%] md:-translate-y-1/2 md:w-[60%] lg:w-[55%] home-hero-copy-reveal">
-              <div class="hero-copy-panel px-5 pt-12 pb-5 sm:px-6 sm:pt-14 sm:pb-6 md:px-0 md:py-0">
-              <div class="flex flex-col items-start mb-3">
-                <img src="${hero.logo}" alt="KOKI LOGO" class="h-32 md:h-44 mb-4 select-none home-hero-logo-img" draggable="false">
-                <p class="text-primary text-base md:text-lg font-semibold tracking-widest mb-3">KOKI INTERNATIONAL CO., LTD</p>
-                <h1 class="hero-text font-bold text-gray-800 leading-[1.08] whitespace-normal drop-shadow-[0_3px_12px_rgba(255,255,255,0.55)] text-[clamp(2.2rem,6.4vw,5.3rem)]">
-                  ${renderHeroTitle()}
-                </h1>
-              </div>
-              <div class="flex justify-start mt-4 mb-4">
-                <div class="w-20 h-[3px] bg-[#b8922a] rounded"></div>
-              </div>
-              <p class="text-gray-600 text-lg md:text-2xl leading-relaxed max-w-xl">${hero.slogan
+            <p class="koki-eyebrow">KOKI INTERNATIONAL CO., LTD.</p>
+            <h1 class="hero-text koki-hero-title">
+              ${renderHeroTitle()}
+            </h1>
+            <div class="koki-accent-line"></div>
+            <p class="koki-hero-slogan">${hero.slogan
                 .split("\n")
                 .map((line) => `<span class=\"block\">${line}</span>`)
                 .join("")}</p>
-            </div>
           </div>
         </div>
+        ${renderImages ? `
+          <div class="koki-hero-media fade-up opacity-0 translate-y-10 home-hero-media-reveal">
+            <img src="${hero.image}" alt="弘毅インターナショナルの企業理念" class="hero-bg">
+          </div>` : ""}
       </div>
     </section>
   `;
 }
 
-/* --- 社長ご挨拶 --- */
+/* --- OUR VISION --- */
 function renderAboutSection(): string {
+  const renderImages = !isMobileViewport();
+
   return `
-    <section id="about" class="pt-6 pb-16 md:py-24 bg-white relative overflow-hidden">
-      <div class="${CONTENT_SHELL_CLASS}">
-        
-        <!-- タイトル -->
-        <div class="mb-8 fade-up opacity-0 translate-y-10">
-          <h2 class="text-2xl md:text-3xl font-bold text-gray-800 tracking-wide about-title">
-            社長挨拶
-          </h2>
-          <p class="text-gray-400 text-sm mt-3">President's Message</p>
-        </div>
-
-        <div class="grid md:grid-cols-[auto_1fr] gap-10 items-start">
-
-          <!-- 左：文章 -->
-          <div class="fade-up opacity-0 translate-y-10">
-            <div class="about-text space-y-4">
-              ${about.paragraphs
-                .map((p) =>
-                  p === "" ? `<div class="h-2"></div>` : `<p>${p}</p>`,
-                )
-                .join("")}
-            </div>
+    <section id="about" class="koki-vision ${HOME_SECTION_CLASS}">
+      <div class="${CONTENT_SHELL_CLASS} koki-vision-grid">
+        ${renderImages ? `
+          <div class="koki-vision-image fade-up opacity-0 translate-y-10">
+            <img src="${vision.image}" alt="弘毅の理念">
+          </div>` : ""}
+        <div class="koki-vision-copy fade-up opacity-0 translate-y-10">
+          <p class="koki-eyebrow">OUR VISION</p>
+          <h2>${vision.title}</h2>
+          <div class="koki-vision-keywords">
+            ${vision.keywords.map((word) => `<span>${word}</span>`).join("<i>×</i>")}
           </div>
-
-          <!-- 右：背景＋論語 -->
-          <div class="fade-up opacity-0 translate-y-10 w-full relative home-about-visual-reveal">
-
-            <!-- 背景画像 -->
-            <div class="absolute inset-0 z-0 overflow-hidden rounded-2xl">
-              <img src="${about.image}" class="w-full h-full object-cover" />
-            </div>
-
-            <!-- 論語カード -->
-            <div class="relative z-10 flex items-center justify-center h-full py-10">
-              <div class="about-quote-card-container">
-                <div class="text-primary text-5xl font-bold mb-4 home-serif-text">"</div>
-                <p class="italic leading-loose mb-4 whitespace-nowrap">士不可以不弘毅、任重而道遠</p>
-                <p class="text-primary text-sm mb-6">— 論語 —</p>
-                <div class="border-t border-gray-200 pt-6">
-                  <div class="text-primary text-2xl font-bold mb-2 home-serif-text">弘毅</div>
-                  <p class="text-gray-500 text-xs tracking-widest">KO · KI</p>
-                </div>
-              </div>
-            </div>
-
+          <blockquote>士不可以不弘毅、任重而道遠</blockquote>
+          <div class="koki-body-copy">
+            ${vision.paragraphs.map((p) => `<p>${p}</p>`).join("")}
           </div>
-
         </div>
       </div>
     </section>
@@ -124,31 +97,33 @@ function renderAboutSection(): string {
 
 /* --- 事業内容（詳細リスト） --- */
 function renderWorksSection(): string {
+  const renderImages = !isMobileViewport();
+
   return `
-    <section id="works" class="${HOME_SECTION_CLASS} bg-gray-50">
+    <section id="works" class="koki-services ${HOME_SECTION_CLASS}">
       <div class="${CONTENT_SHELL_CLASS}">
-        ${renderSectionHeading("事業内容", "Services")}
-        <div class="space-y-14 mt-8 md:space-y-20 home-works-list">
+        <div class="koki-section-intro fade-up opacity-0 translate-y-10">
+          <p class="koki-eyebrow">OUR SERVICES</p>
+          <h2>人と企業、そして世界を結ぶ事業</h2>
+          <p>信頼と技術を基盤に、四つの分野からお客様の未来を支えます。</p>
+        </div>
+        <div class="koki-service-grid home-works-list">
           ${works
             .map(
               (work, i) => `
-            <a href="${work.link ?? `${BASE}#works`}" class="block group">
-              <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12 work-item opacity-0 translate-y-10 ${work.reverse ? "md:[&>:first-child]:order-2 md:[&>:last-child]:order-1" : ""}">
-                <div class="work-img overflow-hidden rounded-xl shadow-md">
-                  <img src="${work.image}" alt="${work.title}" class="work-media-image w-full h-[220px] sm:h-64 object-cover transition-transform duration-500 group-hover:scale-[1.03]">
+            <article class="koki-service-card work-item opacity-0 translate-y-10">
+                ${renderImages ? `
+                  <div class="koki-service-image work-img">
+                    <img src="${work.image}" alt="${work.title}" class="work-media-image">
+                  </div>` : ""}
+                <div class="koki-service-copy home-work-text-reveal">
+                  <span>${work.englishTitle ?? `SERVICE 0${i + 1}`}</span>
+                  <h3>${work.title}</h3>
+                  ${work.lead ? `<h4>${work.lead}</h4>` : ""}
+                  <p>${work.description}</p>
+                  ${work.items ? `<ul>${work.items.map((item) => `<li>${item}</li>`).join("")}</ul>` : ""}
                 </div>
-                <div class="fade-up opacity-0 translate-y-10 home-work-text-reveal">
-                  <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-0.5 bg-primary"></div>
-                    <span class="text-primary text-sm font-semibold tracking-wider">SERVICE 0${i + 1}</span>
-                  </div>
-                  <h3 class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-primary transition-colors">
-                    ${work.title}
-                  </h3>
-                  <p class="text-gray-600 leading-relaxed whitespace-pre-line">${work.description}</p>
-                </div>
-              </div>
-            </a>
+            </article>
           `,
             )
             .join("")}
@@ -161,67 +136,58 @@ function renderWorksSection(): string {
 /* --- 会社概要 --- */
 function renderCompanyOverviewSection(): string {
   return `
-    <section id="company" class="py-12 md:py-16 bg-white">
-      <div class="${CONTENT_SHELL_CLASS}">
-        ${renderSectionHeading("会社概要", "Company Overview")}
-        <div class="fade-up opacity-0 translate-y-10 mt-8 md:mt-10">
-          <div class="overflow-x-auto">
-            <table class="w-full border-collapse">
-              <tbody>
-                <tr>
-                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800 w-32">会社名</th>
-                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.companyName}</td>
-                </tr>
-                <tr>
-                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">所在地</th>
-                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700 whitespace-pre-line text-sm">${companyOverview.location}</td>
-                </tr>
-                <tr>
-                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">代表取締役</th>
-                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.ceo}</td>
-                </tr>
-                <tr>
-                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">設立日</th>
-                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.established}</td>
-                </tr>
-                <tr>
-                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">資本金</th>
-                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.capital}</td>
-                </tr>
-                <tr>
-                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">連絡先</th>
-                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.phone}</td>
-                </tr>
-                <tr>
-                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">メール</th>
-                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.email}</td>
-                </tr>
-                <tr>
-                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">取引銀行</th>
-                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">${companyOverview.bankName}</td>
-                </tr>
-                <tr>
-                  <th class="border-b-2 border-primary bg-white px-5 py-4 text-left font-semibold text-gray-800">業務内容</th>
-                  <td class="border-b border-gray-200 px-5 py-4 text-gray-700">
-                    <ul class="list-disc list-inside space-y-1">
-                      ${companyOverview.services
-                        .map((service) => `<li class="text-sm">${service}</li>`)
-                        .join("")}
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <th class="bg-white px-5 py-4 text-left font-semibold text-gray-800 whitespace-nowrap">パートナー会社</th>
-                  <td class="px-5 py-4 text-gray-700">
-                    <div>${companyOverview.partnerCompany}</div>
-                    <a href=${companyOverview.partnerWebsite} target="_blank" class="text-primary hover:text-gray-700 transition-colors text-sm">${companyOverview.partnerWebsite}</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+    <section id="company" class="koki-company ${HOME_SECTION_CLASS}">
+      <div class="${CONTENT_SHELL_CLASS} koki-company-grid">
+        <div class="fade-up opacity-0 translate-y-10">
+          <p class="koki-eyebrow">COMPANY</p>
+          <h2 class="koki-company-name"><span>株式会社</span><span>弘毅インターナショナル</span></h2>
+          <p class="koki-company-en">KOKI INTERNATIONAL CO., LTD.</p>
+        </div>
+        <dl class="koki-company-list fade-up opacity-0 translate-y-10">
+          <div><dt>所在地</dt><dd>${companyOverview.location}</dd></div>
+          <div><dt>設立</dt><dd>2010年5月7日</dd></div>
+          <div><dt>代表取締役</dt><dd>${companyOverview.ceo}</dd></div>
+          <div><dt>資本金</dt><dd>${companyOverview.capital}</dd></div>
+          <div><dt>事業内容</dt><dd>システム開発、IT・DX支援、国際ビジネス、リサイクル業</dd></div>
+        </dl>
+      </div>
+    </section>
+  `;
+}
+
+/* --- 社長メッセージ --- */
+function renderMessageSection(): string {
+  return `
+    <section id="message" class="koki-message ${HOME_SECTION_CLASS}">
+      <div class="${CONTENT_SHELL_CLASS} koki-message-inner">
+        <div class="koki-message-heading fade-up opacity-0 translate-y-10">
+          <p class="koki-eyebrow">MESSAGE</p>
+          <p class="koki-section-jp">社長メッセージ</p>
+          <h2><span>技術の先にある、</span><span>人と企業の<span class="koki-keyword">未来</span>へ。</span></h2>
+          <div class="koki-message-line" aria-hidden="true"></div>
+        </div>
+        <div class="koki-message-copy koki-message-letter fade-up opacity-0 translate-y-10">
+          ${presidentMessage.paragraphs.map((p) => `<p>${p}</p>`).join("")}
+          <p class="koki-message-signature">${presidentMessage.signature}</p>
         </div>
       </div>
+    </section>`;
+}
+
+/* --- 採用導線 --- */
+function renderRecruitSection(): string {
+  const renderImages = !isMobileViewport();
+
+  return `
+    <section id="recruit" class="koki-recruit">
+      <div class="koki-recruit-copy fade-up opacity-0 translate-y-10">
+        <p class="koki-eyebrow">RECRUIT</p>
+        <h2><span>技術で<span class="koki-keyword">未来</span>をつくる仲間を</span><span>募集しています。</span></h2>
+        <p>経験者・未経験者、そして外国人IT人材まで。ともに学び、成長できる仲間を求めています。</p>
+        <div class="koki-recruit-tags"><span>エンジニア</span><span>システム開発</span><span>未経験者</span><span>経験者</span><span>外国人IT人材</span></div>
+        <a href="${BASE}#recruitment" class="btn-primary">採用情報を見る</a>
+      </div>
+      ${renderImages ? `<div class="koki-recruit-image"><img src="${BASE}assets/recruit-team.jpg" alt="採用情報"></div>` : ""}
     </section>
   `;
 }
@@ -238,7 +204,7 @@ function renderContactSection(): string {
             <div class="space-y-4 text-left mb-8">
               <div class="flex items-start gap-4">
                 <span class="text-primary font-semibold w-20 text-sm flex-shrink-0">TEL</span>
-                <a href="tel:${contact.phone}" class="text-gray-700 hover:text-primary transition-colors">${contact.phone}</a>
+                <span class="text-gray-700">${contact.phone}</span>
               </div>
               <div class="flex items-start gap-4">
                 <span class="text-primary font-semibold w-20 text-sm flex-shrink-0">ADDRESS</span>
@@ -271,7 +237,7 @@ function renderContactSection(): string {
                 <label class="block text-base md:text-sm text-gray-600 mb-2 md:mb-1">
                   会社名 <span class="text-red-400">*</span>
                 </label>
-                <input type="text" name="company" id="company"
+                <input type="text" name="company" id="contact-company"
                   class="w-full border border-gray-300 rounded px-4 py-3.5 md:py-2 text-base md:text-sm focus:outline-none focus:border-primary"
                   placeholder="例：株式会社○○" required>
               </div>
@@ -303,7 +269,7 @@ function renderContactSection(): string {
                 <label class="block text-base md:text-sm text-gray-600 mb-2 md:mb-1">
                   お問い合わせ内容
                 </label>
-                <textarea name="message" id="message" rows="5"
+                <textarea name="message" id="contact-message" rows="5"
                   class="w-full border border-gray-300 rounded px-4 py-3.5 md:py-2 text-base md:text-sm focus:outline-none focus:border-primary resize-none"
                   placeholder="ご相談内容をご記入ください"></textarea>
               </div>
@@ -318,9 +284,7 @@ function renderContactSection(): string {
                     required
                   >
                   <span>
-                    <a href="${BASE}#privacy-policy" class="text-primary hover:underline" target="_blank">
-                      プライバシーポリシー
-                    </a>
+                    <span class="text-primary">プライバシーポリシー</span>
                     に同意します
                   </span>
                 </label>
@@ -336,6 +300,42 @@ function renderContactSection(): string {
       </div>
     </section>
   `;
+}
+
+function initHomeAnchorNavigation(): () => void {
+  const anchors = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("a[href*='#']"),
+  );
+  const listeners: Array<{ anchor: HTMLAnchorElement; handler: (event: MouseEvent) => void }> = [];
+
+  anchors.forEach((anchor) => {
+    const targetId = anchor.hash.replace("#", "").trim();
+    const target = targetId ? document.getElementById(targetId) : null;
+    if (!target) return;
+
+    const handler = (event: MouseEvent) => {
+      event.preventDefault();
+      const header = document.getElementById("header");
+      const headerHeight = header?.getBoundingClientRect().height ?? 0;
+      const targetTop = target.getBoundingClientRect().top + window.scrollY;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      window.history.pushState(null, "", `#${targetId}`);
+      window.scrollTo({
+        top: Math.max(0, targetTop - headerHeight - 12),
+        behavior: reduceMotion ? "auto" : "smooth",
+      });
+    };
+
+    anchor.addEventListener("click", handler);
+    listeners.push({ anchor, handler });
+  });
+
+  return () => {
+    listeners.forEach(({ anchor, handler }) => {
+      anchor.removeEventListener("click", handler);
+    });
+  };
 }
 
 /* --- スクロールエフェクト初期化 --- */
@@ -406,7 +406,7 @@ function initContactFormHandler(): void {
       // ========== 入力値の取得 ==========
       const company =
         (
-          document.getElementById("company") as HTMLInputElement
+          document.getElementById("contact-company") as HTMLInputElement
         )?.value.trim() || "";
       const name =
         (document.getElementById("name") as HTMLInputElement)?.value.trim() ||
@@ -529,19 +529,24 @@ export function renderHomePage(app: HTMLDivElement): () => void {
   cleanupHomeScrollEffect = null;
   cleanupHomeHeaderMenu?.();
   cleanupHomeHeaderMenu = null;
+  cleanupHomeAnchorNavigation?.();
+  cleanupHomeAnchorNavigation = null;
 
   app.innerHTML = `
     ${renderHeader(true)}
     ${renderHeroSection()}
-    ${renderAboutSection()}
     ${renderWorksSection()}
+    ${renderAboutSection()}
+    ${renderMessageSection()}
     ${renderCompanyOverviewSection()}
+    ${renderRecruitSection()}
     ${renderContactSection()}
     ${renderFooter()}
   `;
 
   initHomeScrollEffects();
   cleanupHomeHeaderMenu = initHeaderMobileMenu();
+  cleanupHomeAnchorNavigation = initHomeAnchorNavigation();
   initContactFormHandler();
 
   return () => {
@@ -549,5 +554,7 @@ export function renderHomePage(app: HTMLDivElement): () => void {
     cleanupHomeScrollEffect = null;
     cleanupHomeHeaderMenu?.();
     cleanupHomeHeaderMenu = null;
+    cleanupHomeAnchorNavigation?.();
+    cleanupHomeAnchorNavigation = null;
   };
 }
